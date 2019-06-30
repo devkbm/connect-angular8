@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkScheduleFormComponent } from './work-schedule-form.component';
+import { WorkGroupFormComponent } from './workgroup-form.component';
 
 @Component({
   selector: 'app-workgroup',
@@ -8,27 +9,37 @@ import { WorkScheduleFormComponent } from './work-schedule-form.component';
 })
 export class WorkgroupComponent implements OnInit {
 
-  scheduleDrawerVisible = false;
+  scheduleDrawerVisible: boolean = false;
+  workGroupDrawerVisible: boolean = false;
 
   @ViewChild('workScheduleForm', {static: false}) workScheduleForm: WorkScheduleFormComponent;
+  @ViewChild('workGroupForm', {static: false}) workGroupForm: WorkGroupFormComponent;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  closeDrawer() {
+  public openScheduleDrawer(): void {
+    this.scheduleDrawerVisible = true;
+  }
+
+  public closeScheduleDrawer(): void {
     this.scheduleDrawerVisible = false;
   }
 
-  openDrawer() {
-    this.scheduleDrawerVisible = true;
+  public openWorkGroupDrawer(): void {
+    this.workGroupDrawerVisible = true;
+  }
+
+  public closeWorkGroupDrawer(): void {
+    this.workGroupDrawerVisible = false;
   }
 
   itemSelect(id) {
     console.log(id);
     this.workScheduleForm.getWorkGroupSchedule(id);
-    this.openDrawer();
+    this.openScheduleDrawer();
   }
 
 }
