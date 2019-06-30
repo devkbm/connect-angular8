@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'connect-angular8'`, () => {
+  it(`should have as title 'connect-angular7'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('connect-angular8');
+    expect(app.title).toEqual('connect-angular7');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to connect-angular8!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to connect-angular7!');
   });
 });

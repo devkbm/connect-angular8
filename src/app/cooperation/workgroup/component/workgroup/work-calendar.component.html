@@ -1,0 +1,16 @@
+{{this.calEvent | json}}
+{{this.fromDate}}
+{{this.toDate}}
+<nz-month-picker [(ngModel)]="fromDate" (ngModelChange)="onChange($event)" nzFormat="YYYY-MM" nzPlaceHolder="Select Month"></nz-month-picker>
+<input [(ngModel)]="fkWorkGroup">             
+<br />
+
+<full-calendar #calendar 
+    defaultView="dayGridMonth" 
+    [plugins]="calendarPlugins" 
+    [events]="calEvent" 
+    [selectable]="true"
+    [header]="calendarHeader"    
+    (eventClick)="onEventClick($event)"    
+    (datesRender)="onDatesRender($event)">
+</full-calendar>
