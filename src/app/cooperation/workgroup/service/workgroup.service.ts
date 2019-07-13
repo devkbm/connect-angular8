@@ -40,6 +40,24 @@ export class WorkGroupService extends DataService {
   }
 
   /**
+   * @description 내가 속한 작업그룹명단을 조회한다.
+   * @param params 조회 조건 객체
+   */
+  public getMyWorkGroupList(): Observable<ResponseList<WorkGroup>> {    
+    const url = `${this.API_URI}/myworkgroup`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true
+    };
+
+    return this.http
+      .get<ResponseList<WorkGroup>>(url, options)
+      .pipe(
+        catchError(this.handleError<ResponseList<WorkGroup>>('getMyWorkGroupList', null))
+      );
+  }
+
+  /**
    * @description 작업그룹을 조회한다.
    * @param id 작업그룹id
    */

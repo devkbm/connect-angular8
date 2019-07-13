@@ -1,13 +1,13 @@
 <button 
     nz-button         
-    (click)="openWorkGroupDrawer()">
+    (click)="newWorkGroup()">
     <i nz-icon type="form" theme="outline"></i>
     신규 작업그룹
 </button>
 
 <button 
     nz-button         
-    (click)="openScheduleDrawer()">
+    (click)="newSchedule()">
     <i nz-icon type="form" theme="outline"></i>
     신규 스케쥴
 </button>
@@ -24,7 +24,9 @@
     nzTitle="스케쥴 등록"
     (nzOnClose)="closeScheduleDrawer()">
     
-    <app-work-schedule-form #workScheduleForm>
+    <app-work-schedule-form 
+        #workScheduleForm
+        (formClosed)="closeScheduleDrawer()">
         
     </app-work-schedule-form>
 </nz-drawer>
@@ -37,7 +39,9 @@
     nzTitle="작업그룹 등록"
     (nzOnClose)="closeWorkGroupDrawer()">
     
-    <app-workgroup-form @workGroupForm>
+    <app-workgroup-form 
+        #workGroupForm 
+        (formClosed)="closeWorkGroupDrawer()">
 
     </app-workgroup-form>
 </nz-drawer>

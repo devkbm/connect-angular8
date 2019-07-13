@@ -36,10 +36,22 @@ export class WorkgroupComponent implements OnInit {
     this.workGroupDrawerVisible = false;
   }
 
+  public newWorkGroup(): void {
+    this.workGroupForm.newForm();
+    this.openWorkGroupDrawer();
+  }
+
+  public newSchedule(): void {
+    this.workScheduleForm.newForm();
+    this.openScheduleDrawer();
+  }
+
   itemSelect(id) {
     console.log(id);
     this.workScheduleForm.getWorkGroupSchedule(id);
     this.openScheduleDrawer();
   }
+
+
 
 }
