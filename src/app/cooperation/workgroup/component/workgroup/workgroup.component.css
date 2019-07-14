@@ -1,0 +1,6 @@
+.grid-wrapper {    
+    display: flex;
+    height: calc(100% - 32px);
+    background-color: rebeccapurple;
+
+}

@@ -10,12 +10,12 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ButtonRendererComponent } from '../../common/grid/renderer/button-renderer.component';
 
 
-
 import { WorkGroupService } from './service/workgroup.service';
 import { WorkgroupComponent } from './component/workgroup/workgroup.component';
 import { WorkGroupFormComponent } from './component/workgroup/workgroup-form.component';
 import { WorkScheduleFormComponent } from './component/workgroup/work-schedule-form.component';
 import { WorkCalendarComponent } from './component/workgroup/work-calendar.component';
+import { MyWorkGroupGridComponent } from './component/workgroup/myworkgroup-grid.component';
 
 
 @NgModule({
@@ -34,7 +34,8 @@ import { WorkCalendarComponent } from './component/workgroup/work-calendar.compo
     WorkgroupComponent,
     WorkGroupFormComponent,
     WorkScheduleFormComponent,
-    WorkCalendarComponent
+    WorkCalendarComponent,
+    MyWorkGroupGridComponent
   ],
   providers: [
     DatePipe,
