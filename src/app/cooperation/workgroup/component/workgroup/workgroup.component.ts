@@ -13,6 +13,8 @@ export class WorkgroupComponent implements OnInit {
   scheduleDrawerVisible: boolean = false;
   workGroupDrawerVisible: boolean = false;
 
+  workGroupId;
+
   @ViewChild('myWorkGroupGrid', {static: false}) myWorkGroupGrid: MyWorkGroupGridComponent;
   @ViewChild('workScheduleForm', {static: false}) workScheduleForm: WorkScheduleFormComponent;
   @ViewChild('workGroupForm', {static: false}) workGroupForm: WorkGroupFormComponent;
@@ -50,6 +52,12 @@ export class WorkgroupComponent implements OnInit {
   public newSchedule(): void {
     this.workScheduleForm.newForm();
     this.openScheduleDrawer();
+  }
+
+  public workGroupSelect(row): void {
+    console.log(row.id);    
+
+    this.workGroupId = row.id;
   }
 
   itemSelect(id) {

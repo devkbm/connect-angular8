@@ -20,10 +20,15 @@
 </button>
 
 <div class="grid-wrapper">
-    <app-myworkgroup-grid #myWorkGroupGrid style="width: 200px">
+    <app-myworkgroup-grid 
+        #myWorkGroupGrid         
+        (rowSelected)="workGroupSelect($event)">
     </app-myworkgroup-grid>
     
-    <app-work-calendar (itemSelected)="itemSelect($event)" style="flex: 1">
+    <app-work-calendar 
+        #workCalendar        
+        [fkWorkGroup]="workGroupId"
+        (itemSelected)="itemSelect($event)">
     </app-work-calendar>
     
 </div>

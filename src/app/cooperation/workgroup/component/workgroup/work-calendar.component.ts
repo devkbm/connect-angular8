@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 
 import { ResponseList } from '../../../../common/model/response-list';
 import { WorkGroupService } from '../../service/workgroup.service';
@@ -24,7 +24,7 @@ export class WorkCalendarComponent implements OnInit {
 
     fromDate: Date;
     toDate: Date;
-    fkWorkGroup: string;
+    @Input() fkWorkGroup: string;
 
     calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin];
     calendarHeader = {
