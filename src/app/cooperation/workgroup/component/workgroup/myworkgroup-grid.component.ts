@@ -33,13 +33,18 @@ export class MyWorkGroupGridComponent extends AggridFunction implements OnInit {
       {
           headerName: 'No',
           valueGetter: 'node.rowIndex + 1',
-          width: 70,
+          width: 40,
           cellStyle: {'text-align': 'center'},
-          suppressSizeToFit: true
+          suppressSizeToFit: true,
+          headerCheckboxSelection: true,
+          headerCheckboxSelectionFilteredOnly: true,
+          checkboxSelection: true
       },
       {
           headerName: 'Id',
-          field: 'id'
+          field: 'id',
+          width: 40,
+          suppressSizeToFit: true          
       },
       {
         headerName: '작업그룹명',
@@ -83,8 +88,12 @@ export class MyWorkGroupGridComponent extends AggridFunction implements OnInit {
 
   private selectionChanged(event) {
     const selectedRows = this.gridApi.getSelectedRows();
-    console.log(selectedRows[0]);
-    this.rowSelected.emit(selectedRows[0]);
+    let ids = selectedRows.map(v => v.id)   // id 추출
+                          .join(',');       // 콤마 구분자로 분리함
+    //console.log(selectedRows[0]);
+    //console.log(selectedRows);
+    console.log(ids);    
+    this.rowSelected.emit(ids);
   }
 
   private rowDbClicked(event) {

@@ -54,10 +54,8 @@ export class WorkgroupComponent implements OnInit {
     this.openScheduleDrawer();
   }
 
-  public workGroupSelect(row): void {
-    console.log(row.id);    
-
-    this.workGroupId = row.id;
+  public workGroupSelect(ids): void {     
+    this.workGroupId = ids;
   }
 
   itemSelect(id) {
