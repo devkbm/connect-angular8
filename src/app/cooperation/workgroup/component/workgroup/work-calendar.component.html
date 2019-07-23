@@ -1,12 +1,15 @@
+<!--
 {{this.calEvent | json}}
 {{this.fromDate}}
 {{this.toDate}}
+-->
+
 <nz-month-picker [(ngModel)]="fromDate" (ngModelChange)="onChange($event)" nzFormat="YYYY-MM" nzPlaceHolder="Select Month"></nz-month-picker>
 <input [(ngModel)]="fkWorkGroup">             
-<br />
 
 <full-calendar #calendar 
-    defaultView="dayGridMonth" 
+    defaultView="dayGridMonth"     
+    aspectRatio="2.01"
     [plugins]="calendarPlugins" 
     [events]="calEvent" 
     [selectable]="true"
