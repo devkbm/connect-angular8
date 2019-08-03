@@ -55,6 +55,11 @@ export class ProgramGridComponent extends AggridFunction implements OnInit {
       { headerName: '설명',         field: 'description',     width: 300 }
     ];
 
+    this.defaultColDef = {
+      sortable: true,
+      resizable: true
+    };
+
     this.getRowNodeId = function(data) {
         return data.resourceCode;
     };

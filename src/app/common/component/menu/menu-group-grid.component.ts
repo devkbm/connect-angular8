@@ -67,6 +67,11 @@ export class MenuGroupGridComponent extends AggridFunction implements OnInit {
       }
     ];
 
+    this.defaultColDef = {
+      sortable: true,
+      resizable: true
+    };
+
     this.getRowNodeId = function(data) {
         return data.menuGroupCode;
     };
