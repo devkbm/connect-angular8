@@ -23,7 +23,8 @@
 <div class="grid-wrapper">
     <app-myworkgroup-grid 
         #myWorkGroupGrid         
-        (rowSelected)="workGroupSelect($event)">
+        (rowSelected)="workGroupSelect($event)"
+        (rowDoubleClicked)="modifyWorkGroup($event)">
     </app-myworkgroup-grid>
     
     <app-work-calendar 
@@ -45,6 +46,8 @@
     
     <app-work-schedule-form 
         #workScheduleForm
+        (formSaved)="getScheduleList()"
+        (formDeleted)="getScheduleList()"
         (formClosed)="closeScheduleDrawer()">
         
     </app-work-schedule-form>
@@ -60,6 +63,8 @@
     
     <app-workgroup-form 
         #workGroupForm 
+        (formSaved)="getScheduleList()"
+        (formDeleted)="getScheduleList()"
         (formClosed)="closeWorkGroupDrawer()">
 
     </app-workgroup-form>

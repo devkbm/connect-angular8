@@ -31,7 +31,7 @@ export class ProgramFormComponent extends FormBase implements OnInit {
   formControlXs = 24;
 
   formLabelSm = 4;
-  fromControlSm = 20;
+  formControlSm = 20;
 
   @Output()
   formSaved = new EventEmitter();

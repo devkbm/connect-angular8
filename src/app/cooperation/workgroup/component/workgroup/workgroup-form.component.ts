@@ -57,7 +57,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
             memberList      : [ null ]
         });
         this.color = formData.color;
-
+                
         this.form.patchValue(formData);
     }
 

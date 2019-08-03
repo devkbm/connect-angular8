@@ -43,7 +43,7 @@ export class WorkCalendarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getScheduleList();
+        this.getScheduleList(this.fkWorkGroup);
     }
 
     onChange(result: Date): void {
@@ -56,18 +56,18 @@ export class WorkCalendarComponent implements OnInit {
         console.log(calendarApi);
         calendarApi.select(result, result);
 
-        this.getScheduleList();
+        this.getScheduleList(this.fkWorkGroup);
     }
 
     //#region public methods
 
-    public getScheduleList(): void {
+    public getScheduleList(ids: string): void {
         const param = {
-            fkWorkGroup : this.fkWorkGroup,
+            fkWorkGroup : ids,
             fromDate: this.datePipe.transform(this.fromDate, 'yyyyMMdd'),
             toDate: this.datePipe.transform(this.toDate, 'yyyyMMdd')
         };
-        console.log('getScheduleList');
+        console.log('getScheduleList : '+ids);
         this.workGroupService.getWorkScheduleList(param)
         .subscribe(
             (model: ResponseList<WorkGroupSchedule>) => {
@@ -95,7 +95,7 @@ export class WorkCalendarComponent implements OnInit {
         // console.log(param.view.currentStart);
         // console.log(param.view.currentEnd);
         // console.log(endDate);
-        this.getScheduleList();
+        this.getScheduleList(this.fkWorkGroup);
     }
 
     //#endregion

@@ -30,12 +30,12 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
                 }
 
     ngOnInit() {
-        this.newForm();
+        this.newForm(null);
     }    
     
     //#region public methods
 
-    public newForm(): void {
+    public newForm(workGroupId: string): void {
         this.formType = FormType.NEW;
 
         this.form = this.fb.group({
@@ -44,7 +44,7 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
             start           : [ null, [ Validators.required ] ],
             end             : [ null, [ Validators.required ] ],
             allDay          : [ null, [ Validators.required ] ],
-            workGroupId     : [ null, [ Validators.required ] ]
+            workGroupId     : [ workGroupId, [ Validators.required ] ]
         });
 
     }
@@ -71,7 +71,7 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
             if (model.data) {
                 this.modifyForm(model.data);
             } else {
-                this.newForm();
+                this.newForm(null);
             }
             },
             (err) => {},

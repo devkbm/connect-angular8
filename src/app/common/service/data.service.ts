@@ -27,7 +27,7 @@ export class DataService {
      */
     protected getAuthorizedHttpHeaders(): HttpHeaders {
         const token = this.tokenExtractor.getToken() as string;
-        console.log(token);
+        
         return new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('X-Requested-With', 'XMLHttpRequest')

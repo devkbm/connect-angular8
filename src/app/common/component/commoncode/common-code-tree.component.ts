@@ -36,9 +36,9 @@ export class CommonCodeTreeComponent implements OnInit {
             .subscribe(
                 (model: ResponseList<CommonCodeHierarchy>) => {
                     if ( model.total > 0 ) {
-                    this.nodeItems = model.data;
+                        this.nodeItems = model.data;
                     } else {
-                    this.nodeItems = null;
+                        this.nodeItems = [];
                     }            
                 },
                 (err) => {

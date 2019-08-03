@@ -1,5 +1,6 @@
 {{form.getRawValue() | json}}
-{{color}}
+{{color}} - 11 - 
+{{this.formType}}
 <div class="footer">
     
     <button nz-button (click)="getWorkGroup(form.get('workGroupId').value)">
@@ -27,7 +28,7 @@
 
 <form nz-form [formGroup]="form" [nzLayout]="'vertical'">
     <nz-form-item>
-        <nz-form-label nzFor="workGroupId" [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 Id</nz-form-label>
+        <nz-form-label nzFor="workGroupId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 Id</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
             <input nz-input id="workGroupId" formControlName="workGroupId" placeholder="작업그룹 Id를 입력해주세요.">                         
         </nz-form-control>        
