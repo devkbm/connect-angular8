@@ -9,7 +9,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { DatePipe } from '@angular/common';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-
+import { OptionsInput } from '@fullcalendar/core';
+import koLocale from '@fullcalendar/core/locales/ko';
 
 @Component({
 selector: 'app-work-calendar',
@@ -21,11 +22,13 @@ export class WorkCalendarComponent implements OnInit {
     calEvent = [
         //{ title: 'event 1', start: '2019-06-06T14:13:29Z' }
     ];
+    options: OptionsInput;
+    @Input() fkWorkGroup: string;
 
     fromDate: Date;
     toDate: Date;
-    @Input() fkWorkGroup: string;
-
+    locale = koLocale;
+    
     calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin];
     calendarHeader = {
         left: 'prev,next today',
@@ -42,8 +45,8 @@ export class WorkCalendarComponent implements OnInit {
         // this.getScheduleList();
     }
 
-    ngOnInit() {
-        this.getScheduleList(this.fkWorkGroup);
+    ngOnInit() {        
+        this.getScheduleList(this.fkWorkGroup);                
     }
 
     onChange(result: Date): void {

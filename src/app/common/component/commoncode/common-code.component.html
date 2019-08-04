@@ -1,3 +1,5 @@
+<nz-page-header (nzBack)="true" nzBackIcon nzTitle="공통코드 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
+
 <!--조회 조건-->
 <div nz-row class="btn-group">  
   <div nz-col [nzSpan]="12">
@@ -35,30 +37,27 @@
   </div>
 </div>
       
-<!-- -->
-<h3>공통코드 목록</h3>
+<h3 class="pgm-title">공통코드 목록</h3>
+<div class="grid-wrapper">  
+  <app-common-code-tree
+    #commonCodeTree
+    id="commonCodeTree"
+    [searchValue]="queryValue"
+    (itemSelected)="selectedItem($event)">              
+  </app-common-code-tree>
 
-<div class="grid-wrapper">
-      <app-common-code-tree
-        #commonCodeTree
-        id="commonCodeTree"
-        [searchValue]="queryValue"
-        (itemSelected)="selectedItem($event)">              
-      </app-common-code-tree>
-
-      <!--<app-common-code-grid
-          id="commonCodeGrid"        
-          #commonCodeGrid
-          (rowSelected)="selectedItem($event)"
-          (editButtonClicked)="editDrawerOpen($event)"
-          (rowDoubleClicked)="editDrawerOpen($event)">
-      </app-common-code-grid>-->
-
-      <app-common-code-form
-        id="commonCodeForm"
-        #commonCodeForm
-        (formSaved)="getCommonCodeTree()"
-        (formDeleted)="getCommonCodeTree()">
-    </app-common-code-form>
+  <app-common-code-form
+    id="commonCodeForm"
+    #commonCodeForm
+    (formSaved)="getCommonCodeTree()"
+    (formDeleted)="getCommonCodeTree()">
+  </app-common-code-form>
 </div>
       
+<!--<app-common-code-grid
+    id="commonCodeGrid"        
+    #commonCodeGrid
+    (rowSelected)="selectedItem($event)"
+    (editButtonClicked)="editDrawerOpen($event)"
+    (rowDoubleClicked)="editDrawerOpen($event)">
+</app-common-code-grid>-->

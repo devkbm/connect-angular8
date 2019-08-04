@@ -1,3 +1,5 @@
+<nz-page-header (nzBack)="true" nzBackIcon nzTitle="메뉴 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
+
 <div nz-row class="btn-group">
 
   <div nz-col [nzSpan]="8">
@@ -38,13 +40,13 @@
     <nz-divider nzType="vertical"></nz-divider>
 
     <button nz-button (click)="newMenu()">
-      <i nz-icon type="search"></i>
+      <i nz-icon type="form"></i>
       메뉴등록
     </button>
     <nz-divider nzType="vertical"></nz-divider>
 
     <button nz-button (click)="getMenuGroupList()">
-      <i nz-icon type="search"></i>
+      <i nz-icon type="form"></i>
       조회
     </button>
     <nz-divider nzType="vertical"></nz-divider>
@@ -52,7 +54,7 @@
 </div>
 
 <div class="content">
-  <h3>메뉴 그룹 목록</h3>  
+  <h3 class="pgm-title">메뉴 그룹 목록</h3>  
   <app-menu-group-grid
     #menuGroupGrid
     id="menuGroupGrid"
@@ -61,7 +63,7 @@
     (rowDoubleClicked)="menuGroupFormOpen($event)">
   </app-menu-group-grid>
 
-  <h3>메뉴 목록</h3>
+  <h3 class="pgm-title">메뉴 목록</h3>
   <app-menu-grid
     id="menuGrid"
     #menuGrid

@@ -6,16 +6,21 @@
   }
 
 .grid {
-  height: calc(100vh - 233px);
+  height: calc(100vh - 200px);
 }
 
 .tree {
   width: 200px; 
-  height: calc(100vh - 173px);
-  float: left; 
-  background-color: brown;
+  height: calc(100vh - 140px);
+  float: left;
+  background-color:burlywood
 }
 
 :host ::ng-deep .ck-editor__editable {
   min-height: 700px !important;
+}
+
+.pgm-title {  
+  padding-left: 5px;
+  border-left: 5px solid green;
 }

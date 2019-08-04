@@ -1,5 +1,6 @@
-[nz-button] {
-    margin: auto;    
+.pgm-title {  
+    padding-left: 5px;
+    border-left: 5px solid green;
 }
 
 .btn-group {
@@ -13,4 +14,8 @@
 
 .grid-wrapper {
     height: calc(100% - 80px)
+}
+
+[nz-button] {
+    margin: auto;    
 }
