@@ -29,7 +29,9 @@
     <app-work-calendar 
         #workCalendar        
         [fkWorkGroup]="workGroupId"
-        (itemSelected)="itemSelect($event)">
+        (itemSelected)="itemSelect($event)"
+        (newDateSelected)="newSchedule2($event)"
+        >
     </app-work-calendar>
     
 </div>

@@ -16,6 +16,7 @@
         [events]="calEvent" 
         [selectable]="true"
         [header]="calendarHeader"        
+        (dateClick)="onDateClick($event)"
         (eventClick)="onEventClick($event)"    
         (datesRender)="onDatesRender($event)">
     </full-calendar>

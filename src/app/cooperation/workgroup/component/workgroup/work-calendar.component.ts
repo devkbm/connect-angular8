@@ -6,6 +6,7 @@ import { WorkGroupSchedule } from '../../model/workgroup-schedule';
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { DatePipe } from '@angular/common';
 import { FullCalendarComponent } from '@fullcalendar/angular';
@@ -29,7 +30,7 @@ export class WorkCalendarComponent implements OnInit {
     toDate: Date;
     locale = koLocale;
     
-    calendarPlugins = [dayGridPlugin, timeGridPlugin, interactionPlugin];
+    calendarPlugins = [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin];
     calendarHeader = {
         left: 'prev,next today',
         center: 'title',
@@ -38,6 +39,7 @@ export class WorkCalendarComponent implements OnInit {
     };
 
     @Output() itemSelected = new EventEmitter();
+    @Output() newDateSelected = new EventEmitter();
 
     @ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
 
@@ -89,6 +91,11 @@ export class WorkCalendarComponent implements OnInit {
         this.itemSelected.emit(param.event.id);
     }
 
+    onDateClick(param) {
+        console.log(param);      
+        this.newDateSelected.emit(this.fkWorkGroup);
+    }
+
     onDatesRender(param) {
         const endDate: Date = param.view.currentEnd;
         endDate.setDate(endDate.getDate() - 1);
@@ -101,6 +108,7 @@ export class WorkCalendarComponent implements OnInit {
         this.getScheduleList(this.fkWorkGroup);
     }
 
+    
     //#endregion
 
 }
