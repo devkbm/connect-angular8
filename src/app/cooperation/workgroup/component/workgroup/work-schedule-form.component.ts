@@ -22,6 +22,7 @@ styleUrls: ['./work-schedule-form.component.css']
 export class WorkScheduleFormComponent extends FormBase implements OnInit {
 
     form: FormGroup;
+    workGroupList;
     startTime;
 
     constructor(private fb: FormBuilder,     
@@ -30,6 +31,7 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
                 }
 
     ngOnInit() {
+        this.getMyWorkGroupList();
         this.newForm(null);
     }    
     
@@ -41,8 +43,8 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
         this.form = this.fb.group({
             id              : [ null ],
             title           : [ null, [ Validators.required ] ],
-            start           : [ null, [ Validators.required ] ],
-            end             : [ null, [ Validators.required ] ],
+            start           : [ new Date(), [ Validators.required ] ],
+            end             : [ new Date(), [ Validators.required ] ],
             allDay          : [ null, [ Validators.required ] ],
             workGroupId     : [ workGroupId, [ Validators.required ] ]
         });
@@ -105,6 +107,25 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
             () => {}
         );
     }
+
+    public getMyWorkGroupList(): void {
+        this.workGroupService
+            .getMyWorkGroupList()
+            .subscribe(
+              (model: ResponseList<WorkGroup>) => {
+                  if (model.total > 0) {
+                      this.workGroupList = model.data;
+                  } else {
+                      this.workGroupList = null;
+                  }
+                  //this.appAlarmService.changeMessage(model.message);
+              },
+              (err) => {
+                  console.log(err);
+              },
+              () => {}
+            );
+      }
 
     public closeForm() {
         this.formClosed.emit(this.form.getRawValue());

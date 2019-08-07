@@ -25,11 +25,31 @@
 </div>
 
 <form nz-form [formGroup]="form" [nzLayout]="'vertical'">
+    <!--
     <nz-form-item>
         <nz-form-label nzFor="workGroupId" [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 Id</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
             <input nz-input id="workGroupId" formControlName="workGroupId" placeholder="작업그룹 Id를 입력해주세요.">                         
         </nz-form-control>        
+    </nz-form-item>
+    -->
+
+    <nz-form-item>
+        <nz-form-label nzFor="workGroupId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 ID</nz-form-label>
+        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+            <nz-select
+                id="workGroupId"
+                formControlName="workGroupId"
+                nzShowSearch
+                [nzSize]="'default'"
+                nzPlaceHolder="Please select">
+                <nz-option
+                    *ngFor="let item of workGroupList"
+                    [nzLabel]="item.name"
+                    [nzValue]="item.id | number">
+                </nz-option>
+            </nz-select>             
+        </nz-form-control>
     </nz-form-item>
     
     <nz-form-item>

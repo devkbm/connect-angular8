@@ -22,6 +22,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
 
     form: FormGroup;
 
+    workGroupList;
     memberList;
     color;
 
@@ -29,7 +30,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
                 private workGroupService: WorkGroupService) { super(); }
 
     ngOnInit() {
-        this.getAllMember();
+        this.getAllMember();        
 
         this.newForm();
     }
