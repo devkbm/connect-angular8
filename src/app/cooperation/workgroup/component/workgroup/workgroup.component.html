@@ -30,8 +30,7 @@
         #workCalendar        
         [fkWorkGroup]="workGroupId"
         (itemSelected)="itemSelect($event)"
-        (newDateSelected)="newSchedule2($event)"
-        >
+        (newDateSelected)="newSchedule2($event)">
     </app-work-calendar>
     
 </div>
@@ -64,9 +63,8 @@
     
     <app-workgroup-form 
         #workGroupForm 
-        (formSaved)="getScheduleList()"
-        (formDeleted)="getScheduleList()"
+        (formSaved)="getMyWorkGroupList()"
+        (formDeleted)="getMyWorkGroupList()"
         (formClosed)="closeWorkGroupDrawer()">
-
-    </app-workgroup-form>
+    </app-workgroup-form>    
 </nz-drawer>

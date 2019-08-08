@@ -34,6 +34,7 @@
     </nz-form-item>
     -->
 
+    <!--작업그룹ID 필드-->
     <nz-form-item>
         <nz-form-label nzFor="workGroupId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 ID</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
@@ -52,10 +53,11 @@
         </nz-form-control>
     </nz-form-item>
     
+    <!--스케쥴ID 필드-->
     <nz-form-item>
         <nz-form-label nzFor="id" [nzXs]="formLabelXs" [nzSm]="formLabelSm">스케쥴 Id</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="id" formControlName="id" placeholder="스케쥴 Id를 입력해주세요.">                         
+            <input nz-input id="id" formControlName="id">
         </nz-form-control>        
     </nz-form-item>
 
