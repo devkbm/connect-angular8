@@ -36,6 +36,7 @@ import { CommonCodeService } from './service/common-code.service';
 import { CommonCodeGridComponent } from './component/commoncode/common-code-grid.component';
 import { CommonCodeComponent } from './component/commoncode/common-code.component';
 import { CommonCodeTreeComponent } from './component/commoncode/common-code-tree.component';
+import { UserPopupComponent } from './component/user/user-popup.component';
 
 import { UserDuplicationValidatorDirective } from './validator/user-duplication-validator.directive';
 import { ButtonRendererComponent } from './grid/renderer/button-renderer.component';
@@ -46,8 +47,7 @@ import { DeptComponent } from './component/dept/dept.component';
 import { MenuService } from './service/menu.service';
 import { DeptService } from './service/dept.service';
 import { CustomHttpInterceptor } from './interceptor/custom-http-interceptor';
-import { ResponseList } from './model/response-list';
-import { ResponseObject } from './model/response-object';
+import { UserSessionService } from './service/user-session.service';
 
 
 @NgModule({
@@ -70,6 +70,7 @@ import { ResponseObject } from './model/response-object';
     UserFormComponent,
     UserGridComponent,
     UserComponent,
+    UserPopupComponent,
     MenuFormComponent,
     MenuGridComponent,
     MenuGroupFormComponent,
@@ -97,6 +98,7 @@ import { ResponseObject } from './model/response-object';
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
     LoginService,
     UserService,
+    UserSessionService,
     CommonCodeService,
     MenuService,
     DeptService
@@ -106,6 +108,7 @@ import { ResponseObject } from './model/response-object';
     UserFormComponent,
     UserGridComponent,
     UserComponent,
+    UserPopupComponent,
     MenuFormComponent,
     MenuGroupFormComponent,
     ProgramFormComponent,

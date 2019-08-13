@@ -12,6 +12,7 @@ import { AppAlarmService } from '../common/service/app-alarm.service';
 import { CommonFuncModule } from '../common/common-func.module';
 import { TermService } from '../common/service/term.service';
 import { WorkgroupModule } from '../cooperation/workgroup/workgroup.module';
+import { UserPopupComponent } from '../common/component/user/user-popup.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,10 @@ import { WorkgroupModule } from '../cooperation/workgroup/workgroup.module';
     WorkgroupModule
   ],
   declarations: [
-    CommonLayoutComponent
+    CommonLayoutComponent    
+  ],
+  entryComponents: [
+    UserPopupComponent
   ],
   providers: [
     AppAlarmService,

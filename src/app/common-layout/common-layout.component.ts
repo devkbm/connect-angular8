@@ -5,7 +5,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NzFormatEmitEvent, NzTreeNode, NzTreeNodeOptions } from 'ng-zorro-antd';
+import { NzFormatEmitEvent, NzTreeNode, NzTreeNodeOptions, NzModalService } from 'ng-zorro-antd';
 
 import { AppAlarmService } from '../common/service/app-alarm.service';
 import { MenuService } from '../common/service/menu.service';
@@ -13,6 +13,8 @@ import { MenuService } from '../common/service/menu.service';
 import { MenuGroup } from '../common/model/menu-group';
 import { MenuHierarchy } from '../common/model/menu-hierarchy';
 import { ResponseList } from '../common/model/response-list';
+import { UserSessionService } from '../common/service/user-session.service';
+import { UserPopupComponent } from '../common/component/user/user-popup.component';
 
 
 @Component({
@@ -27,7 +29,7 @@ export class CommonLayoutComponent implements OnInit {
   selectedValue: string;
   message: string;
   menuGroupCode: string;
-  userImageBase64;
+  avartarImgSrc;
 
   menuGroupList: MenuGroup[];
   menuItems: MenuHierarchy[];
@@ -35,7 +37,9 @@ export class CommonLayoutComponent implements OnInit {
   @ViewChild('treeCom', {static: false}) treeCom;
 
   constructor(private appAlarmService: AppAlarmService,
+              private sessionService: UserSessionService,
               private menuService: MenuService,
+              private modalService: NzModalService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -114,8 +118,24 @@ export class CommonLayoutComponent implements OnInit {
 
   public setAvatar(): void {
     // this.userImageBase64 = 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png';
-    const url = sessionStorage.getItem('imageUrl');
-    this.userImageBase64 = `http://localhost:8090/static/${url}`;
+    // const url = sessionStorage.getItem('imageUrl');
+    // this.userImageBase64 = `http://localhost:8090/static/${url}`;
+    this.avartarImgSrc = this.sessionService.getAvartarImageString();
+  }
+
+  public imageClick(args): void {
+    const modal = this.modalService.create({
+      nzTitle: 'Modal Title',
+      nzContent: UserPopupComponent
+    });
+
+    modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
+
+    // Return a result when closed
+    modal.afterClose.subscribe(result => console.log('[afterClose] The result is:', result));
+
+    modal.open();
+    
   }
 
 }

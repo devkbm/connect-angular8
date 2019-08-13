@@ -72,7 +72,7 @@
          class="collapse-icon"
          (click)="isCollapsed=!isCollapsed"></i>
 
-      <nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='48' [nzSrc]="userImageBase64"></nz-avatar>      
+      <nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='48' [nzSrc]="avartarImgSrc" (click)="imageClick($event)"></nz-avatar>      
     </nz-header>
 
     <nz-content class="main-content">
