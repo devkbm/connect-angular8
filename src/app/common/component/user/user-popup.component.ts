@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserSessionService } from '../../service/user-session.service';
 import { NzModalRef } from 'ng-zorro-antd';
+import { ResponseObject } from '../../model/response-object';
+import { User } from '../../model/user-info';
 
 @Component({
     selector: 'app-user-popup',
@@ -13,14 +15,32 @@ export class UserPopupComponent implements OnInit {
      * 아바타 이미지 경로
      */
     imgSrc;
+    user: User;
 
     constructor(private sessionService: UserSessionService,
                 private modal: NzModalRef) { }
 
     ngOnInit(): void {        
         this.imgSrc = this.sessionService.getAvartarImageString();
+        this.getMyInfo();
     }
 
+    public getMyInfo() {
+        this.sessionService
+            .getSessionUserInfo()
+            .subscribe(
+                (model: ResponseObject<User>) => {
+                    if ( model.total > 0 ) {
+                        this.user = model.data;
+                    } 
+                    //this.appAlarmService.changeMessage(model.message);
+                },
+                (err) => {
+                    console.log(err);
+                },
+                () => { }
+        );
+    }
 
 }
   

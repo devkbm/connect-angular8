@@ -21,6 +21,16 @@ styleUrls: ['./work-schedule-form.component.css']
 })
 export class WorkScheduleFormComponent extends FormBase implements OnInit {
 
+    /**
+     * Xs < 576px span size
+     * Sm >= 576px span size
+     */
+    formLabelXs = 24;
+    formControlXs = 24;
+
+    formLabelSm = 3;
+    formControlSm = 21;
+
     form: FormGroup;
     workGroupList;
     startTime;
