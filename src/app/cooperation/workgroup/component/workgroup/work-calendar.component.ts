@@ -93,7 +93,7 @@ export class WorkCalendarComponent implements OnInit {
 
     onDateClick(param) {
         console.log(param);      
-        this.newDateSelected.emit(this.fkWorkGroup);
+        this.newDateSelected.emit({fkWorkGroup: this.fkWorkGroup, date: param.date});
     }
 
     onDatesRender(param) {

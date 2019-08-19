@@ -1,2 +1,12 @@
-<nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='48' [nzSrc]="imgSrc"></nz-avatar>
-{{user | json}}
+<nz-card style="width: 400px;margin-top: 16px" [nzBordered]="false">
+    <nz-card-meta
+      [nzAvatar]="avatarTemplate"
+      [nzTitle]="user.name + '(' + user.userId + ')'"
+      nzDescription="This is the description">
+    </nz-card-meta>
+</nz-card>
+<ng-template #avatarTemplate>
+    <nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='48' [nzSrc]="imgSrc"></nz-avatar>
+</ng-template>  
+
+<!-- {{user | json}} -->

@@ -51,7 +51,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
         this.formType = FormType.NEW;
 
         this.form = this.fb.group({
-            workGroupId     : [ null, [ Validators.required ] ],
+            workGroupId     : new FormControl({value: null, disabled: true}),
             workGroupName   : [ null, [ Validators.required ] ],
             color           : [ null, [ Validators.required ] ],
             memberList      : [ null ]

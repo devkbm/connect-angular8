@@ -1,11 +1,10 @@
-{{form.getRawValue() | json}}
+<!--{{form.getRawValue() | json}}-->
 <div class="footer">
-    
-    <button nz-button (click)="getWorkGroupSchedule(form.get('id').value)">
-        <i nz-icon type="close" theme="outline"></i>
+    <!--
+    <button nz-button (click)="getWorkGroupSchedule(form.get('id').value)">        
         조회
     </button>
-    
+    -->
     <button nz-button (click)="closeForm()">
         <i nz-icon type="close" theme="outline"></i>
         닫기
@@ -64,8 +63,10 @@
     <nz-form-item class="form-item">
         <nz-form-label nzFor="start" [nzXs]="formLabelXs" [nzSm]="formLabelSm">기간</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker id="start" formControlName="start" nzShowTime nzFormat="YYYY-MM-DD HH:mm:ss"></nz-date-picker> ~
-            <nz-date-picker id="end" formControlName="end" nzShowTime nzFormat="YYYY-MM-DD HH:mm:ss"></nz-date-picker>            
+            <nz-date-picker formControlName="start" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
+            <nz-time-picker formControlName="start" style="width: 105px"></nz-time-picker> ~
+            <nz-date-picker formControlName="end" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker> 
+            <nz-time-picker formControlName="end" style="width: 105px"></nz-time-picker>           
         </nz-form-control>
     </nz-form-item>    
 

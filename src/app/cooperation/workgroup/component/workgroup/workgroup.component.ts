@@ -81,9 +81,11 @@ export class WorkgroupComponent implements OnInit {
     this.openScheduleDrawer();
   }
 
-  public newSchedule2(id): void {
-    console.log(id);
-    this.workScheduleForm.newForm(id);
+  public newSchedule2(param): void {
+    console.log(param);
+    this.workScheduleForm.newForm(param.fkWorkGroup);
+    this.workScheduleForm.form.get('start').setValue(param.date);
+    this.workScheduleForm.form.get('end').setValue(param.date);
     this.openScheduleDrawer();
   }
 
