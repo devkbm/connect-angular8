@@ -1,3 +1,5 @@
+<nz-page-header (nzBack)="true" nzBackIcon nzTitle="부서코드 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
+
 <!--조회 조건-->
 <div nz-row class="btn-group">  
   <div nz-col [nzSpan]="12">
@@ -36,21 +38,21 @@
 </div>
       
 <!-- -->
-<h3>부서코드 목록</h3>
+<h3 class="pgm-title">부서코드 목록</h3>
 
 <div class="grid-wrapper">
-      <app-dept-tree
-        #deptTree
-        id="deptTree"
-        [searchValue]="queryValue"
-        (itemSelected)="selectedItem($event)">              
-      </app-dept-tree>      
+  <app-dept-tree
+    #deptTree
+    id="deptTree"
+    [searchValue]="queryValue"
+    (itemSelected)="selectedItem($event)">              
+  </app-dept-tree>      
 
-      <app-dept-form
-        id="deptForm"
-        #deptForm
-        (formSaved)="getDeptTree()"
-        (formDeleted)="getDeptTree()">
-    </app-dept-form>
+  <app-dept-form
+    id="deptForm"
+    #deptForm
+    (formSaved)="getDeptTree()"
+    (formDeleted)="getDeptTree()">
+  </app-dept-form>
 </div>
       

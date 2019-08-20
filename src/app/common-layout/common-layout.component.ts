@@ -125,8 +125,15 @@ export class CommonLayoutComponent implements OnInit {
 
   public imageClick(args): void {
     const modal = this.modalService.create({
-      nzTitle: 'Modal Title',
-      nzContent: UserPopupComponent
+      /*nzTitle: 'Modal Title',*/
+      nzTitle: null,
+      nzContent: UserPopupComponent,
+      nzFooter: null,
+      //nzMaskClosable: false,
+      //nzClosable: false,
+      nzKeyboard: true,
+      nzWidth: 400,
+      nzStyle: { position: 'absolute', top: '30px', right: '70px', padding: 0, margin: 0 }
     });
 
     modal.afterOpen.subscribe(() => console.log('[afterOpen] emitted!'));
