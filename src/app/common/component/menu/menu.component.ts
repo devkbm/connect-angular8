@@ -1,15 +1,17 @@
-import { MenuGroupFormComponent } from './menu-group-form.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
+import { MenuGroupFormComponent } from './menu-group-form.component';
 import { MenuGroupGridComponent } from './menu-group-grid.component';
 import { MenuGridComponent } from './menu-grid.component';
 import { MenuFormComponent } from './menu-form.component';
+import { AppBase } from '../../app/app-base';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent extends AppBase implements OnInit {
 
   protected menuGroupFormVisible = false;
   protected menuFormVisible = false;
@@ -32,7 +34,9 @@ export class MenuComponent implements OnInit {
   @ViewChild('menuForm', {static: false})
   menuForm: MenuFormComponent;
 
-  constructor() { }
+  constructor(location: Location) { 
+    super(location); 
+  }
 
   ngOnInit() {
   }

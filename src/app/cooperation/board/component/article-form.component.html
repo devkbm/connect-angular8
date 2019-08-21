@@ -3,19 +3,19 @@
 <!--{{fileList | json}}-->
 <div class="footer">
     <button nz-button (click)="closeForm()">
-        <i nz-icon type="close" theme="outline"></i>
+        <i nz-icon nzType="close" theme="outline"></i>
         닫기
     </button>
     <nz-divider nzType="vertical"></nz-divider>
     <button nz-button nzType="primary" nz-popconfirm nzTitle="저장하시겠습니까?" 
         (nzOnConfirm)="saveBoard()" (nzOnCancel)="false">
-        <i nz-icon type="save" theme="outline"></i>
+        <i nz-icon nzType="save" theme="outline"></i>
         저장
     </button>
     <nz-divider nzType="vertical"></nz-divider>
     <button nz-button nzType="danger" nz-popconfirm nzTitle="삭제하시겠습니까?"
         (nzOnConfirm)="deleteArticle(articleForm.get('pkArticle').value)" (nzOnCancel)="false">
-        <i nz-icon type="delete" theme="outline"></i>
+        <i nz-icon nzType="delete" theme="outline"></i>
         삭제
     </button>    
 </div>
@@ -63,7 +63,7 @@
             [nzHeaders]="fileUploadHeader"
             [nzFileList]="fileList"
             (nzChange)="fileUploadChange($event)">
-            <button nz-button><i nz-icon type="upload"></i><span>첨부파일</span></button>
+            <button nz-button><i nz-icon nzType="upload"></i><span>첨부파일</span></button>
         </nz-upload>
     </div>    
     

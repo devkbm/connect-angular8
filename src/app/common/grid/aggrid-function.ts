@@ -13,7 +13,6 @@ export class AggridFunction {
     protected columnDefs: object[];
     protected defaultColDef: {};
 
-
     protected style = {
         width: '100%',
         height: '100%'
@@ -23,6 +22,11 @@ export class AggridFunction {
         this.frameworkComponents = {
             buttonRenderer: ButtonRendererComponent,
             checkboxRenderer: CheckboxRendererComponent
+        };
+
+        this.defaultColDef = {
+            sortable: true,
+            resizable: true
         };
     }
 

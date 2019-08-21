@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { NzDrawerService, NzDrawerRef } from 'ng-zorro-antd';
 import { CommonCodeFormComponent } from './common-code-form.component';
 import { CommonCodeTreeComponent } from './common-code-tree.component';
+import { AppBase } from '../../app/app-base';
 
 @Component({
   selector: 'app-common-code',
   templateUrl: './common-code.component.html',
   styleUrls: ['./common-code.component.css']
 })
-export class CommonCodeComponent implements OnInit {
+export class CommonCodeComponent extends AppBase implements OnInit {
 
     queryKey = 'programCode';
     queryValue = '';
@@ -19,7 +21,9 @@ export class CommonCodeComponent implements OnInit {
     @ViewChild('commonCodeForm', {static: false})
     form: CommonCodeFormComponent;
 
-    constructor() { }
+    constructor(location: Location) { 
+        super(location); 
+    }
 
     ngOnInit() {
         this.tree.getCommonCodeHierarchy();

@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { AuthorityGridComponent } from './authority-grid.component';
 import { AuthorityFormComponent } from './authority-form.component';
+import { AppBase } from '../../app/app-base';
 
 @Component({
   selector: 'app-authority',
   templateUrl: './authority.component.html',
   styleUrls: ['./authority.component.css']
 })
-export class AuthorityComponent implements OnInit {
+export class AuthorityComponent extends AppBase implements OnInit {
 
   drawerVisible = false;
 
@@ -20,7 +22,9 @@ export class AuthorityComponent implements OnInit {
   @ViewChild('authForm', {static: false})
   form: AuthorityFormComponent;
 
-  constructor() { }
+  constructor(location: Location) { 
+    super(location); 
+  }
 
   ngOnInit() {
   }

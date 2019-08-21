@@ -40,7 +40,7 @@
           <ul *ngFor="let level2 of level1.children">
 
               <li nz-menu-item *ngIf="level2.menuType == 'ITEM'" (click)="selectMenuItem(level2.url)">
-                {{level2.title}}
+                  <span title>{{level2.title}}</span>
               </li>
               <li nz-submenu *ngIf="level2.menuType == 'SUBMENU'">
                   <span title>{{level2.title}}</span>
@@ -48,8 +48,7 @@
                     <li nz-menu-item *ngIf="level3.menuType == 'ITEM'" (click)="selectMenuItem(level3.url)">
                       {{level3.title}}
                     </li>
-                  </ul
-                  >
+                  </ul>
               </li>
               <li nz-menu-group *ngIf="level2.menuType == 'GROUP'">
                 <span title>{{level2.title}}</span>
@@ -68,10 +67,11 @@
 
   <nz-layout>    
     <nz-header class="header">
-      <i nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'"
+      <i nz-icon [nzType]="isCollapsed?'menu-unfold':'menu-fold'"
          class="collapse-icon"
-         (click)="isCollapsed=!isCollapsed"></i>
-
+         (click)="isCollapsed=!isCollapsed">
+      </i>      
+      
       <nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='48' [nzSrc]="avartarImgSrc" (click)="imageClick($event)"></nz-avatar>      
     </nz-header>
 
@@ -80,7 +80,8 @@
     </nz-content>
     
     <!--<nz-footer class="footer">Ant Design ©2017 Implement By Angular- {{message}}</nz-footer>-->
-    <div class="footer">nz-footer class="footer">Ant Design ©2017 Implement By Angular- {{message}}</div>
+    <div class="footer">{{message}}
+    </div>
   </nz-layout>
 
 </nz-layout>

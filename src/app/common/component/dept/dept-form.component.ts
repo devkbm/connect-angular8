@@ -26,7 +26,7 @@ export class DeptFormComponent extends FormBase implements OnInit {
 
   deptForm: FormGroup;
 
-  deptHierarchy: DeptHierarchy[];
+  deptHierarchy: DeptHierarchy[] = [];
 
   /**
    * Xs < 576px span size
@@ -115,19 +115,19 @@ export class DeptFormComponent extends FormBase implements OnInit {
     this.deptService
         .getDeptHierarchyList()
         .subscribe(
-            (model: ResponseList<DeptHierarchy>) => {
-                if ( model.total > 0 ) {
-                this.deptHierarchy = model.data;
-                } else {
-                this.deptHierarchy = [];
-                }
-            },
-            (err) => {
-            console.log(err);
-            },
-            () => {
-            console.log('완료');
+          (model: ResponseList<DeptHierarchy>) => {
+            if ( model.total > 0 ) {
+              this.deptHierarchy = model.data;
+            } else {
+              this.deptHierarchy = [];
             }
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {
+            console.log('완료');
+          }
         );
   }
 

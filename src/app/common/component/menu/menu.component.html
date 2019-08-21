@@ -1,4 +1,4 @@
-<nz-page-header (nzBack)="true" nzBackIcon nzTitle="메뉴 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
+<nz-page-header (nzBack)="goBack()" nzBackIcon nzTitle="메뉴 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
 
 <div nz-row class="btn-group">
 
@@ -13,7 +13,7 @@
         </nz-select>
       </ng-template>
     <ng-template #suffixIconSearch>
-      <i nz-icon type="search"></i>
+      <i nz-icon nzType="search"></i>
     </ng-template>
   </div>
 
@@ -28,25 +28,25 @@
         </nz-select>
       </ng-template>
     <ng-template #suffixIconSearch2>
-      <i nz-icon type="search"></i>
+      <i nz-icon nzType="search"></i>
     </ng-template>
   </div>
 
   <div nz-col [nzSpan]="8" style="text-align: right;">
     <button nz-button (click)="newMenuGroupForm()">
-      <i nz-icon type="search"></i>
+      <i nz-icon nzType="search"></i>
       메뉴그룹등록
     </button>
     <nz-divider nzType="vertical"></nz-divider>
 
     <button nz-button (click)="newMenu()">
-      <i nz-icon type="form"></i>
+      <i nz-icon nzType="form"></i>
       메뉴등록
     </button>
     <nz-divider nzType="vertical"></nz-divider>
 
     <button nz-button (click)="getMenuGroupList()">
-      <i nz-icon type="form"></i>
+      <i nz-icon nzType="form"></i>
       조회
     </button>
     <nz-divider nzType="vertical"></nz-divider>

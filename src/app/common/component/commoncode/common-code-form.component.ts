@@ -24,7 +24,7 @@ import { FormBase, FormType } from '../../form/form-base';
 export class CommonCodeFormComponent extends FormBase implements OnInit {
 
   codeForm: FormGroup;
-  nodeItems: CommonCodeHierarchy[];
+  nodeItems: CommonCodeHierarchy[] = [];
 
   /**
    * Xs < 576px span size

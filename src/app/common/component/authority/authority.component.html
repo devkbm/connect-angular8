@@ -1,4 +1,4 @@
-<nz-page-header (nzBack)="true" nzBackIcon nzTitle="권한 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
+<nz-page-header (nzBack)="goBack()" nzBackIcon nzTitle="권한 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
 
 <div nz-row class="btn-group">    
     <div nz-col [nzSpan]="12">
@@ -12,7 +12,7 @@
             </nz-select>
             </ng-template>
         <ng-template #suffixIconSearch>
-            <i nz-icon type="search"></i>
+            <i nz-icon nzType="search"></i>
         </ng-template>
     </div>
 
@@ -20,14 +20,14 @@
         <button 
             nz-button         
             (click)="getAuthorityList()">
-            <i nz-icon type="search" theme="outline"></i>
+            <i nz-icon nzType="search" theme="outline"></i>
             조회
         </button>        
         <nz-divider nzType="vertical"></nz-divider>  
         <button 
             nz-button         
             (click)="initForm()">
-            <i nz-icon type="form" theme="outline"></i>
+            <i nz-icon nzType="form" theme="outline"></i>
             신규
         </button>
         <nz-divider nzType="vertical"></nz-divider>          
@@ -38,7 +38,7 @@
             nzTitle="삭제하시겠습니까?" 
             (nzOnConfirm)="deleteAuthority()" 
             (nzOnCancel)="false">
-            <i nz-icon type="delete" theme="outline"></i>
+            <i nz-icon nzType="delete" theme="outline"></i>
             삭제
         </button>    
     </div>

@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { UserGridComponent } from './user-grid.component';
 import { UserFormComponent } from './user-form.component';
+import { AppBase } from '../../app/app-base';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserComponent extends AppBase implements OnInit {
 
   drawerVisible = false;
 
@@ -20,7 +22,9 @@ export class UserComponent implements OnInit {
   @ViewChild('userForm', {static: false})
   form: UserFormComponent;
 
-  constructor() { }
+  constructor(location: Location) { 
+    super(location); 
+  }
 
   ngOnInit() {
   }
@@ -60,6 +64,6 @@ export class UserComponent implements OnInit {
   initForm() {
     this.form.newForm();
     this.openDrawer();
-  }
+  }  
 
 }

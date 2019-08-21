@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { TermGridComponent } from './term-grid.component';
 import { TermFormComponent } from './term-form.component';
 import { NzDrawerService, NzDrawerRef } from 'ng-zorro-antd';
+import { AppBase } from '../../app/app-base';
 
 @Component({
   selector: 'app-term',
   templateUrl: './term.component.html',
   styleUrls: ['./term.component.css']
 })
-export class TermComponent implements OnInit {
+export class TermComponent extends AppBase implements OnInit {
 
   drawerVisible = false;
 
@@ -21,7 +23,9 @@ export class TermComponent implements OnInit {
   @ViewChild('termForm', {static: false})
   form: TermFormComponent;
 
-  constructor() { }
+  constructor(location: Location) { 
+    super(location); 
+  }
 
   ngOnInit() {
   }

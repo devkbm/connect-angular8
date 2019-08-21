@@ -16,7 +16,7 @@ export class CommonCodeTreeComponent implements OnInit {
 
     @ViewChild('treeComponent', {static: false}) treeComponent;
   
-    nodeItems: CommonCodeHierarchy[];
+    nodeItems: CommonCodeHierarchy[] = [];
 
     @Input()
     searchValue = '';

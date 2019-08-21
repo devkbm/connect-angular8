@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { ProgramGridComponent } from './program-grid.component';
 import { ProgramFormComponent } from './program-form.component';
 import { NzDrawerService, NzDrawerRef } from 'ng-zorro-antd';
+import { AppBase } from '../../app/app-base';
 
 @Component({
   selector: 'app-program',
   templateUrl: './program.component.html',
   styleUrls: ['./program.component.css']
 })
-export class ProgramComponent implements OnInit {
+export class ProgramComponent extends AppBase  implements OnInit {
 
   drawerVisible = false;
 
@@ -21,7 +23,9 @@ export class ProgramComponent implements OnInit {
   @ViewChild('programForm', {static: false})
   form: ProgramFormComponent;
 
-  constructor() { }
+  constructor(location: Location) { 
+    super(location); 
+  }
 
   ngOnInit() {
   }

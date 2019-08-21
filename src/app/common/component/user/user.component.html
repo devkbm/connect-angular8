@@ -1,4 +1,4 @@
-<nz-page-header (nzBack)="true" nzBackIcon nzTitle="사용자 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
+<nz-page-header (nzBack)="goBack()" nzBackIcon nzTitle="사용자 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
 
 <div nz-row class="btn-group">
   <div nz-col [nzSpan]="12">
@@ -12,21 +12,21 @@
           </nz-select>
           </ng-template>
       <ng-template #suffixIconSearch>
-          <i nz-icon type="search"></i>
+          <i nz-icon nzType="search"></i>
       </ng-template>
   </div>
   <div nz-col [nzSpan]="12" style="text-align: right;">
       <button
           nz-button
           (click)="getUserList()">
-          <i nz-icon type="search"></i>
+          <i nz-icon nzType="search"></i>
           조회
       </button>
       <nz-divider nzType="vertical"></nz-divider>
       <button
           nz-button
           (click)="initForm()">
-          <i nz-icon type="form" theme="outline"></i>
+          <i nz-icon nzType="form" theme="outline"></i>
           신규
       </button>
       <nz-divider nzType="vertical"></nz-divider>
@@ -37,7 +37,7 @@
           nzTitle="저장하시겠습니까?"
           (nzOnConfirm)="saveUser()"
           (nzOnCancel)="false">
-          <i nz-icon type="save" theme="outline"></i>
+          <i nz-icon nzType="save" theme="outline"></i>
           저장
       </button>
       <nz-divider nzType="vertical"></nz-divider>
@@ -48,7 +48,7 @@
           nzTitle="삭제하시겠습니까?"
           (nzOnConfirm)="deleteUser()"
           (nzOnCancel)="false">
-          <i nz-icon type="delete" theme="outline"></i>
+          <i nz-icon nzType="delete" theme="outline"></i>
           삭제
       </button>
   </div>

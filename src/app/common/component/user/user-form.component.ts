@@ -33,7 +33,7 @@ export class UserFormComponent extends FormBase implements OnInit {
   public userForm: FormGroup;
   public authList;
   public menuGroupList;
-  public deptHierarchy: DeptHierarchy[];
+  public deptHierarchy: DeptHierarchy[] = [];
 
   passwordConfirm: string;
   popup: boolean;

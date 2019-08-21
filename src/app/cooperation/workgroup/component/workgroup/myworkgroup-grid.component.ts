@@ -29,6 +29,11 @@ export class MyWorkGroupGridComponent extends AggridFunction implements OnInit {
               private workGroupService: WorkGroupService) {
     super();
 
+    this.defaultColDef = {
+      sortable: true,
+      resizable: true
+    };
+    
     this.columnDefs = [
       {
           headerName: 'No',
@@ -50,13 +55,7 @@ export class MyWorkGroupGridComponent extends AggridFunction implements OnInit {
         headerName: '작업그룹명',
         field: 'name'
       }
-    ];
-
-    this.defaultColDef = {
-      sortable: true,
-      resizable: true
-    };
-
+    ];    
 
     this.getRowNodeId = function(data) {
         return data.id;
