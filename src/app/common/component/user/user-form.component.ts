@@ -67,8 +67,8 @@ export class UserFormComponent extends FormBase implements OnInit {
   formLabelXs = 24;
   formControlXs = 24;
 
-  formLabelSm = 4;
-  formControlSm = 20;
+  formLabelSm = 24;
+  formControlSm = 24;
 
 
   @Output()

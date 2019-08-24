@@ -30,8 +30,8 @@ export class AuthorityFormComponent extends FormBase implements OnInit {
   formLabelXs = 24;
   formControlXs = 24;
 
-  formLabelSm = 2;
-  fromControlSm = 22;
+  formLabelSm = 24;
+  fromControlSm = 24;
 
   @Output()
   formSaved = new EventEmitter();

@@ -31,8 +31,8 @@ export class MenuGroupFormComponent extends FormBase implements OnInit {
   formLabelXs = 24;
   formControlXs = 24;
 
-  formLabelSm = 4;
-  fromControlSm = 20;
+  formLabelSm = 24;
+  fromControlSm = 24;
 
   @Output()
   formSaved = new EventEmitter();

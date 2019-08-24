@@ -1,34 +1,40 @@
 {{menuGroupForm.value | json}}
 {{this.formType}}
-<form nz-form [formGroup]="menuGroupForm">
+<form nz-form [formGroup]="menuGroupForm" nzLayout="vertical">
 
-    <!--메뉴그룹코드 필드(생성)-->
-    <nz-form-item *ngIf="this.formType == 'NEW'">
-        <nz-form-label nzFor="menuGroupCode" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">메뉴그룹코드c</nz-form-label>
-        <nz-form-control nzHasFeedback [nzXs]="formControlXs" [nzSm]="fromControlSm">
-            <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupCode','required')">The input is Required!</nz-form-explain>
-            <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupCode','exists')">기존 메뉴그룹코드가 존재합니다</nz-form-explain>            
-        </nz-form-control>
-    </nz-form-item>
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="12">
+            <!--메뉴그룹코드 필드(생성)-->
+            <nz-form-item *ngIf="this.formType == 'NEW'">
+                <nz-form-label nzFor="menuGroupCode" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">메뉴그룹코드c</nz-form-label>
+                <nz-form-control nzHasFeedback [nzXs]="formControlXs" [nzSm]="fromControlSm">
+                    <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupCode','required')">The input is Required!</nz-form-explain>
+                    <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupCode','exists')">기존 메뉴그룹코드가 존재합니다</nz-form-explain>            
+                </nz-form-control>
+            </nz-form-item>
 
-    <!--메뉴그룹코드 필드(수정)-->
-    <nz-form-item *ngIf="this.formType == 'MODIFY'">
-        <nz-form-label nzFor="menuGroupCode" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">메뉴그룹코드u</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="fromControlSm">
-            <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요." >
-            <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupCode','required')">The input is Required!</nz-form-explain>
-        </nz-form-control>
-    </nz-form-item>
+            <!--메뉴그룹코드 필드(수정)-->
+            <nz-form-item *ngIf="this.formType == 'MODIFY'">
+                <nz-form-label nzFor="menuGroupCode" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">메뉴그룹코드u</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="fromControlSm">
+                    <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요." >
+                    <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupCode','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
 
-    <!--메뉴그룹명 필드-->
-    <nz-form-item>
-        <nz-form-label nzFor="menuGroupName" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">메뉴그룹명</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="fromControlSm">
-            <input nz-input id="menuGroupName" formControlName="menuGroupName" placeholder="메뉴그룹명을 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupName','required')">The input is Required!</nz-form-explain>
-        </nz-form-control>
-    </nz-form-item>
+        <div nz-col nzSpan="12">
+            <!--메뉴그룹명 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="menuGroupName" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">메뉴그룹명</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="fromControlSm">
+                    <input nz-input id="menuGroupName" formControlName="menuGroupName" placeholder="메뉴그룹명을 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(menuGroupForm,'menuGroupName','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
 
     <!--비고 필드-->
     <nz-form-item>
