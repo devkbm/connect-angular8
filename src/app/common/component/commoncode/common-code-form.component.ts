@@ -31,10 +31,10 @@ export class CommonCodeFormComponent extends FormBase implements OnInit {
    * Sm >= 576px span size
    */
   formLabelXs = 24;
-  formLabelSm = 4;
+  formControlXs = 24;  
 
-  formControlXs = 24;
-  formControlSm = 20;
+  formLabelSm = 24;
+  formControlSm = 24;
 
   @Output()
   formSaved = new EventEmitter();
