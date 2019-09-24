@@ -27,14 +27,8 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
-  }
-
-  id: string;
-  code: string;
-  codeName: string;    
-  useYn: boolean;
-  sequence: number;
-  comment: string;
+    this.newForm();
+  }  
 
   public newForm(): void {
     this.formType = FormType.NEW;
@@ -83,7 +77,7 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
       );
   }
 
-  public submitDept() {
+  public submitForm() {
     this.deptTypeService
         .saveDeptType(this.fg.getRawValue())
         .subscribe(
@@ -96,5 +90,9 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
           },
           () => {}
         );
+  }
+
+  public closeForm() {
+    //this.formClosed.emit(this.fg.getRawValue());
   }
 }

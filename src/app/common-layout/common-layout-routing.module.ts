@@ -27,6 +27,7 @@ import { TeamFormComponent } from '../cooperation/communication/component/team-f
 import { TeamComponent } from '../cooperation/communication/component/team.component';
 import { DeptComponent } from '../common/component/dept/dept.component';
 import { WorkgroupComponent } from '../cooperation/workgroup/component/workgroup/workgroup.component';
+import { DeptTypeComponent } from '../hrm/appointment/component/dept-type/dept-type.component';
 
 
 const layoutroutes: Routes = [
@@ -53,7 +54,8 @@ const layoutroutes: Routes = [
       {path: 'term',          component: TermComponent},
       {path: 'team',          component: TeamComponent},
       {path: 'dept',          component: DeptComponent},
-      {path: 'workgroup',     component: WorkgroupComponent}
+      {path: 'workgroup',     component: WorkgroupComponent},
+      {path: 'depttype',      component: DeptTypeComponent}
     ]
   }
 ];

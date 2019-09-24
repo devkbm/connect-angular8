@@ -9,6 +9,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ButtonRendererComponent } from 'src/app/common/grid/renderer/button-renderer.component';
 import { DeptTypeComponent } from './component/dept-type/dept-type.component';
 import { DeptTypeFormComponent } from './component/dept-type/dept-type-form.component';
+import { DeptTypeService } from './service/dept-type.service';
 
 
 @NgModule({
@@ -23,6 +24,12 @@ import { DeptTypeFormComponent } from './component/dept-type/dept-type-form.comp
   declarations: [
     DeptTypeComponent,
     DeptTypeFormComponent
+  ],
+  providers: [
+    DeptTypeService
+  ],
+  exports: [
+    DeptTypeComponent
   ]
 })
 export class AppointmentModule { }

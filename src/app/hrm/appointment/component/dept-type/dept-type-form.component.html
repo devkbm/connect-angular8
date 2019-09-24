@@ -1,99 +1,52 @@
 {{fg.value | json}}
-<form nz-form [formGroup]="fg">
+<form nz-form [formGroup]="fg">    
 
-    <!--상위부서코드 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label
-            nzFor="parentDeptCode"
-            [nzXs]="formLabelXs" [nzSm]="formLabelSm">
-            상위 메뉴코드
-        </nz-form-label>
-        
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm" >
-            <nz-tree-select
-                id="parentDeptCode"
-                [nzNodes]="deptHierarchy"
-                [nzAllowClear]="true"            
-                [nzPlaceHolder]="'상위 부서 없음'"    
-                formControlName="parentDeptCode">
-            </nz-tree-select>
-        </nz-form-control>
-    </nz-form-item>
-
-    <!--부서코드 필드 (생성)-->
+    <!--부서유형코드 필드 (생성)-->
     <nz-form-item class="form-item" *ngIf="formType == 'NEW'">
-        <nz-form-label nzFor="deptCode" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서코드</nz-form-label>
+        <nz-form-label nzFor="code" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서유형코드</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="deptCode" formControlName="deptCode" placeholder="부서코드를 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(deptForm,'deptCode','required')">The input is Required!</nz-form-explain>
+            <input nz-input id="code" formControlName="code" placeholder="부서유형코드를 입력해주세요.">
+            <nz-form-explain *ngIf="isFieldErrors(fg,'code','required')">The input is Required!</nz-form-explain>
         </nz-form-control>
     </nz-form-item>
 
-    <!--부서코드 필드 (수정)-->
+    <!--부서유형코드 필드 (수정)-->
     <nz-form-item class="form-item" *ngIf="formType == 'MODIFY'">
-        <nz-form-label nzFor="deptCode" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서코드U</nz-form-label>
+        <nz-form-label nzFor="code" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서유형코드U</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="deptCode" formControlName="deptCode" placeholder="부서코드를 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(deptForm,'deptCode','required')">The input is Required!</nz-form-explain>
+            <input nz-input id="code" formControlName="code" placeholder="부서유형코드를 입력해주세요.">
+            <nz-form-explain *ngIf="isFieldErrors(fg,'code','required')">The input is Required!</nz-form-explain>
         </nz-form-control>
     </nz-form-item>
 
-    <!--부서코드명(한글) 필드-->
+    <!--부서유형명(한글) 필드-->
     <nz-form-item class="form-item">
-        <nz-form-label nzFor="deptNameKorean" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서코드명(한글)</nz-form-label>
+        <nz-form-label nzFor="codeName" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서유형명</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="deptNameKorean" formControlName="deptNameKorean" placeholder="부서코드명(한글)을 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(deptForm,'deptNameKorean','required')">The input is Required!</nz-form-explain>
+            <input nz-input id="codeName" formControlName="codeName" placeholder="부서유형명(한글)을 입력해주세요.">
+            <nz-form-explain *ngIf="isFieldErrors(fg,'codeName','required')">The input is Required!</nz-form-explain>
         </nz-form-control>
     </nz-form-item>
-    
-    <!--부서코드명(한글) 약어 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label nzFor="deptAbbreviationKorean" [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서코드명(한글) 약어</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="deptAbbreviationKorean" formControlName="deptAbbreviationKorean" placeholder="부서코드명(한글) 약어를 입력해주세요.">                        
-        </nz-form-control>
-    </nz-form-item>    
+        
+    <!--사용여부 필드-->
+    <nz-form-item>
+        <nz-form-label 
+            nzFor="useYn"    
+            [nzXs]="formLabelXs"
+            [nzSm]="formLabelSm">사용여부
+        </nz-form-label>
 
-    <!--부서코드명(영문) 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label nzFor="deptNameEnglish" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서코드명(영문)</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="deptNameEnglish" formControlName="deptNameEnglish" placeholder="부서코드명(영문)을 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(deptForm,'deptNameEnglish','required')">The input is Required!</nz-form-explain>
-        </nz-form-control>
-    </nz-form-item>
-    
-    <!--부서코드명(영문) 약어 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label nzFor="deptAbbreviationEnglish" [nzXs]="formLabelXs" [nzSm]="formLabelSm">부서코드명(영문) 약어</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="deptAbbreviationEnglish" formControlName="deptAbbreviationEnglish" placeholder="부서코드명(영문) 약어를 입력해주세요.">
-        </nz-form-control>
-    </nz-form-item>    
-
-    <!--시작일 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label nzFor="fromDate" [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker id="fromDate" formControlName="fromDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>            
-        </nz-form-control>
-    </nz-form-item>    
-
-    <!--종료일 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label nzFor="toDate" [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker id="toDate" formControlName="toDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>                        
+            <label id="useYn" nz-checkbox formControlName="useYn"></label>
         </nz-form-control>
     </nz-form-item>
 
     <!--출력순번 필드-->
     <nz-form-item class="form-item">
-        <nz-form-label nzFor="seq" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">출력 순번</nz-form-label>
+        <nz-form-label nzFor="sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">출력 순번</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-input-number id="seq" formControlName="seq" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>            
-            <nz-form-explain *ngIf="isFieldErrors(deptForm,'seq','required')">The input is Required!</nz-form-explain>
+            <nz-input-number id="sequence" formControlName="sequence" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>            
+            <nz-form-explain *ngIf="isFieldErrors(fg,'sequence','required')">The input is Required!</nz-form-explain>
         </nz-form-control>
     </nz-form-item>    
 
@@ -107,22 +60,22 @@
 
 </form>
 
-<!--<div class="footer">
+<div class="footer">
     <button
         nz-button
         (click)="closeForm()">
-        <i nz-icon type="form" theme="outline"></i>
+        <i nz-icon nzType="form" theme="outline"></i>
         닫기
-    </button>
+    </button>    
     <nz-divider nzType="vertical"></nz-divider>
     <button
         nz-button
         nzType="primary"
         nz-popconfirm
         nzTitle="저장하시겠습니까?"
-        (nzOnConfirm)="submitCommonCode()"
+        (nzOnConfirm)="submitForm()"
         (nzOnCancel)="false">
-        <i nz-icon type="save" theme="outline"></i>
+        <i nz-icon nzType="save" theme="outline"></i>
         저장
     </button>
     <nz-divider nzType="vertical"></nz-divider>
@@ -131,11 +84,11 @@
         nzType="danger"
         nz-popconfirm
         nzTitle="삭제하시겠습니까?"
-        (nzOnConfirm)="deleteCommonCode()"
+        (nzOnConfirm)="true"
         (nzOnCancel)="false">
-        <i nz-icon type="delete" theme="outline"></i>
+        <i nz-icon nzType="delete" theme="outline"></i>
         삭제
     </button>
 
 </div>
--->
+
