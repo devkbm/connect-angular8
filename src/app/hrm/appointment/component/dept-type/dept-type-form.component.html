@@ -61,6 +61,13 @@
 </form>
 
 <div class="footer">
+        <button
+        nz-button
+        (click)="getDeptType(fg.get('code').value)">
+        <i nz-icon nzType="search" nzTheme="outline"></i>        
+        조회
+    </button>    
+    <nz-divider nzType="vertical"></nz-divider>
     <button
         nz-button
         (click)="closeForm()">
@@ -84,7 +91,7 @@
         nzType="danger"
         nz-popconfirm
         nzTitle="삭제하시겠습니까?"
-        (nzOnConfirm)="true"
+        (nzOnConfirm)="deleteDeptType()"
         (nzOnCancel)="false">
         <i nz-icon nzType="delete" theme="outline"></i>
         삭제

@@ -58,12 +58,17 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
     this.fg.patchValue(formData);
   }
 
+  public select(param) {    
+    this.getDeptType(param.value['code']);
+  }
+
   public getDeptType(id: string): void {
     this.deptTypeService
         .getDeptType(id)
         .subscribe(
           (model: ResponseObject<DeptType>) => {
             if ( model.total > 0 ) {
+              console.log(model.data);
               this.modifyForm(model.data);
             } else {
               this.newForm();
@@ -77,7 +82,7 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
       );
   }
 
-  public submitForm() {
+  public submitForm(): void {
     this.deptTypeService
         .saveDeptType(this.fg.getRawValue())
         .subscribe(
@@ -89,6 +94,21 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
             console.log(err);
           },
           () => {}
+        );
+  }
+
+  public deleteDeptType(): void {
+    this.deptTypeService
+        .deleteDeptType(this.fg.get('code').value)
+        .subscribe(
+            (model: ResponseObject<DeptType>) => {
+            this.appAlarmService.changeMessage(model.message);
+            this.formDeleted.emit(this.fg.getRawValue());
+            },
+            (err) => {
+            console.log(err);
+            },
+            () => {}
         );
   }
 
