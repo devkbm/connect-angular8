@@ -10,20 +10,21 @@ import { FormBase, FormType } from 'src/app/common/form/form-base';
 import { ResponseObject } from 'src/app/common/model/response-object';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 
-import { DeptTypeService } from '../../service/dept-type.service';
 import { DeptType } from '../../model/dept-type';
+import { JobTypeService } from '../../service/job-type.service';
+import { JobType } from '../../model/job-type';
 
 @Component({
-  selector: 'app-dept-type-form',
-  templateUrl: './dept-type-form.component.html',
-  styleUrls: ['./dept-type-form.component.css']
+  selector: 'app-job-type-form',
+  templateUrl: './job-type-form.component.html',
+  styleUrls: ['./job-type-form.component.css']
 })
-export class DeptTypeFormComponent extends FormBase implements OnInit {
+export class JobTypeFormComponent extends FormBase implements OnInit {
 
   fg: FormGroup;
 
   constructor(private fb:FormBuilder,
-              private deptTypeService: DeptTypeService,
+              private jobTypeService: JobTypeService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
@@ -59,14 +60,14 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
   }
 
   public select(param) {    
-    this.getDeptType(param.value['code']);
+    this.getJobType(param.value['code']);
   }
 
-  public getDeptType(id: string): void {
-    this.deptTypeService
-        .getDeptType(id)
+  public getJobType(id: string): void {
+    this.jobTypeService
+        .getJobType(id)
         .subscribe(
-          (model: ResponseObject<DeptType>) => {
+          (model: ResponseObject<JobType>) => {
             if ( model.total > 0 ) {
               console.log(model.data);
               this.modifyForm(model.data);
@@ -83,10 +84,10 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
   }
 
   public submitForm(): void {
-    this.deptTypeService
-        .saveDeptType(this.fg.getRawValue())
+    this.jobTypeService
+        .saveJobType(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<DeptType>) => {
+          (model: ResponseObject<JobType>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           },
@@ -97,11 +98,11 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
         );
   }
 
-  public deleteDeptType(): void {
-    this.deptTypeService
-        .deleteDeptType(this.fg.get('code').value)
+  public deleteJobType(): void {
+    this.jobTypeService
+        .deleteJobType(this.fg.get('code').value)
         .subscribe(
-            (model: ResponseObject<DeptType>) => {
+            (model: ResponseObject<JobType>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
             },
@@ -116,3 +117,4 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
     this.formClosed.emit(this.fg.getRawValue());
   }
 }
+

@@ -10,6 +10,8 @@ import { ButtonRendererComponent } from 'src/app/common/grid/renderer/button-ren
 import { DeptTypeComponent } from './component/dept-type/dept-type.component';
 import { DeptTypeFormComponent } from './component/dept-type/dept-type-form.component';
 import { DeptTypeService } from './service/dept-type.service';
+import { JobTypeFormComponent } from './component/dept-type/job-type-form.component';
+import { JobTypeService } from './service/job-type.service';
 
 
 @NgModule({
@@ -23,10 +25,12 @@ import { DeptTypeService } from './service/dept-type.service';
   ],
   declarations: [
     DeptTypeComponent,
-    DeptTypeFormComponent
+    DeptTypeFormComponent,
+    JobTypeFormComponent
   ],
   providers: [
-    DeptTypeService
+    DeptTypeService,
+    JobTypeService
   ],
   exports: [
     DeptTypeComponent
