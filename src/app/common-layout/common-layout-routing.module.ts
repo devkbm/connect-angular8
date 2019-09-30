@@ -28,6 +28,7 @@ import { TeamComponent } from '../cooperation/communication/component/team.compo
 import { DeptComponent } from '../common/component/dept/dept.component';
 import { WorkgroupComponent } from '../cooperation/workgroup/component/workgroup/workgroup.component';
 import { DeptTypeComponent } from '../hrm/appointment/component/dept-type/dept-type.component';
+import { AppointmentCodeComponent } from '../hrm/appointment/component/appointment-code/appointment-code.component';
 
 
 const layoutroutes: Routes = [
@@ -55,7 +56,8 @@ const layoutroutes: Routes = [
       {path: 'team',          component: TeamComponent},
       {path: 'dept',          component: DeptComponent},
       {path: 'workgroup',     component: WorkgroupComponent},
-      {path: 'depttype',      component: DeptTypeComponent}
+      {path: 'depttype',      component: DeptTypeComponent},
+      {path: 'appointmentcode',      component: AppointmentCodeComponent}
     ]
   }
 ];
