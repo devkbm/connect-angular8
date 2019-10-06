@@ -70,6 +70,19 @@ export class AppointmentCodeService extends DataService {
               );
   }
 
+  getAppointmentCodeDetailList(params?: any): Observable<ResponseList<AppointmentCodeDetail>> {
+    const url = `${this.API_URI}/appointmentcodedetail`;
+    const options = {
+        headers: this.getAuthorizedHttpHeaders(),
+        withCredentials: true,
+        params: params
+     };
+
+    return this.http.get<ResponseList<AppointmentCodeDetail>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
   getAppointmentCodeDetail(id: string, detailId: string): Observable<ResponseObject<AppointmentCodeDetail>> {
     const url = `${this.API_URI}/appointmentcodedetail/${id}/${detailId}`;
     const options = {

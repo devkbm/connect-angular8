@@ -19,6 +19,7 @@ import { AppointmentCodeFormComponent } from './component/appointment-code/appoi
 import { AppointmentCodeService } from './service/appointment-code.service';
 import { AppointmentCodeDetailFormComponent } from './component/appointment-code/appointment-code-detail-form.component';
 import { AppointmentCodeGridComponent } from './component/appointment-code/appointment-code-grid.component';
+import { AppointmentCodeDetailGridComponent } from './component/appointment-code/appointment-code-detail-grid.component';
 
 
 
@@ -39,7 +40,8 @@ import { AppointmentCodeGridComponent } from './component/appointment-code/appoi
     AppointmentCodeComponent,
     AppointmentCodeFormComponent,
     AppointmentCodeGridComponent,
-    AppointmentCodeDetailFormComponent
+    AppointmentCodeDetailFormComponent,
+    AppointmentCodeDetailGridComponent
   ],
   providers: [
     DeptTypeService,
