@@ -17,7 +17,7 @@ export class AppointmentCodeDetailGridComponent extends AggridFunction implement
   protected gridList: AppointmentCodeDetail[];
 
   @Input()
-  code;
+  appointmentCode;
 
   @Output()
   rowSelected = new EventEmitter();
@@ -51,10 +51,10 @@ export class AppointmentCodeDetailGridComponent extends AggridFunction implement
         width: 70,
         cellStyle: {'text-align': 'center'}
       },
-      { headerName: '코드',     field: 'code',        width: 150 },
-      { headerName: '변경유형', field: 'changeType',    width: 200 },
+      { headerName: '코드',         field: 'code',        width: 150 },
+      { headerName: '변경유형',     field: 'changeType',    width: 200 },
       { headerName: '변경유형상세', field: 'changeTypeDetail',    width: 200 },
-      { headerName: '순번',     field: 'sequence',    width: 80 }
+      { headerName: '순번',         field: 'sequence',    width: 80 }
     ];
 
     this.defaultColDef = {
@@ -68,14 +68,18 @@ export class AppointmentCodeDetailGridComponent extends AggridFunction implement
   }
 
   ngOnInit() {
-    this.getGridList();
+    
   }
 
   private onEditButtonClick(e) {
     this.editButtonClicked.emit(e.rowData);
   }
 
-  public getGridList(params?: any): void {
+  public getGridList(appointmentCode: string, filter: object): void {
+    const params = {
+      appointmentCode : appointmentCode
+    };
+
     this.appointmentCodeService
         .getAppointmentCodeDetailList(params)
         .subscribe(

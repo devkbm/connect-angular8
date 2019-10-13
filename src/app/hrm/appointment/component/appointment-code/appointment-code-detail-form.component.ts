@@ -53,12 +53,13 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
     this.fg.patchValue(formData);
   }
 
-  public getForm(): void {
-    const id = this.fg.get('code').value;
-    const detailId = this.fg.get('code').value + this.fg.get('changeType').value + this.fg.get('changeTypeDetail').value;
+  public getForm(appointmentCode: string, changeType: string, changeTypeDetail: string): void {
+    //const appointmentCode = this.fg.get('code').value;
+    //const detailId = this.fg.get('code').value + this.fg.get('changeType').value + this.fg.get('changeTypeDetail').value;
+    const detailId = appointmentCode + changeType + changeTypeDetail;
 
     this.appointmentCodeService
-        .getAppointmentCodeDetail(id, detailId)
+        .getAppointmentCodeDetail(appointmentCode, detailId)
         .subscribe(
           (model: ResponseObject<AppointmentCodeDetail>) => {
             if ( model.total > 0 ) {

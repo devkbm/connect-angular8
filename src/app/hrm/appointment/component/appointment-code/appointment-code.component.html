@@ -1,15 +1,48 @@
-<app-appointment-code-form>
+<nz-page-header (nzBack)="goBack()" nzBackIcon nzTitle="발령코드 등록" nzSubtitle="This is a subtitle"> </nz-page-header>
 
-</app-appointment-code-form>
+<div class="content">
+    <h3 class="pgm-title">발령코드 목록</h3>  
+    <app-appointment-code-grid #gridCode
+        (rowSelected)="gridCodeRowSelected($event)"
+        (editButtonClicked)="openDrawerCode($event)"
+        (rowDoubleClicked)="openDrawerCode($event)">    
+    </app-appointment-code-grid>
 
-<app-appointment-code-detail-form>
+    <h3 class="pgm-title">발령코드상세 목록</h3>  
+    <app-appointment-code-detail-grid #gridDetail
+        (editButtonClicked)="openDrawerCodeDetail($event)"
+        (rowDoubleClicked)="openDrawerCodeDetail($event)">         
+    </app-appointment-code-detail-grid>
+</div>
+
+
+<nz-drawer
+    [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
+    [nzMaskClosable]="true"
+    [nzWidth]="800"
+    [nzVisible]="drawerVisibleCode"
+    nzTitle="발령코드 등록"
+    (nzOnClose)="closeDrawerCode()">
+    <app-appointment-code-form #formCode
+        (formSaved)="gridCodeRefresh()"
+        (formDeleted)="gridCodeRefresh()"
+        (formClosed)="closeDrawerCode()">
+
+    </app-appointment-code-form>    
+</nz-drawer>
+
+<nz-drawer
+    [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
+    [nzMaskClosable]="true"
+    [nzWidth]="800"
+    [nzVisible]="drawerVisibleCodeDetail"
+    nzTitle="발령상세코드 등록"
+    (nzOnClose)="closeDrawerCodeDetail()">
     
-</app-appointment-code-detail-form>
-
-<app-appointment-code-grid>
-    
-</app-appointment-code-grid>
-
-<app-appointment-code-detail-grid>
-    
-</app-appointment-code-detail-grid>
+    <app-appointment-code-detail-form #formCodeDetail
+        (formSaved)="gridCodeDetailRefresh()"
+        (formDeleted)="gridCodeDetailRefresh()"
+        (formClosed)="closeDrawerCodeDetail()">
+        
+    </app-appointment-code-detail-form>    
+</nz-drawer>
