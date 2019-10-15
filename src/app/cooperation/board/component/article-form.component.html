@@ -55,7 +55,7 @@
     <!--[nzHeaders]="fileUploadHeader" -->
     <div class="clearfix" nz-row style="height: 100px">
         <nz-upload #upload class="upload-list-inline"
-            nzAction="http://localhost:8090/common/file/"         
+            [nzAction]="fileUploadUrl"         
             nzMultiple                                    
             [nzListType]="'text'"      
             [nzWithCredentials]="true"  

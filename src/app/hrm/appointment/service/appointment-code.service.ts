@@ -17,11 +17,11 @@ import { AppointmentCodeDetail } from '../model/appointment-code-detail';
 export class AppointmentCodeService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('http://localhost:8090/hrm', http, tokenExtractor);
+    super('/hrm', http, tokenExtractor);
   }
 
   getAppointmentCodeList(params?: any): Observable<ResponseList<AppointmentCode>> {
-    const url = `${this.API_URI}/appointmentcode`;
+    const url = `${this.API_URL}/appointmentcode`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -34,7 +34,7 @@ export class AppointmentCodeService extends DataService {
   }
   
   getAppointmentCode(id: string): Observable<ResponseObject<AppointmentCode>> {
-    const url = `${this.API_URI}/appointmentcode/${id}`;
+    const url = `${this.API_URL}/appointmentcode/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -47,7 +47,7 @@ export class AppointmentCodeService extends DataService {
 
 
   saveAppointmentCode(appointmentCode: AppointmentCode): Observable<ResponseObject<AppointmentCode>> {
-    const url = `${this.API_URI}/appointmentcode`;
+    const url = `${this.API_URL}/appointmentcode`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -58,7 +58,7 @@ export class AppointmentCodeService extends DataService {
   }
 
   deleteAppointmentCode(id: string): Observable<ResponseObject<AppointmentCode>> {
-    const url = `${this.API_URI}/appointmentcode/${id}`;
+    const url = `${this.API_URL}/appointmentcode/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -70,8 +70,20 @@ export class AppointmentCodeService extends DataService {
               );
   }
 
+  getTypeList(): Observable<ResponseList<any>> {
+    const url = `${this.API_URL}/typelist`;
+    const options = {
+        headers: this.getAuthorizedHttpHeaders(),
+        withCredentials: true
+     };
+
+    return this.http.get<ResponseList<any>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
   getAppointmentCodeDetailList(params?: any): Observable<ResponseList<AppointmentCodeDetail>> {
-    const url = `${this.API_URI}/appointmentcodedetail`;
+    const url = `${this.API_URL}/appointmentcodedetail`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -84,7 +96,7 @@ export class AppointmentCodeService extends DataService {
   }
 
   getAppointmentCodeDetail(id: string, detailId: string): Observable<ResponseObject<AppointmentCodeDetail>> {
-    const url = `${this.API_URI}/appointmentcodedetail/${id}/${detailId}`;
+    const url = `${this.API_URL}/appointmentcodedetail/${id}/${detailId}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -96,7 +108,7 @@ export class AppointmentCodeService extends DataService {
   }
 
   saveAppointmentCodeDetail(appointmentCode: AppointmentCode): Observable<ResponseObject<AppointmentCodeDetail>> {
-    const url = `${this.API_URI}/appointmentcodedetail`;
+    const url = `${this.API_URL}/appointmentcodedetail`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -107,7 +119,7 @@ export class AppointmentCodeService extends DataService {
   }
 
   deleteAppointmentCodeDetail(id: string): Observable<ResponseObject<AppointmentCodeDetail>> {
-    const url = `${this.API_URI}/appointmentcodedetail/${id}`;
+    const url = `${this.API_URL}/appointmentcodedetail/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true

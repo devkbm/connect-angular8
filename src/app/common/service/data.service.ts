@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpXsrfTokenExtractor } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { GlobalProperty } from 'src/app/global-property';
 
 @Injectable()
 export class DataService {
-
-    protected responseMap =  (res: Response) => res;
     
-    constructor(protected API_URI: string, protected http: HttpClient, protected tokenExtractor: HttpXsrfTokenExtractor) { }
+    protected responseMap =  (res: Response) => res;    
+    protected serverUrl;
+    protected API_URL;
+
+    constructor(protected API_URI: string, protected http: HttpClient, protected tokenExtractor: HttpXsrfTokenExtractor) { 
+        this.serverUrl = GlobalProperty.serverUrl;
+        this.API_URL = this.serverUrl + API_URI;
+    }
 
     /**
      * @description HttpHeaders를 가져온다.

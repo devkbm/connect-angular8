@@ -16,7 +16,7 @@ import { DeptType } from '../model/dept-type';
 export class DeptTypeService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('http://localhost:8090/hrm/depttype', http, tokenExtractor);
+    super('/hrm/depttype', http, tokenExtractor);
   }
   /*
   getDeptList(params?: any): Observable<ResponseList<Dept>> {
@@ -33,7 +33,7 @@ export class DeptTypeService extends DataService {
   }
   */
   getDeptType(id: string): Observable<ResponseObject<DeptType>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -46,7 +46,7 @@ export class DeptTypeService extends DataService {
 
 
   saveDeptType(dept: DeptType): Observable<ResponseObject<DeptType>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -57,7 +57,7 @@ export class DeptTypeService extends DataService {
   }
 
   deleteDeptType(id: string): Observable<ResponseObject<DeptType>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true

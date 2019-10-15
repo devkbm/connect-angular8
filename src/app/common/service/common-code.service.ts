@@ -10,17 +10,18 @@ import { ResponseList } from '../model/response-list';
 
 import { CommonCode } from '../model/common-code';
 import { CommonCodeHierarchy } from '../model/common-code-hierarchy';
+import { GlobalProperty } from 'src/app/global-property';
 
 
 @Injectable()
 export class CommonCodeService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('http://localhost:8090/common/code', http, tokenExtractor);
+    super('/common/code', http, tokenExtractor);
   }
 
   getCommonCodeList(params?: any): Observable<ResponseList<CommonCode>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -33,7 +34,7 @@ export class CommonCodeService extends DataService {
   }
 
   getCommonCode(id: string): Observable<ResponseObject<CommonCode>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -45,7 +46,7 @@ export class CommonCodeService extends DataService {
   }
 
   getCommonCodeHierarchy(params?: any): Observable<ResponseList<CommonCodeHierarchy>> {
-    const url = `http://localhost:8090/common/codetree`;
+    const url = GlobalProperty.serverUrl + `/common/codetree`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -58,7 +59,7 @@ export class CommonCodeService extends DataService {
   }
 
   getCommonCodeListByParentId(parentId: string): Observable<ResponseList<CommonCode>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -73,7 +74,7 @@ export class CommonCodeService extends DataService {
   }
 
   registerCommonCode(program: CommonCode): Observable<ResponseObject<CommonCode>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -85,7 +86,7 @@ export class CommonCodeService extends DataService {
   }
 
   deleteCommonCode(id: string): Observable<ResponseObject<CommonCode>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true

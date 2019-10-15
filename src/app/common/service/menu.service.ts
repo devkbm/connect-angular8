@@ -16,11 +16,11 @@ import { MenuHierarchy } from '../model/menu-hierarchy';
 export class MenuService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('http://localhost:8090/common', http, tokenExtractor);
+    super('/common', http, tokenExtractor);
   }
 
   getMenuGroupList(params?: any): Observable<ResponseList<MenuGroup>> {
-    const url = `${this.API_URI}/menugroup`;
+    const url = `${this.API_URL}/menugroup`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true,
@@ -35,7 +35,7 @@ export class MenuService extends DataService {
   }
 
   getMenuGroup(menuGroupCode: string): Observable<ResponseObject<MenuGroup>> {
-    const url = `${this.API_URI}/menugroup/${menuGroupCode}`;
+    const url = `${this.API_URL}/menugroup/${menuGroupCode}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -49,7 +49,7 @@ export class MenuService extends DataService {
   }
 
   getValidDupMenuGroup(menuGroupCode: string): Observable<ResponseObject<boolean>> {
-    const url = `${this.API_URI}/menugroup/${menuGroupCode}/check`;
+    const url = `${this.API_URL}/menugroup/${menuGroupCode}/check`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -63,7 +63,7 @@ export class MenuService extends DataService {
   }
 
   registerMenuGroup(menuGroup: MenuGroup): Observable<ResponseObject<MenuGroup>> {
-    const url = `${this.API_URI}/menugroup/${menuGroup.menuGroupCode}`;
+    const url = `${this.API_URL}/menugroup/${menuGroup.menuGroupCode}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -77,7 +77,7 @@ export class MenuService extends DataService {
   }
 
   deleteMenuGroup(menuGroupCode: string): Observable<ResponseObject<MenuGroup>> {
-    const url = `${this.API_URI}/menugroup/${menuGroupCode}`;
+    const url = `${this.API_URL}/menugroup/${menuGroupCode}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -91,7 +91,7 @@ export class MenuService extends DataService {
   }
 
   getMenu(menuCode: string): Observable<ResponseObject<Menu>> {
-    const url = `${this.API_URI}/menu/${menuCode}`;
+    const url = `${this.API_URL}/menu/${menuCode}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -105,7 +105,7 @@ export class MenuService extends DataService {
   }
 
   getValidDupMenu(menuCode: string): Observable<ResponseObject<boolean>> {
-    const url = `${this.API_URI}/menu/${menuCode}/check`;
+    const url = `${this.API_URL}/menu/${menuCode}/check`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -119,7 +119,7 @@ export class MenuService extends DataService {
   }
 
   getMenuList(params?: any): Observable<ResponseList<Menu>> {
-    const url = `${this.API_URI}/menu`;
+    const url = `${this.API_URL}/menu`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true,
@@ -134,7 +134,7 @@ export class MenuService extends DataService {
   }
 
   getMenuTypeList(): Observable<ResponseObject<any>> {
-    const url = `${this.API_URI}/menu/menutype`;
+    const url = `${this.API_URL}/menu/menutype`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -148,7 +148,7 @@ export class MenuService extends DataService {
   }
 
   registerMenu(menu: Menu): Observable<ResponseObject<Menu>> {
-    const url = `${this.API_URI}/menu/${menu.menuCode}`;
+    const url = `${this.API_URL}/menu/${menu.menuCode}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -162,7 +162,7 @@ export class MenuService extends DataService {
   }
 
   deleteMenu(menu: Menu): Observable<ResponseObject<Menu>> {
-    const url = `${this.API_URI}/menu/${menu.menuCode}`;
+    const url = `${this.API_URL}/menu/${menu.menuCode}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -176,7 +176,7 @@ export class MenuService extends DataService {
   }
 
   getMenuHierarchy(menuGroupCode: String): Observable<ResponseList<MenuHierarchy>> {
-    const url = `http://localhost:8090/common/menuhierarchy/${menuGroupCode}`;
+    const url = `${this.API_URL}/menuhierarchy/${menuGroupCode}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true

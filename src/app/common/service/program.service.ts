@@ -14,11 +14,11 @@ import { WebResource } from '../model/web-resource';
 export class ProgramService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('http://localhost:8090/common/webresource', http, tokenExtractor);
+    super('/common/webresource', http, tokenExtractor);
   }
 
   getProgramList(params?: any): Observable<ResponseList<WebResource>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -31,7 +31,7 @@ export class ProgramService extends DataService {
   }
 
   getProgram(id: string): Observable<ResponseObject<WebResource>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -43,7 +43,7 @@ export class ProgramService extends DataService {
   }
 
   getProgramDupCheck(id: string): Observable<ResponseObject<boolean>> {
-    const url = `${this.API_URI}/${id}/check`;
+    const url = `${this.API_URL}/${id}/check`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -55,7 +55,7 @@ export class ProgramService extends DataService {
   }
 
   registerProgram(program: WebResource): Observable<ResponseObject<WebResource>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -66,7 +66,7 @@ export class ProgramService extends DataService {
   }
 
   deleteProgram(id: string): Observable<ResponseObject<WebResource>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true

@@ -11,6 +11,7 @@ import { ResponseObject } from 'src/app/common/model/response-object';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 import { AppointmentCodeService } from '../../service/appointment-code.service';
 import { AppointmentCodeDetail } from '../../model/appointment-code-detail';
+import { ResponseList } from 'src/app/common/model/response-list';
 
 @Component({
   selector: 'app-appointment-code-detail-form',
@@ -21,11 +22,14 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
 
   fg: FormGroup;
 
+  changeTypeList: any[];
+
   constructor(private fb:FormBuilder,
               private appointmentCodeService: AppointmentCodeService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
+    this.getTypeList();
     this.newForm();
   }  
 
@@ -51,6 +55,22 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
     });
 
     this.fg.patchValue(formData);
+  }
+
+  public getTypeList(): void {
+    this.appointmentCodeService
+        .getTypeList()
+        .subscribe(
+          (model: ResponseList<any>) => {
+            if ( model.total > 0 ) {              
+              this.changeTypeList = model.data;
+            } 
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {}
+      );
   }
 
   public getForm(appointmentCode: string, changeType: string, changeTypeDetail: string): void {

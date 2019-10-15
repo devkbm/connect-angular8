@@ -20,6 +20,10 @@ import { AppointmentCodeService } from './service/appointment-code.service';
 import { AppointmentCodeDetailFormComponent } from './component/appointment-code/appointment-code-detail-form.component';
 import { AppointmentCodeGridComponent } from './component/appointment-code/appointment-code-grid.component';
 import { AppointmentCodeDetailGridComponent } from './component/appointment-code/appointment-code-detail-grid.component';
+import { LedgerFormComponent } from './component/ledger/ledger-form.component';
+import { LedgerComponent } from './component/ledger/ledger.component';
+import { LegderService } from './service/ledger.service';
+import { LedgerListFormComponent } from './component/ledger/ledger-list-form.component';
 
 
 
@@ -41,16 +45,22 @@ import { AppointmentCodeDetailGridComponent } from './component/appointment-code
     AppointmentCodeFormComponent,
     AppointmentCodeGridComponent,
     AppointmentCodeDetailFormComponent,
-    AppointmentCodeDetailGridComponent
+    AppointmentCodeDetailGridComponent,
+
+    LedgerFormComponent,
+    LedgerListFormComponent,
+    LedgerComponent
   ],
   providers: [
     DeptTypeService,
     JobTypeService,
-    AppointmentCodeService
+    AppointmentCodeService,
+    LegderService
   ],
   exports: [
     DeptTypeComponent,
-    AppointmentCodeComponent
+    AppointmentCodeComponent,
+    LedgerComponent
   ]
 })
 export class AppointmentModule { }

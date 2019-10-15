@@ -16,7 +16,7 @@ import { TeamMember } from '../model/team-member';
 export class TeamService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-      super('http://localhost:8090/grw', http, tokenExtractor);
+      super('/grw', http, tokenExtractor);
   }
 
   /**
@@ -24,7 +24,7 @@ export class TeamService extends DataService {
    * @param params 조회 조건 객체
    */
   public getTeamList(params?: any): Observable<ResponseList<Team>> {
-    const url = `${this.API_URI}/team`;
+    const url = `${this.API_URL}/team`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       params: params
@@ -42,7 +42,7 @@ export class TeamService extends DataService {
    * @param id 팀 id
    */
   public getTeam(id: number): Observable<ResponseObject<Team>> {
-    const url = `${this.API_URI}/team/${id}`;
+    const url = `${this.API_URL}/team/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders()
     };
@@ -59,7 +59,7 @@ export class TeamService extends DataService {
    * @param team team 객체
    */
   public saveTeam(team: Team): Observable<ResponseObject<Team>> {
-    const url = `${this.API_URI}/team`;
+    const url = `${this.API_URL}/team`;
     const options = {
       headers: this.getAuthorizedHttpHeaders()
     };
@@ -77,7 +77,7 @@ export class TeamService extends DataService {
    * @param id team 객체 id
    */
   public deleteTeam(id: number): Observable<ResponseObject<Team>> {
-    const url = `${this.API_URI}/team/${id}`;
+    const url = `${this.API_URL}/team/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders()
     };
@@ -90,7 +90,7 @@ export class TeamService extends DataService {
   }
 
   public getAllMemberList(params?: any): Observable<ResponseList<TeamMember>> {
-    const url = `${this.API_URI}/allmember`;
+    const url = `${this.API_URL}/allmember`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       params: params

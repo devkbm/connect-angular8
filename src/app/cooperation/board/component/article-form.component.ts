@@ -15,6 +15,7 @@ import { Article } from '.././model/article';
 import { FormBase, FormType } from 'src/app/common/form/form-base';
 import { UploadChangeParam, NzUploadComponent, UploadFile } from 'ng-zorro-antd';
 import { HttpHeaders } from '@angular/common/http';
+import { GlobalProperty } from 'src/app/global-property';
 
 @Component({
   selector: 'app-article-form',
@@ -59,6 +60,7 @@ export class ArticleFormComponent extends FormBase implements OnInit {
   articleForm: FormGroup;
   imageUploadParam = {pgmId: 'board'};
   fileUploadHeader = null;
+  fileUploadUrl;
   
   /*new HttpHeaders()
                           //.set('X-Requested-With', 'XMLHttpRequest')
@@ -92,11 +94,13 @@ export class ArticleFormComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     this.newForm(null);
+    this.fileUploadUrl = GlobalProperty.serverUrl + '/common/file/';
     this.fileUploadHeader = {
       Authorization: sessionStorage.getItem('token')
       //'x-auth-token': sessionStorage.getItem('token')
       //'Content-Type': 'multipart/form-data'
     };
+    
   }
 
   //#region public methods

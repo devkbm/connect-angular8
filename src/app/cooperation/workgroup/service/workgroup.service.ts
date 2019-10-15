@@ -10,6 +10,7 @@ import { ResponseList } from '../../../common/model/response-list';
 import { WorkGroup } from '../model/workgroup';
 import { WorkGroupMember } from '../model/workgroup-member';
 import { WorkGroupSchedule } from '../model/workgroup-schedule';
+import { GlobalProperty } from 'src/app/global-property';
 
 
 
@@ -17,7 +18,7 @@ import { WorkGroupSchedule } from '../model/workgroup-schedule';
 export class WorkGroupService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-      super('http://localhost:8090/grw', http, tokenExtractor);
+      super('/grw', http, tokenExtractor);
   }
 
   /**
@@ -25,7 +26,7 @@ export class WorkGroupService extends DataService {
    * @param params 조회 조건 객체
    */
   public getWorkGroupList(params?: any): Observable<ResponseList<WorkGroup>> {
-    const url = `${this.API_URI}/workgroup`;
+    const url = `${this.API_URL}/workgroup`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true,
@@ -44,7 +45,7 @@ export class WorkGroupService extends DataService {
    * @param params 조회 조건 객체
    */
   public getMyWorkGroupList(): Observable<ResponseList<WorkGroup>> {    
-    const url = `${this.API_URI}/myworkgroup`;
+    const url = `${this.API_URL}/myworkgroup`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -62,7 +63,7 @@ export class WorkGroupService extends DataService {
    * @param id 작업그룹id
    */
   public getWorkGroup(id: number): Observable<ResponseObject<WorkGroup>> {
-    const url = `${this.API_URI}/workgroup/${id}`;
+    const url = `${this.API_URL}/workgroup/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -80,7 +81,7 @@ export class WorkGroupService extends DataService {
    * @param workGroup
    */
   public saveWorkGroup(workGroup: WorkGroup): Observable<ResponseObject<WorkGroup>> {
-    const url = `${this.API_URI}/workgroup`;
+    const url = `${this.API_URL}/workgroup`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -99,7 +100,7 @@ export class WorkGroupService extends DataService {
    * @param id 작업그룹 id
    */
   public deleteWorkGroup(id: number): Observable<ResponseObject<WorkGroup>> {
-    const url = `${this.API_URI}/workgroup/${id}`;
+    const url = `${this.API_URL}/workgroup/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -113,7 +114,7 @@ export class WorkGroupService extends DataService {
   }
 
   public getMemberList(params?: any): Observable<ResponseList<WorkGroupMember>> {
-    const url = `http://localhost:8090/common/user`;
+    const url = GlobalProperty.serverUrl + `/common/user`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true,
@@ -133,7 +134,7 @@ export class WorkGroupService extends DataService {
    * @param id 스케쥴id
    */
   public getWorkGroupSchedule(id: number): Observable<ResponseObject<WorkGroupSchedule>> {
-    const url = `${this.API_URI}/schedule/${id}`;
+    const url = `${this.API_URL}/schedule/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -151,7 +152,7 @@ export class WorkGroupService extends DataService {
    * @param workGroupSchedule
    */
   public saveWorkGroupSchedule(workGroupSchedule: WorkGroupSchedule): Observable<ResponseObject<WorkGroupSchedule>> {
-    const url = `${this.API_URI}/schedule`;
+    const url = `${this.API_URL}/schedule`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -169,7 +170,7 @@ export class WorkGroupService extends DataService {
    * @param id 스케쥴id
    */
   public deleteWorkGroupSchedule(id: number): Observable<ResponseObject<WorkGroupSchedule>> {
-    const url = `${this.API_URI}/schedule/${id}`;
+    const url = `${this.API_URL}/schedule/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -187,7 +188,7 @@ export class WorkGroupService extends DataService {
    * @param params 조회 조건 객체
    */
   public getWorkScheduleList(params?: any): Observable<ResponseList<WorkGroupSchedule>> {
-    const url = `${this.API_URI}/schedule`;
+    const url = `${this.API_URL}/schedule`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true,

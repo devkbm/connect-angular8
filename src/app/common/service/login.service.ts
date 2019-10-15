@@ -12,8 +12,7 @@ import { map, tap, catchError } from 'rxjs/operators';
 export class LoginService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('http://localhost:8090/common/user/login', http, tokenExtractor);
-    //super('http://localhost:8090/login', http);
+    super('/common/user/login', http, tokenExtractor);    
   }
 
   /**
@@ -30,7 +29,7 @@ export class LoginService extends DataService {
     };
 
     return this.http
-      .post<UserToken>(this.API_URI, body, options).pipe(
+      .post<UserToken>(this.API_URL, body, options).pipe(
         // tap((userToken: UserToken) => console.log(userToken.token) ),
         // catchError((err) => Observable.throw(err))
       );
@@ -44,7 +43,7 @@ export class LoginService extends DataService {
     };
 
     return this.http
-      .post<UserToken>(this.API_URI, body, options).pipe(
+      .post<UserToken>(this.API_URL, body, options).pipe(
         // tap((userToken: UserToken) => console.log(userToken.token) ),
         // catchError((err) => Observable.throw(err))
       );
@@ -62,7 +61,7 @@ export class LoginService extends DataService {
     form.set('password', pwd);
 
     return this.http
-      .post<UserToken>(this.API_URI, form, options).pipe(
+      .post<UserToken>(this.API_URL, form, options).pipe(
         // tap((userToken: UserToken) => console.log(userToken.token) ),
         // catchError((err) => Observable.throw(err))
       );

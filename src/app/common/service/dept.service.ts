@@ -10,16 +10,17 @@ import { ResponseList } from '../model/response-list';
 
 import { Dept } from '../model/dept';
 import { DeptHierarchy } from '../model/dept-hierarchy';
+import { GlobalProperty } from 'src/app/global-property';
 
 @Injectable()
 export class DeptService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('http://localhost:8090/common/dept', http, tokenExtractor);
+    super('/common/dept', http, tokenExtractor);
   }
 
   getDeptList(params?: any): Observable<ResponseList<Dept>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -32,7 +33,7 @@ export class DeptService extends DataService {
   }
 
   getDeptHierarchyList(params?: any): Observable<ResponseList<DeptHierarchy>> {
-    const url = 'http://localhost:8090/common/depttree';
+    const url = GlobalProperty.serverUrl + '/common/depttree';
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
@@ -45,7 +46,7 @@ export class DeptService extends DataService {
   }
 
   getDept(id: string): Observable<ResponseObject<Dept>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -68,7 +69,7 @@ export class DeptService extends DataService {
   }*/
 
   saveDept(dept: Dept): Observable<ResponseObject<Dept>> {
-    const url = `${this.API_URI}`;
+    const url = `${this.API_URL}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
@@ -79,7 +80,7 @@ export class DeptService extends DataService {
   }
 
   deleteDept(id: string): Observable<ResponseObject<Dept>> {
-    const url = `${this.API_URI}/${id}`;
+    const url = `${this.API_URL}/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true

@@ -9,60 +9,62 @@ import { DataService } from '../../../common/service/data.service';
 import { ResponseObject } from '../../../common/model/response-object';
 import { ResponseList } from '../../../common/model/response-list';
 
-import { JobType } from '../model/job-type';
+
+import { AppointmentCode } from '../model/appointment-code';
+import { AppointmentCodeDetail } from '../model/appointment-code-detail';
+import { Ledger } from '../model/ledger';
 
 @Injectable()
-export class JobTypeService extends DataService {
+export class LegderService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-    super('/hrm/jobtype', http, tokenExtractor);
+    super('/hrm', http, tokenExtractor);
   }
-  /*
-  getDeptList(params?: any): Observable<ResponseList<Dept>> {
-    const url = `${this.API_URI}`;
+
+  getAppointmentCodeList(params?: any): Observable<ResponseList<Ledger>> {
+    const url = `${this.API_URL}/appointmentcode`;
     const options = {
         headers: this.getAuthorizedHttpHeaders(),
         withCredentials: true,
         params: params
      };
 
-    return this.http.get<ResponseList<Dept>>(url, options).pipe(
+    return this.http.get<ResponseList<Ledger>>(url, options).pipe(
       catchError((err) => Observable.throw(err))
     );
   }
-  */
-  getJobType(id: string): Observable<ResponseObject<JobType>> {
-    const url = `${this.API_URL}/${id}`;
+  
+  getLedger(id: string): Observable<ResponseObject<Ledger>> {
+    const url = `${this.API_URL}/ledger/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
     };
 
-    return this.http.get<ResponseObject<JobType>>(url, options).pipe(
+    return this.http.get<ResponseObject<Ledger>>(url, options).pipe(
       catchError((err) => Observable.throw(err))
     );
   }
 
-
-  saveJobType(dept: JobType): Observable<ResponseObject<JobType>> {
-    const url = `${this.API_URL}`;
+  saveLedger(ledger: Ledger): Observable<ResponseObject<Ledger>> {
+    const url = `${this.API_URL}/ledger`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
     };
-    return this.http.post<ResponseObject<JobType>>(url, dept, options).pipe(
+    return this.http.post<ResponseObject<Ledger>>(url, ledger, options).pipe(
       catchError((err) => Observable.throw(err))
     );
   }
 
-  deleteJobType(id: string): Observable<ResponseObject<JobType>> {
-    const url = `${this.API_URL}/${id}`;
+  deleteLedger(id: string): Observable<ResponseObject<Ledger>> {
+    const url = `${this.API_URL}/ledger/${id}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
     };
     return this.http
-              .delete<ResponseObject<JobType>>(url, options)
+              .delete<ResponseObject<Ledger>>(url, options)
               .pipe(
                 catchError((err) => Observable.throw(err))
               );

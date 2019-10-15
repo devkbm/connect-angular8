@@ -21,10 +21,16 @@
 
     <!--변경유형코드 필드-->
     <nz-form-item class="form-item">
-        <nz-form-label nzFor="changeType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">변경유형코드</nz-form-label>
+        <nz-form-label nzFor="changeType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">변경유형코드</nz-form-label>        
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="changeType" formControlName="changeType" placeholder="변경유형코드를 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(fg,'changeType','required')">The input is Required!</nz-form-explain>
+            <nz-select formControlName="changeType" [nzSize]="'default'"
+                nzShowSearch nzAllowClear nzPlaceHolder="변경유형을 선택해주세요.">
+                    <nz-option
+                        *ngFor="let option of changeTypeList"
+                        [nzLabel]="option.name"
+                        [nzValue]="option.code">
+                    </nz-option>
+            </nz-select>
         </nz-form-control>
     </nz-form-item>
         

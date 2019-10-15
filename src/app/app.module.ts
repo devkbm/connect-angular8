@@ -20,6 +20,7 @@ import { CommonFuncModule } from './common/common-func.module';
 
 import { BoardModule } from './cooperation/board/board.module';
 import { CommunicationModule } from './cooperation/communication/communication.module';
+import { GlobalProperty } from './global-property';
 
 
 
@@ -52,7 +53,8 @@ import { CommunicationModule } from './cooperation/communication/communication.m
     {
       provide: COMPOSITION_BUFFER_MODE,
       useValue: false
-    }
+    },
+    GlobalProperty
   ],
   bootstrap: [AppComponent]
 })

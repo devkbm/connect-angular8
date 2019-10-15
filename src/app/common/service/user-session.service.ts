@@ -6,14 +6,16 @@ import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { ResponseObject } from '../model/response-object';
 import { User } from '../model/user-info';
+import { GlobalProperty } from 'src/app/global-property';
 
 
 @Injectable()
 export class UserSessionService extends DataService {
-    private STATIC_URI = 'http://localhost:8090/static/';
+    private STATIC_URI = '/static/';
     
     constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
-        super('http://localhost:8090/common/user', http, tokenExtractor);
+        super('/common/user', http, tokenExtractor);
+        this.STATIC_URI = GlobalProperty.serverUrl + '/static/';
       }
 
     public getAvartarImageString(): string {
@@ -23,7 +25,7 @@ export class UserSessionService extends DataService {
     }
 
     public getSessionUserInfo(): Observable<ResponseObject<User>> {
-        const url = `${this.API_URI}/myinfo`;
+        const url = `${this.API_URL}/myinfo`;
         const options = {
           headers: this.getAuthorizedHttpHeaders(),
           withCredentials: true
