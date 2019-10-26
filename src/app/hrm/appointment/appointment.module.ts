@@ -24,6 +24,7 @@ import { LedgerFormComponent } from './component/ledger/ledger-form.component';
 import { LedgerComponent } from './component/ledger/ledger.component';
 import { LegderService } from './service/ledger.service';
 import { LedgerListFormComponent } from './component/ledger/ledger-list-form.component';
+import { LedgerListDetailGridComponent } from './component/ledger/ledger-list-detail-grid.component';
 
 
 
@@ -49,6 +50,7 @@ import { LedgerListFormComponent } from './component/ledger/ledger-list-form.com
 
     LedgerFormComponent,
     LedgerListFormComponent,
+    LedgerListDetailGridComponent,
     LedgerComponent
   ],
   providers: [

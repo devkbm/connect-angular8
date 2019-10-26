@@ -3,7 +3,8 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators
+  Validators,
+  FormArray
 } from '@angular/forms';
 
 import { FormBase, FormType } from 'src/app/common/form/form-base';
@@ -13,6 +14,7 @@ import { AppointmentCodeDetail } from '../../model/appointment-code-detail';
 import { ResponseList } from 'src/app/common/model/response-list';
 import { LegderService } from '../../service/ledger.service';
 import { Ledger } from '../../model/ledger';
+import { LedgerChangeInfo } from '../../model/legder-change-info';
 
 @Component({
   selector: 'app-ledger-list-form',
@@ -42,6 +44,7 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
       appointmentFromDate : [ null ],
       appointmentToDate   : [ null ],
       ledgerId            : [ null, [ Validators.required ] ],
+      changeInfoList      :  this.fb.array([])
     });
   }
 
@@ -56,14 +59,26 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
       appointmentFromDate : [ null ],
       appointmentToDate   : [ null ],
       ledgerId            : [ null, [ Validators.required ] ],
+      changeInfoList      :  this.fb.array([])
     });
 
     this.fg.patchValue(formData);
   }
 
+  public addChangeInfo(changeInfo: LedgerChangeInfo) {
+    const formArray = this.fg.controls.changeInfoList as FormArray;    
+    formArray.push(this.fb.group({
+      id: null, //changeInfo.id,
+      changeType: null, //changeInfo.changeType,      
+		  changeTypeDetail: null, //changeInfo.changeTypeDetail,		
+		  changeCode: null, //changeInfo.changeCode,		
+		  sequence: null, //changeInfo.sequence
+    }));
+  }
+
   public getForm(ledgerId: string): void {        
     this.legderService
-        .getLedger(ledgerId)
+        .getLedgerList(ledgerId)
         .subscribe(
           (model: ResponseObject<Ledger>) => {
             if ( model.total > 0 ) {              

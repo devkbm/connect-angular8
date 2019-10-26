@@ -13,6 +13,7 @@ import { ResponseList } from '../../../common/model/response-list';
 import { AppointmentCode } from '../model/appointment-code';
 import { AppointmentCodeDetail } from '../model/appointment-code-detail';
 import { Ledger } from '../model/ledger';
+import { LedgerChangeInfo } from '../model/legder-change-info';
 
 @Injectable()
 export class LegderService extends DataService {
@@ -70,4 +71,29 @@ export class LegderService extends DataService {
               );
   }
 
+  getLedgerList(id: string): Observable<ResponseObject<Ledger>> {
+    const url = `${this.API_URL}/ledger/${id}`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true
+    };
+
+    return this.http.get<ResponseObject<Ledger>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
+  getAppointmentCodeDetailList(appointmentCode: string): Observable<ResponseList<LedgerChangeInfo>> {
+    const url = `${this.API_URL}/ledgerlist/changeinfo/${appointmentCode}`;
+
+    const options = {
+        headers: this.getAuthorizedHttpHeaders(),
+        withCredentials: true
+     };
+
+    return this.http.get<ResponseList<LedgerChangeInfo>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+  
 }
