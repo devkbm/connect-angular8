@@ -14,6 +14,7 @@ import { AppointmentCode } from '../model/appointment-code';
 import { AppointmentCodeDetail } from '../model/appointment-code-detail';
 import { Ledger } from '../model/ledger';
 import { LedgerChangeInfo } from '../model/legder-change-info';
+import { LedgerList } from '../model/legder-list';
 
 @Injectable()
 export class LegderService extends DataService {
@@ -34,7 +35,7 @@ export class LegderService extends DataService {
       catchError((err) => Observable.throw(err))
     );
   }
-  
+
   getLedger(id: string): Observable<ResponseObject<Ledger>> {
     const url = `${this.API_URL}/ledger/${id}`;
     const options = {
@@ -71,14 +72,15 @@ export class LegderService extends DataService {
               );
   }
 
-  getLedgerList(id: string): Observable<ResponseObject<Ledger>> {
-    const url = `${this.API_URL}/ledger/${id}`;
+  getLedgerList(params: any): Observable<ResponseObject<LedgerList>> {
+    const url = `${this.API_URL}/ledgerlist`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
-      withCredentials: true
+      withCredentials: true,
+      params: params
     };
 
-    return this.http.get<ResponseObject<Ledger>>(url, options).pipe(
+    return this.http.get<ResponseObject<LedgerList>>(url, options).pipe(
       catchError((err) => Observable.throw(err))
     );
   }
@@ -95,5 +97,5 @@ export class LegderService extends DataService {
       catchError((err) => Observable.throw(err))
     );
   }
-  
+
 }

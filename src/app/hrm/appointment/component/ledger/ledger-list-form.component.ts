@@ -15,6 +15,7 @@ import { ResponseList } from 'src/app/common/model/response-list';
 import { LegderService } from '../../service/ledger.service';
 import { Ledger } from '../../model/ledger';
 import { LedgerChangeInfo } from '../../model/legder-change-info';
+import { LedgerList } from '../../model/legder-list';
 
 @Component({
   selector: 'app-ledger-list-form',
@@ -25,18 +26,26 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
 
   fg: FormGroup;
 
-  constructor(private fb:FormBuilder,
+  formControlXs = 4;
+  formLabelXs = 4;
+  formControlSm = 4;
+  formLabelSm = 4;
+
+  detailFormLabelXs = 4;
+  detailFormControlXs = 4;
+
+  constructor(private fb: FormBuilder,
               private legderService: LegderService,
               private appAlarmService: AppAlarmService) { super(); }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.newForm();
-  }  
+  }
 
   public newForm(): void {
     this.formType = FormType.NEW;
 
-    this.fg = this.fb.group({      
+    this.fg = this.fb.group({
       listId              : [ null, [ Validators.required ] ],
       sequence            : [ null, [ Validators.required ] ],
       empId               : [ null ],
@@ -48,10 +57,10 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
     });
   }
 
-  public modifyForm(formData: Ledger): void {
+  public modifyForm(formData: LedgerList): void {
     this.formType = FormType.MODIFY;
 
-    this.fg = this.fb.group({      
+    this.fg = this.fb.group({
       listId              : [ null, [ Validators.required ] ],
       sequence            : [ null, [ Validators.required ] ],
       empId               : [ null ],
@@ -59,30 +68,40 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
       appointmentFromDate : [ null ],
       appointmentToDate   : [ null ],
       ledgerId            : [ null, [ Validators.required ] ],
-      changeInfoList      :  this.fb.array([])
+      changeInfoList      : this.fb.array([])
     });
 
     this.fg.patchValue(formData);
   }
 
   public addChangeInfo(changeInfo: LedgerChangeInfo) {
-    const formArray = this.fg.controls.changeInfoList as FormArray;    
+    const formArray = this.fg.controls.changeInfoList as FormArray;
+    console.log(changeInfo);
     formArray.push(this.fb.group({
-      id: null, //changeInfo.id,
-      changeType: null, //changeInfo.changeType,      
-		  changeTypeDetail: null, //changeInfo.changeTypeDetail,		
-		  changeCode: null, //changeInfo.changeCode,		
-		  sequence: null, //changeInfo.sequence
+      id: changeInfo.id,
+      changeType: changeInfo.changeType,
+      changeTypeDetail: changeInfo.changeTypeDetail,
+      changeCode: changeInfo.changeCode,
+      sequence: changeInfo.sequence
     }));
   }
 
-  public getForm(ledgerId: string): void {        
+  public getForm(ledgerId: string, listId: string): void {
+    const params = {
+      ledgerId: ledgerId,
+      listId: listId
+    };
+
     this.legderService
-        .getLedgerList(ledgerId)
+        .getLedgerList(params)
         .subscribe(
-          (model: ResponseObject<Ledger>) => {
-            if ( model.total > 0 ) {              
+          (model: ResponseObject<LedgerList>) => {
+            if ( model.total > 0 ) {
               this.modifyForm(model.data);
+
+              for (const details of model.data.changeInfoList) {
+                this.addChangeInfo(details);
+              }
             } else {
               this.newForm();
             }

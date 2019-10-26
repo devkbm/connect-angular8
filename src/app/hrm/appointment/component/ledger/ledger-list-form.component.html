@@ -1,5 +1,5 @@
 {{fg.value | json}}
-<form nz-form [formGroup]="fg">    
+<form nz-form [formGroup]="fg" nzLayout="'inline'">
 
     <!--발령번호 필드-->
     <nz-form-item class="form-item">
@@ -27,12 +27,12 @@
             <nz-form-explain *ngIf="isFieldErrors(fg,'listId','required')">The input is Required!</nz-form-explain>
         </nz-form-control>
     </nz-form-item>
-        
+
     <!--순번 필드-->
     <nz-form-item class="form-item">
       <nz-form-label nzFor="sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">순번</nz-form-label>
       <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <input nz-input id="sequence" formControlName="sequence" placeholder="순번을 입력해주세요.">          
+          <input nz-input id="sequence" formControlName="sequence" placeholder="순번을 입력해주세요.">
       </nz-form-control>
     </nz-form-item>
 
@@ -58,15 +58,15 @@
     <nz-form-item class="form-item">
         <nz-form-label nzFor="appointmentFromDate" [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker id="appointmentFromDate" formControlName="appointmentFromDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>            
+            <nz-date-picker id="appointmentFromDate" formControlName="appointmentFromDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
         </nz-form-control>
     </nz-form-item>
-    
+
     <!--종료일 필드-->
     <nz-form-item class="form-item">
       <nz-form-label nzFor="appointmentToDate" [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일</nz-form-label>
       <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <nz-date-picker id="appointmentToDate" formControlName="appointmentToDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>            
+          <nz-date-picker id="appointmentToDate" formControlName="appointmentToDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
 
@@ -82,9 +82,36 @@
     <button (click)="addChangeInfo(null)">
         aaa
     </button>
-    <div formArrayName="changeInfoList" *ngFor="let list of fg.controls.changeInfoList?.value; let i=index;">
+
+    <div formArrayName="changeInfoList"
+        *ngFor="let list of fg.controls['changeInfoList'].value; let i=index;">
         <ng-container [formGroupName]="i">
             <input formControlName="id" placeholder="id">
+
+            <!--유형 필드-->
+            <nz-form-item class="form-item">
+              <nz-form-label nzFor="changeType" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형</nz-form-label>
+              <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
+                  <input nz-input id="changeType" formControlName="changeType" placeholder="유형을 입력해주세요.">
+              </nz-form-control>
+            </nz-form-item>
+
+            <!--유형 필드-->
+            <nz-form-item class="form-item">
+              <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형 상세</nz-form-label>
+              <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
+                  <input nz-input id="changeTypeDetail" formControlName="changeTypeDetail" placeholder="유형 상세를 입력해주세요.">
+              </nz-form-control>
+            </nz-form-item>
+
+            <!--유형 필드-->
+            <nz-form-item class="form-item">
+              <nz-form-label nzFor="changeCode" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">코드</nz-form-label>
+              <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
+                  <input nz-input id="changeCode" formControlName="changeCode" placeholder="코드를 입력해주세요.">
+              </nz-form-control>
+            </nz-form-item>
+
         </ng-container>
     </div>
 
@@ -100,17 +127,17 @@
 <div class="footer">
     <button
         nz-button
-        (click)="getForm(this.fg.get('listId').value)">
-        <i nz-icon nzType="search" nzTheme="outline"></i>        
+        (click)="getForm(this.fg.get('ledgerId').value,this.fg.get('listId').value)">
+        <i nz-icon nzType="search" nzTheme="outline"></i>
         조회
-    </button>    
+    </button>
     <nz-divider nzType="vertical"></nz-divider>
     <button
         nz-button
         (click)="closeForm()">
         <i nz-icon nzType="form" theme="outline"></i>
         닫기
-    </button>    
+    </button>
     <nz-divider nzType="vertical"></nz-divider>
     <button
         nz-button
