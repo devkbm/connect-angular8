@@ -4,8 +4,8 @@ import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 
 import { AggridFunction } from 'src/app/common/grid/aggrid-function';
 import { ResponseList } from 'src/app/common/model/response-list';
-import { LegderService } from '../../service/ledger.service';
-import { LedgerChangeInfo } from '../../model/legder-change-info';
+import { LedgerService } from '../../service/ledger.service';
+import { LedgerChangeInfo } from '../../model/ledger-change-info';
 
 @Component({
   selector: 'app-ledger-list-detail-grid',
@@ -29,7 +29,7 @@ export class LedgerListDetailGridComponent extends AggridFunction implements OnI
   editButtonClicked = new EventEmitter();
 
   constructor(private appAlarmService: AppAlarmService,              
-              private ledgerService: LegderService) {
+              private ledgerService: LedgerService) {
 
     super();
 
@@ -82,7 +82,7 @@ export class LedgerListDetailGridComponent extends AggridFunction implements OnI
   }
 
   public getGridList(appointmentCode: string): void {
-        
+    /*    
     this.ledgerService
         .getAppointmentCodeDetailList(appointmentCode)
         .subscribe(
@@ -99,6 +99,7 @@ export class LedgerListDetailGridComponent extends AggridFunction implements OnI
           },
           () => {}
         );
+        */
   }
 
   private selectionChanged(event) {

@@ -22,7 +22,7 @@ import { AppointmentCodeGridComponent } from './component/appointment-code/appoi
 import { AppointmentCodeDetailGridComponent } from './component/appointment-code/appointment-code-detail-grid.component';
 import { LedgerFormComponent } from './component/ledger/ledger-form.component';
 import { LedgerComponent } from './component/ledger/ledger.component';
-import { LegderService } from './service/ledger.service';
+import { LedgerService } from './service/ledger.service';
 import { LedgerListFormComponent } from './component/ledger/ledger-list-form.component';
 import { LedgerListDetailGridComponent } from './component/ledger/ledger-list-detail-grid.component';
 
@@ -57,7 +57,7 @@ import { LedgerListDetailGridComponent } from './component/ledger/ledger-list-de
     DeptTypeService,
     JobTypeService,
     AppointmentCodeService,
-    LegderService
+    LedgerService
   ],
   exports: [
     DeptTypeComponent,

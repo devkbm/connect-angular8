@@ -70,48 +70,45 @@
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item class="form-item">
-        <nz-form-label nzFor="appointmentToDate" [nzXs]="formLabelXs" [nzSm]="formLabelSm">변경정보</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <app-ledger-list-detail-grid>
-
-            </app-ledger-list-detail-grid>
-        </nz-form-control>
-    </nz-form-item>
-
-    <button (click)="addChangeInfo(null)">
+    <button (click)="getChangeInfo(fg.get('appointmentCode').value)">
         aaa
     </button>
 
     <div formArrayName="changeInfoList"
         *ngFor="let list of fg.controls['changeInfoList'].value; let i=index;">
         <ng-container [formGroupName]="i">
-            <input formControlName="id" placeholder="id">
+            <input type="hidden" formControlName="id" placeholder="id">
 
-            <!--유형 필드-->
-            <nz-form-item class="form-item">
-              <nz-form-label nzFor="changeType" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형</nz-form-label>
-              <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
-                  <input nz-input id="changeType" formControlName="changeType" placeholder="유형을 입력해주세요.">
-              </nz-form-control>
-            </nz-form-item>
-
-            <!--유형 필드-->
-            <nz-form-item class="form-item">
-              <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형 상세</nz-form-label>
-              <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
-                  <input nz-input id="changeTypeDetail" formControlName="changeTypeDetail" placeholder="유형 상세를 입력해주세요.">
-              </nz-form-control>
-            </nz-form-item>
-
-            <!--유형 필드-->
-            <nz-form-item class="form-item">
-              <nz-form-label nzFor="changeCode" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">코드</nz-form-label>
-              <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
-                  <input nz-input id="changeCode" formControlName="changeCode" placeholder="코드를 입력해주세요.">
-              </nz-form-control>
-            </nz-form-item>
-
+            <div nz-row>
+                <div nz-col nzSpan="8">
+                    <!--유형 필드-->                
+                    <nz-form-item class="form-item">
+                        <nz-form-label nzFor="changeType" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형</nz-form-label>
+                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
+                            <input nz-input id="changeType" formControlName="changeType" placeholder="유형을 입력해주세요." [disabled]="true">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="8">
+                    <!--유형상세 필드-->
+                    <nz-form-item class="form-item">
+                        <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형 상세</nz-form-label>
+                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
+                            <input nz-input formControlName="changeTypeDetail" placeholder="유형 상세를 입력해주세요." [disabled]="true">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="8">
+                    <!--코드 필드-->
+                    <nz-form-item class="form-item">
+                        <nz-form-label [nzFor]="'changeCode'+i" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">코드</nz-form-label>
+                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
+                            <input nz-input [id]="'changeCode'+i" formControlName="changeCode" placeholder="코드를 입력해주세요.">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+                                    
         </ng-container>
     </div>
 

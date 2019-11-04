@@ -12,10 +12,10 @@ import { ResponseObject } from 'src/app/common/model/response-object';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 import { AppointmentCodeDetail } from '../../model/appointment-code-detail';
 import { ResponseList } from 'src/app/common/model/response-list';
-import { LegderService } from '../../service/ledger.service';
+import { LedgerService } from '../../service/ledger.service';
 import { Ledger } from '../../model/ledger';
-import { LedgerChangeInfo } from '../../model/legder-change-info';
-import { LedgerList } from '../../model/legder-list';
+import { LedgerChangeInfo } from '../../model/ledger-change-info';
+import { LedgerList } from '../../model/ledger-list';
 
 @Component({
   selector: 'app-ledger-list-form',
@@ -35,7 +35,7 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   detailFormControlXs = 4;
 
   constructor(private fb: FormBuilder,
-              private legderService: LegderService,
+              private ledgerService: LedgerService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
@@ -74,9 +74,9 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
     this.fg.patchValue(formData);
   }
 
-  public addChangeInfo(changeInfo: LedgerChangeInfo) {
+  public addChangeInfo(changeInfo: LedgerChangeInfo): void {
     const formArray = this.fg.controls.changeInfoList as FormArray;
-    console.log(changeInfo);
+    
     formArray.push(this.fb.group({
       id: changeInfo.id,
       changeType: changeInfo.changeType,
@@ -86,13 +86,18 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
     }));
   }
 
+  public clearChangeInfo(): void {
+    const arr = <FormArray>this.fg.controls.changeInfoList;
+    arr.controls = [];
+  }
+
   public getForm(ledgerId: string, listId: string): void {
     const params = {
       ledgerId: ledgerId,
       listId: listId
     };
 
-    this.legderService
+    this.ledgerService
         .getLedgerList(params)
         .subscribe(
           (model: ResponseObject<LedgerList>) => {
@@ -115,10 +120,10 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   }
 
   public submitForm(): void {
-    this.legderService
-        .saveLedger(this.fg.getRawValue())
+    this.ledgerService
+        .saveLedgerList(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<Ledger>) => {
+          (model: ResponseObject<LedgerList>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           },
@@ -130,10 +135,10 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   }
 
   public deleteForm(): void {
-    this.legderService
-        .deleteLedger(this.fg.get('ledgerId').value)
+    this.ledgerService
+        .deleteLedgerList(this.fg.get('ledgerId').value, this.fg.get('listId').value)
         .subscribe(
-            (model: ResponseObject<Ledger>) => {
+            (model: ResponseObject<LedgerList>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
             },
@@ -141,6 +146,27 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
             console.log(err);
             },
             () => {}
+        );
+  }
+
+  public getChangeInfo(appointmentCode: string): void {
+    
+    this.ledgerService
+        .getChangeInfo(appointmentCode)
+        .subscribe(
+          (model: ResponseList<LedgerChangeInfo>) => {
+              if (model.total > 0) {
+                this.clearChangeInfo();
+                for (const details of model.data) {
+                  this.addChangeInfo(details);
+                }
+              } 
+              this.appAlarmService.changeMessage(model.message);
+          },
+          (err) => {
+              console.log(err);
+          },
+          () => {}
         );
   }
 

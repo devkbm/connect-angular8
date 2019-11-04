@@ -13,11 +13,11 @@ import { ResponseList } from '../../../common/model/response-list';
 import { AppointmentCode } from '../model/appointment-code';
 import { AppointmentCodeDetail } from '../model/appointment-code-detail';
 import { Ledger } from '../model/ledger';
-import { LedgerChangeInfo } from '../model/legder-change-info';
-import { LedgerList } from '../model/legder-list';
+import { LedgerChangeInfo } from '../model/ledger-change-info';
+import { LedgerList } from '../model/ledger-list';
 
 @Injectable()
-export class LegderService extends DataService {
+export class LedgerService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
     super('/hrm', http, tokenExtractor);
@@ -73,7 +73,7 @@ export class LegderService extends DataService {
   }
 
   getLedgerList(params: any): Observable<ResponseObject<LedgerList>> {
-    const url = `${this.API_URL}/ledgerlist`;
+    const url = `${this.API_URL}/ledger/list`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true,
@@ -85,8 +85,32 @@ export class LegderService extends DataService {
     );
   }
 
-  getAppointmentCodeDetailList(appointmentCode: string): Observable<ResponseList<LedgerChangeInfo>> {
-    const url = `${this.API_URL}/ledgerlist/changeinfo/${appointmentCode}`;
+  saveLedgerList(ledger: LedgerList): Observable<ResponseObject<LedgerList>> {
+    const url = `${this.API_URL}/ledger/list`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true
+    };
+    return this.http.post<ResponseObject<LedgerList>>(url, ledger, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
+  deleteLedgerList(ledgerId: string, listId: string): Observable<ResponseObject<LedgerList>> {
+    const url = `${this.API_URL}/ledger/${ledgerId}/list/${listId}`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true
+    };
+    return this.http
+              .delete<ResponseObject<LedgerList>>(url, options)
+              .pipe(
+                catchError((err) => Observable.throw(err))
+              );
+  }
+
+  getChangeInfo(appointmentCode: string): Observable<ResponseList<LedgerChangeInfo>> {
+    const url = `${this.API_URL}/ledger/list/changeinfo/${appointmentCode}`;
 
     const options = {
         headers: this.getAuthorizedHttpHeaders(),

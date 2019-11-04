@@ -11,7 +11,7 @@ import { ResponseObject } from 'src/app/common/model/response-object';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 import { AppointmentCodeDetail } from '../../model/appointment-code-detail';
 import { ResponseList } from 'src/app/common/model/response-list';
-import { LegderService } from '../../service/ledger.service';
+import { LedgerService } from '../../service/ledger.service';
 import { Ledger } from '../../model/ledger';
 
 @Component({
@@ -23,7 +23,7 @@ export class LedgerFormComponent extends FormBase implements OnInit {
   fg: FormGroup;
 
   constructor(private fb:FormBuilder,
-              private legderService: LegderService,
+              private legderService: LedgerService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {  
