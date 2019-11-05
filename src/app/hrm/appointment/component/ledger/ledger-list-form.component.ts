@@ -10,12 +10,12 @@ import {
 import { FormBase, FormType } from 'src/app/common/form/form-base';
 import { ResponseObject } from 'src/app/common/model/response-object';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
-import { AppointmentCodeDetail } from '../../model/appointment-code-detail';
 import { ResponseList } from 'src/app/common/model/response-list';
 import { LedgerService } from '../../service/ledger.service';
-import { Ledger } from '../../model/ledger';
 import { LedgerChangeInfo } from '../../model/ledger-change-info';
 import { LedgerList } from '../../model/ledger-list';
+import { AppointmentCodeService } from '../../service/appointment-code.service';
+import { AppointmentCode } from '../../model/appointment-code';
 
 @Component({
   selector: 'app-ledger-list-form',
@@ -32,45 +32,46 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   formLabelSm = 4;
 
   detailFormLabelXs = 4;
-  detailFormControlXs = 4;
+  detailFormControlXs = 20;
+  detailFormLabelSm = 3;
+  detailFormControlSm = 21;
+
+  appointmentCodeList;
 
   constructor(private fb: FormBuilder,
               private ledgerService: LedgerService,
+              private appointmentCodeService: AppointmentCodeService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
+    this.getAppointmentCodeList();
+    
     this.newForm();
+  }
+
+  private createForm(): FormGroup {
+    return this.fb.group({            
+              listId              : [ null, [ Validators.required ] ],
+              sequence            : [ null, [ Validators.required ] ],
+              empId               : [ null ],
+              appointmentCode     : [ null ],
+              appointmentFromDate : [ null ],
+              appointmentToDate   : [ null ],
+              ledgerId            : [ null, [ Validators.required ] ],
+              changeInfoList      :  this.fb.array([])
+           });
   }
 
   public newForm(): void {
     this.formType = FormType.NEW;
 
-    this.fg = this.fb.group({
-      listId              : [ null, [ Validators.required ] ],
-      sequence            : [ null, [ Validators.required ] ],
-      empId               : [ null ],
-      appointmentCode     : [ null ],
-      appointmentFromDate : [ null ],
-      appointmentToDate   : [ null ],
-      ledgerId            : [ null, [ Validators.required ] ],
-      changeInfoList      :  this.fb.array([])
-    });
+    this.fg = this.createForm();
   }
 
   public modifyForm(formData: LedgerList): void {
     this.formType = FormType.MODIFY;
 
-    this.fg = this.fb.group({
-      listId              : [ null, [ Validators.required ] ],
-      sequence            : [ null, [ Validators.required ] ],
-      empId               : [ null ],
-      appointmentCode     : [ null ],
-      appointmentFromDate : [ null ],
-      appointmentToDate   : [ null ],
-      ledgerId            : [ null, [ Validators.required ] ],
-      changeInfoList      : this.fb.array([])
-    });
-
+    this.fg = this.createForm();
     this.fg.patchValue(formData);
   }
 
@@ -79,8 +80,8 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
     
     formArray.push(this.fb.group({
       id: changeInfo.id,
-      changeType: changeInfo.changeType,
-      changeTypeDetail: changeInfo.changeTypeDetail,
+      changeType: new FormControl({value: changeInfo.changeType, disabled:true}),
+      changeTypeDetail: new FormControl({value: changeInfo.changeTypeDetail, disabled:true}),
       changeCode: changeInfo.changeCode,
       sequence: changeInfo.sequence
     }));
@@ -168,6 +169,28 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
           },
           () => {}
         );
+  }
+
+  public getAppointmentCodeList(): void {
+    this.appointmentCodeService
+        .getAppointmentCodeList()
+        .subscribe(
+          (model: ResponseList<AppointmentCode>) => {
+              if (model.total > 0) {
+                console.log(model.data);
+                this.appointmentCodeList = model.data;
+              } 
+              this.appAlarmService.changeMessage(model.message);
+          },
+          (err) => {
+              console.log(err);
+          },
+          () => {}
+        );
+  }
+
+  public appointmentCodeChanged(appointmentCode): void {    
+    this.getChangeInfo(appointmentCode);
   }
 
   public closeForm() {

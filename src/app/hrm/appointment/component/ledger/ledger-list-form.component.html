@@ -1,4 +1,5 @@
 {{fg.value | json}}
+{{appointmentCodeList | json}}
 <form nz-form [formGroup]="fg" nzLayout="'inline'">
 
     <!--발령번호 필드-->
@@ -32,7 +33,7 @@
     <nz-form-item class="form-item">
       <nz-form-label nzFor="sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">순번</nz-form-label>
       <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <input nz-input id="sequence" formControlName="sequence" placeholder="순번을 입력해주세요.">
+          <nz-input-number nzId="sequence" formControlName="sequence" placeholder="순번을 입력해주세요."></nz-input-number>
       </nz-form-control>
     </nz-form-item>
 
@@ -47,31 +48,42 @@
 
     <!--발령코드 필드-->
     <nz-form-item class="form-item">
-      <nz-form-label nzFor="appointmentCode" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
-      <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <input nz-input id="appointmentCode" formControlName="appointmentCode" placeholder="발령코드을 입력해주세요.">
-          <nz-form-explain *ngIf="isFieldErrors(fg,'appointmentCode','required')">The input is Required!</nz-form-explain>
+      <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
+      <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">          
+          <nz-select                
+                formControlName="appointmentCode"
+                nzShowSearch
+                [nzSize]="'default'"
+                nzPlaceHolder="Please select"
+                (ngModelChange)="appointmentCodeChanged($event)">
+                <nz-option
+                    *ngFor="let option of appointmentCodeList"
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code"
+                    [nzDisabled]="!option.useYn">
+                </nz-option>
+            </nz-select>    
       </nz-form-control>
     </nz-form-item>
 
     <!--시작일 필드-->
     <nz-form-item class="form-item">
-        <nz-form-label nzFor="appointmentFromDate" [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일</nz-form-label>
+        <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일</nz-form-label>
         <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker id="appointmentFromDate" formControlName="appointmentFromDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
+            <nz-date-picker formControlName="appointmentFromDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
         </nz-form-control>
     </nz-form-item>
 
     <!--종료일 필드-->
     <nz-form-item class="form-item">
-      <nz-form-label nzFor="appointmentToDate" [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일</nz-form-label>
+      <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일</nz-form-label>
       <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <nz-date-picker id="appointmentToDate" formControlName="appointmentToDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
+          <nz-date-picker formControlName="appointmentToDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
 
     <button (click)="getChangeInfo(fg.get('appointmentCode').value)">
-        aaa
+        상세조회
     </button>
 
     <div formArrayName="changeInfoList"
@@ -83,27 +95,27 @@
                 <div nz-col nzSpan="8">
                     <!--유형 필드-->                
                     <nz-form-item class="form-item">
-                        <nz-form-label nzFor="changeType" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형</nz-form-label>
-                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
-                            <input nz-input id="changeType" formControlName="changeType" placeholder="유형을 입력해주세요." [disabled]="true">
+                        <nz-form-label nzFor="changeType" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">유형</nz-form-label>
+                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="detailFormControlSm">
+                            <input nz-input id="changeType" formControlName="changeType" placeholder="유형을 입력해주세요.">
                         </nz-form-control>
                     </nz-form-item>
                 </div>
                 <div nz-col nzSpan="8">
                     <!--유형상세 필드-->
                     <nz-form-item class="form-item">
-                        <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">유형 상세</nz-form-label>
-                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
-                            <input nz-input formControlName="changeTypeDetail" placeholder="유형 상세를 입력해주세요." [disabled]="true">
+                        <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">유형 상세</nz-form-label>
+                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="detailFormControlSm">
+                            <input nz-input formControlName="changeTypeDetail" placeholder="유형 상세를 입력해주세요."/>
                         </nz-form-control>
                     </nz-form-item>
                 </div>
                 <div nz-col nzSpan="8">
                     <!--코드 필드-->
                     <nz-form-item class="form-item">
-                        <nz-form-label [nzFor]="'changeCode'+i" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="formLabelSm">코드</nz-form-label>
-                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="formControlSm">
-                            <input nz-input [id]="'changeCode'+i" formControlName="changeCode" placeholder="코드를 입력해주세요.">
+                        <nz-form-label [nzFor]="'changeCode'+i" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">코드</nz-form-label>
+                        <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="detailFormControlSm">
+                            <input nz-input [id]="'changeCode'+i" formControlName="changeCode" placeholder="코드를 입력해주세요."/>                                                        
                         </nz-form-control>
                     </nz-form-item>
                 </div>
