@@ -46,10 +46,10 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   ngOnInit() {
     this.getAppointmentCodeList();
     
-    this.newForm();
+    this.newForm(null);
   }
 
-  private createForm(): FormGroup {
+  private createForm(ledgerId: string): FormGroup {
     return this.fb.group({            
               listId              : [ null, [ Validators.required ] ],
               sequence            : [ null, [ Validators.required ] ],
@@ -57,21 +57,21 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
               appointmentCode     : [ null ],
               appointmentFromDate : [ null ],
               appointmentToDate   : [ null ],
-              ledgerId            : [ null, [ Validators.required ] ],
+              ledgerId            : [ ledgerId, [ Validators.required ] ],
               changeInfoList      :  this.fb.array([])
            });
   }
 
-  public newForm(): void {
+  public newForm(ledgerId: string): void {
     this.formType = FormType.NEW;
 
-    this.fg = this.createForm();
+    this.fg = this.createForm(ledgerId);
   }
 
   public modifyForm(formData: LedgerList): void {
     this.formType = FormType.MODIFY;
 
-    this.fg = this.createForm();
+    this.fg = this.createForm(null);
     this.fg.patchValue(formData);
   }
 
@@ -92,24 +92,21 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
     arr.controls = [];
   }
 
-  public getForm(ledgerId: string, listId: string): void {
-    const params = {
-      ledgerId: ledgerId,
-      listId: listId
-    };
+  public getForm(ledgerId: string, listId: string): void {    
 
     this.ledgerService
-        .getLedgerList(params)
+        .getLedgerList(ledgerId, listId)
         .subscribe(
           (model: ResponseObject<LedgerList>) => {
-            if ( model.total > 0 ) {
+            this.clearChangeInfo();
+            if ( model.total > 0 ) {              
               this.modifyForm(model.data);
 
               for (const details of model.data.changeInfoList) {
                 this.addChangeInfo(details);
               }
             } else {
-              this.newForm();
+              this.newForm(null);
             }
             this.appAlarmService.changeMessage(model.message);
           },

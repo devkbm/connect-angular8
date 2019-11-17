@@ -15,6 +15,7 @@ import { AppointmentCodeDetail } from '../model/appointment-code-detail';
 import { Ledger } from '../model/ledger';
 import { LedgerChangeInfo } from '../model/ledger-change-info';
 import { LedgerList } from '../model/ledger-list';
+import { LedgerGridComponent } from '../component/ledger/ledger-grid.component';
 
 @Injectable()
 export class LedgerService extends DataService {
@@ -40,8 +41,7 @@ export class LedgerService extends DataService {
     const url = `${this.API_URL}/ledger`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
-      withCredentials: true,
-      params: param
+      withCredentials: true
     };
 
     return this.http.get<ResponseList<Ledger>>(url, options).pipe(
@@ -85,7 +85,20 @@ export class LedgerService extends DataService {
               );
   }
 
-  getLedgerList(params: any): Observable<ResponseObject<LedgerList>> {
+  getLedgerList(ledgerId: string, listId: string): Observable<ResponseObject<LedgerList>> {
+
+    const url = `${this.API_URL}/ledger/${ledgerId}/list/${listId}`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true
+    };
+
+    return this.http.get<ResponseObject<LedgerList>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
+  getLedgerLists(params: any): Observable<ResponseList<LedgerList>> {
     const url = `${this.API_URL}/ledger/list`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
@@ -93,7 +106,7 @@ export class LedgerService extends DataService {
       params: params
     };
 
-    return this.http.get<ResponseObject<LedgerList>>(url, options).pipe(
+    return this.http.get<ResponseList<LedgerList>>(url, options).pipe(
       catchError((err) => Observable.throw(err))
     );
   }

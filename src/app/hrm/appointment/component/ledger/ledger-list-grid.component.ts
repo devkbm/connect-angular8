@@ -5,17 +5,16 @@ import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 
 import { AggridFunction } from 'src/app/common/grid/aggrid-function';
 import { ResponseList } from 'src/app/common/model/response-list';
-import { Ledger } from '../../model/ledger';
-
+import { LedgerList } from '../../model/ledger-list';
 
 @Component({
-  selector: 'app-ledger-grid',
-  templateUrl: './ledger-grid.component.html',
-  styleUrls: ['./ledger-grid.component.css']
+  selector: 'app-ledger-list-grid',
+  templateUrl: './ledger-list-grid.component.html',
+  styleUrls: ['./ledger-list-grid.component.css']
 })
-export class LedgerGridComponent extends AggridFunction implements OnInit {
+export class LedgerListGridComponent extends AggridFunction implements OnInit {
 
-  protected gridList: Ledger[];
+  protected gridList: LedgerList[];
 
   @Output()
   rowSelected = new EventEmitter();
@@ -49,10 +48,12 @@ export class LedgerGridComponent extends AggridFunction implements OnInit {
         width: 70,
         cellStyle: {'text-align': 'center'}
       },
-      { headerName: '발령번호',     field: 'ledgerId',          width: 150 },
-      { headerName: '발령유형',     field: 'appointmentType',   width: 200 },
-      { headerName: '발령등록일',   field: 'registrationDate',  width: 200 },      
-      { headerName: '설명',         field: 'comment',           width: 300 }
+      { headerName: '식별자',       field: 'listId',              width: 150 },
+      { headerName: '순번',         field: 'sequence',            width: 150 },
+      { headerName: '직원번호',     field: 'empId',               width: 150 },
+      { headerName: '발령코드',     field: 'appointmentCode',     width: 200 },
+      { headerName: '발령일',       field: 'appointmentFromDate', width: 200 },
+      { headerName: '발령종료일',   field: 'appointmentToDate',   width: 200 }
     ];
 
     this.defaultColDef = {
@@ -61,7 +62,7 @@ export class LedgerGridComponent extends AggridFunction implements OnInit {
     };
 
     this.getRowNodeId = function(data) {
-        return data.ledgerId;
+        return data.listId;
     };
   }
 
@@ -75,9 +76,9 @@ export class LedgerGridComponent extends AggridFunction implements OnInit {
 
   public getGridList(params?: any): void {
     this.ledgerService
-        .getLedgers(params)
+        .getLedgerLists(params)
         .subscribe(
-          (model: ResponseList<Ledger>) => {
+          (model: ResponseList<LedgerList>) => {
               if (model.total > 0) {
                   this.gridList = model.data;
               } else {
