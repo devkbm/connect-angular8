@@ -6,7 +6,8 @@ import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angu
 import { RouterModule, Routes } from '@angular/router';
 
 import { AgGridModule } from 'ag-grid-angular';
-import { NgZorroAntdModule, NZ_I18N, en_US, ko_KR } from 'ng-zorro-antd';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NZ_I18N, ko_KR } from 'ng-zorro-antd/i18n';
 
 import { AppRoutingModule } from '../app-routing.module';
 

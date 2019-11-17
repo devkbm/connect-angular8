@@ -36,6 +36,19 @@ export class LedgerService extends DataService {
     );
   }
 
+  getLedgers(param): Observable<ResponseList<Ledger>> {
+    const url = `${this.API_URL}/ledger`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true,
+      params: param
+    };
+
+    return this.http.get<ResponseList<Ledger>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
   getLedger(id: string): Observable<ResponseObject<Ledger>> {
     const url = `${this.API_URL}/ledger/${id}`;
     const options = {

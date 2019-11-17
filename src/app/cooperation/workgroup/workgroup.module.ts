@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonFuncModule } from '../../common/common-func.module';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ColorPickerModule } from 'ngx-color-picker';

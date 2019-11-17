@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonFuncModule } from '../../common/common-func.module';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NZ_I18N, ko_KR } from 'ng-zorro-antd/i18n';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { BoardService } from './service/board.service';
