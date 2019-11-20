@@ -62,6 +62,10 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
            });
   }
 
+  get changeInfoList() {
+    return this.fg.get('changeInfoList') as FormArray
+  }
+
   public newForm(ledgerId: string): void {
     this.formType = FormType.NEW;
 
@@ -71,19 +75,22 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   public modifyForm(formData: LedgerList): void {
     this.formType = FormType.MODIFY;
 
-    this.fg = this.createForm(null);
+    this.fg = this.createForm(formData.ledgerId);
     this.fg.patchValue(formData);
-  }
 
-  public addChangeInfo(changeInfo: LedgerChangeInfo): void {
-    const formArray = this.fg.controls.changeInfoList as FormArray;
+    for (const details of formData.changeInfoList) {
+      this.addChangeInfo(details);
+    }
+  }
+  
+  public addChangeInfo(changeInfo: LedgerChangeInfo): void {    
     
-    formArray.push(this.fb.group({
-      id: changeInfo.id,
-      changeType: new FormControl({value: changeInfo.changeType, disabled:true}),
-      changeTypeDetail: new FormControl({value: changeInfo.changeTypeDetail, disabled:true}),
-      changeCode: changeInfo.changeCode,
-      sequence: changeInfo.sequence
+    this.changeInfoList.push(this.fb.group({
+      id: new FormControl({value: changeInfo.id, disabled: false}),
+      changeType: new FormControl({value: changeInfo.changeType, disabled: true}),
+      changeTypeDetail: new FormControl({value: changeInfo.changeTypeDetail, disabled: true}),
+      changeCode: new FormControl({value: changeInfo.changeCode, disabled: false}),
+      sequence: new FormControl({value: changeInfo.sequence, disabled: false})
     }));
   }
 
@@ -98,13 +105,9 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
         .getLedgerList(ledgerId, listId)
         .subscribe(
           (model: ResponseObject<LedgerList>) => {
-            this.clearChangeInfo();
+            
             if ( model.total > 0 ) {              
-              this.modifyForm(model.data);
-
-              for (const details of model.data.changeInfoList) {
-                this.addChangeInfo(details);
-              }
+              this.modifyForm(model.data);                          
             } else {
               this.newForm(null);
             }

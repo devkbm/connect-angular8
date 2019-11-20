@@ -1,5 +1,4 @@
 {{fg.value | json}}
-{{appointmentCodeList | json}}
 <form nz-form [formGroup]="fg" nzLayout="'inline'">
 
     <!--발령번호 필드-->
@@ -87,7 +86,7 @@
     </button>
 
     <div formArrayName="changeInfoList"
-        *ngFor="let list of fg.controls['changeInfoList'].value; let i=index;">
+        *ngFor="let list of changeInfoList.controls; let i=index;">
         <ng-container [formGroupName]="i">
             <input type="hidden" formControlName="id" placeholder="id">
 
@@ -115,7 +114,7 @@
                     <nz-form-item class="form-item">
                         <nz-form-label [nzFor]="'changeCode'+i" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">코드</nz-form-label>
                         <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="detailFormControlSm">
-                            <input nz-input [id]="'changeCode'+i" formControlName="changeCode" placeholder="코드를 입력해주세요."/>                                                        
+                            <input nz-input [attr.id]="'changeCode'+i" formControlName="changeCode" placeholder="코드를 입력해주세요."/>                                                        
                         </nz-form-control>
                     </nz-form-item>
                 </div>
