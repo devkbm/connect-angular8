@@ -30,6 +30,7 @@ import { WorkgroupComponent } from '../cooperation/workgroup/component/workgroup
 import { DeptTypeComponent } from '../hrm/appointment/component/dept-type/dept-type.component';
 import { AppointmentCodeComponent } from '../hrm/appointment/component/appointment-code/appointment-code.component';
 import { LedgerComponent } from '../hrm/appointment/component/ledger/ledger.component';
+import { EmployeeFormComponent } from '../hrm/employee/component/basic-info/employee-form.component';
 
 
 const layoutroutes: Routes = [
@@ -59,7 +60,8 @@ const layoutroutes: Routes = [
       {path: 'workgroup',     component: WorkgroupComponent},
       {path: 'depttype',      component: DeptTypeComponent},
       {path: 'appointmentcode',     component: AppointmentCodeComponent},
-      {path: 'appointmentledger',   component: LedgerComponent}
+      {path: 'appointmentledger',   component: LedgerComponent},
+      {path: 'employee',      component: EmployeeFormComponent}
     ]
   }
 ];

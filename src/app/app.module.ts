@@ -52,7 +52,7 @@ import { GlobalProperty } from './global-property';
     },
     {
       provide: COMPOSITION_BUFFER_MODE,
-      useValue: false
+      useValue: true
     },
     GlobalProperty
   ],

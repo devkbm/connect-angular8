@@ -14,6 +14,7 @@ import { TermService } from '../common/service/term.service';
 import { WorkgroupModule } from '../cooperation/workgroup/workgroup.module';
 import { UserPopupComponent } from '../common/component/user/user-popup.component';
 import { AppointmentModule } from '../hrm/appointment/appointment.module';
+import { EmployeeModule } from '../hrm/employee/employee.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { AppointmentModule } from '../hrm/appointment/appointment.module';
     CommonLayoutRoutingModule,
     CommonFuncModule,
     WorkgroupModule,
-    AppointmentModule
+    AppointmentModule,
+    EmployeeModule
   ],
   declarations: [
     CommonLayoutComponent    

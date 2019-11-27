@@ -1,0 +1,142 @@
+{{fg.getRawValue() | json}}
+<!--{{fileList | json}}-->
+<form nz-form [formGroup]="fg" nzLayout="vertical">    
+
+    <nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='48' [nzSrc]="imageUrl"></nz-avatar>    
+
+  <div nz-row nzGutter="8">
+      <div nz-col nzSpan="12">
+          <!--아이디 필드(생성)-->
+          <nz-form-item *ngIf="this.formType == 'NEW'">
+              <nz-form-label nzFor="id" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+                  아이디
+              </nz-form-label>
+              <nz-form-control nzHasFeedback [nzXs]="formControlXs" [nzSm]="formControlSm">
+                  <input nz-input id="id" formControlName="id" placeholder="아이디를 입력해주세요.">
+                  <nz-form-explain *ngIf="isFieldErrors(fg,'id','required')">The input is Required!</nz-form-explain>                  
+              </nz-form-control>        
+          </nz-form-item>
+
+          <!--아이디 필드(수정)-->
+          <nz-form-item *ngIf="this.formType == 'MODIFY'">
+              <nz-form-label nzFor="id" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+                  아이디
+              </nz-form-label>
+              <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                  <input nz-input id="id" formControlName="id" placeholder="아이디를 입력해주세요.">
+                  <nz-form-explain *ngIf="isFieldErrors(fg,'id','required')">The input is Required!</nz-form-explain>            
+              </nz-form-control>        
+          </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+          <!--이름 필드-->
+          <nz-form-item>
+              <nz-form-label 
+                  nzFor="name" 
+                  nzRequired
+                  [nzXs]="formLabelXs"
+                  [nzSm]="formLabelSm">
+                  이름
+              </nz-form-label>
+
+              <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm" nzHasFeedback>
+                  <input id="name" nz-input formControlName="name" style="IME-MODE: disabled">
+                  <nz-form-explain *ngIf="isFieldErrors(fg,'name','required')">The input is Required!</nz-form-explain>
+              </nz-form-control>
+          </nz-form-item>
+      </div>
+  </div>
+
+    <!--이름(영문) 필드-->
+    <nz-form-item>
+        <nz-form-label 
+            nzFor="nameEng"             
+            [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+            이름(영문)
+        </nz-form-label>
+
+        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm" nzHasFeedback>
+            <input id="nameEng" nz-input formControlName="nameEng" style="IME-MODE: inactive">
+            <nz-form-explain *ngIf="isFieldErrors(fg,'nameEng','required')">The input is Required!</nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+
+    <!--주민등록번호 필드-->
+    <nz-form-item>
+        <nz-form-label 
+            nzFor="residentRegistrationNumber" 
+            nzRequired
+            [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+            주민등록번호
+        </nz-form-label>
+
+        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm" nzHasFeedback>
+            <input style="ime-mode: inactive" id="residentRegistrationNumber" nz-input formControlName="residentRegistrationNumber">
+            <nz-form-explain *ngIf="isFieldErrors(fg,'residentRegistrationNumber','required')">The input is Required!</nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+
+    <!--생년월일 필드-->
+    <nz-form-item class="form-item">
+        <nz-form-label nzFor="birthday" [nzXs]="formLabelXs" [nzSm]="formLabelSm">생년월일</nz-form-label>
+        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+            <nz-date-picker id="birthday" formControlName="birthday" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>            
+        </nz-form-control>
+    </nz-form-item>
+
+    <!--성별 필드-->
+    <nz-radio-group formControlName="gender">
+        <label nz-radio nzValue="M">Male</label>
+        <label nz-radio nzValue="F">Female</label>        
+    </nz-radio-group>
+        
+</form>
+
+<div class="footer">
+    <button
+    nz-button
+    (click)="getForm(fg.get('id').value)">
+    <i nz-icon nzType="search" nzTheme="outline"></i>        
+    조회
+</button>    
+<nz-divider nzType="vertical"></nz-divider>
+    <button
+    nz-button
+    (click)="closeForm()">
+    <i nz-icon nzType="close" theme="outline"></i>
+    닫기
+</button>
+<nz-divider nzType="vertical"></nz-divider>
+<button
+    nz-button
+    nzType="primary"
+    nz-popconfirm
+    nzTitle="신규 직원을 등록하시겠습니까?"
+    (nzOnConfirm)="newEmployee()"
+    (nzOnCancel)="false">
+    <i nz-icon nzType="save" theme="outline"></i>
+    신규직원등록
+</button>
+<nz-divider nzType="vertical"></nz-divider>
+<button
+    nz-button
+    nzType="primary"
+    nz-popconfirm
+    nzTitle="저장하시겠습니까?"
+    (nzOnConfirm)="submitForm()"
+    (nzOnCancel)="false">
+    <i nz-icon nzType="save" theme="outline"></i>
+    저장
+</button>
+<nz-divider nzType="vertical"></nz-divider>
+<button
+    nz-button
+    nzType="danger"
+    nz-popconfirm
+    nzTitle="삭제하시겠습니까?"
+    (nzOnConfirm)="deleteForm(this.fg.get('id').value)"
+    (nzOnCancel)="false">
+    <i nz-icon nzType="delete" theme="outline"></i>
+    삭제
+</button>
+</div>
