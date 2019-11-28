@@ -23,7 +23,7 @@ import { GlobalProperty } from 'src/app/global-property';
 export class EmployeeFormComponent extends FormBase implements OnInit {
 
   fg: FormGroup;  
-
+  formModel: Employee;  
   imageUrl;
 
   constructor(private fb:FormBuilder,
@@ -35,6 +35,7 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
   }  
 
   public newForm(): void {
+    this.formModel = new Employee();
     this.formType = FormType.NEW;
 
     this.fg = this.fb.group({      
@@ -51,6 +52,7 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
   }
 
   public modifyForm(formData: Employee): void {
+    this.formModel = formData;
     this.formType = FormType.MODIFY;
 
     this.fg = this.fb.group({      
@@ -77,7 +79,7 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
         .getEmployee(empId)
         .subscribe(
           (model: ResponseObject<Employee>) => {
-            if ( model.total > 0 ) {              
+            if ( model.total > 0 ) {                            
               this.modifyForm(model.data);
             } else {
               this.newForm();

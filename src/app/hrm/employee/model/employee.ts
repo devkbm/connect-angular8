@@ -1,3 +1,6 @@
+import { DeptChangeHistory } from './dept-change-history';
+import { JobChangeHistory } from './job-change-history';
+
 export class Employee {    
     id: string;
     name: string;
@@ -8,6 +11,7 @@ export class Employee {
 	birthday: Date;
 	workCondition: string;
 	imagePath: string;	
+	deptChangeHistory: DeptChangeHistory[];
+	jobChangeHistory: JobChangeHistory[];
 }
-
 

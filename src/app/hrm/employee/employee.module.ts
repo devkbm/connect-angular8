@@ -10,6 +10,7 @@ import { ButtonRendererComponent } from 'src/app/common/grid/renderer/button-ren
 import { CheckboxRendererComponent } from 'src/app/common/grid/renderer/checkbox-renderer.component';
 
 import { EmployeeFormComponent } from './component/basic-info/employee-form.component';
+import { DeptChangeHistoryGridComponent } from './component/basic-info/dept-change-history-grid.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { EmployeeFormComponent } from './component/basic-info/employee-form.comp
     AgGridModule.withComponents([ButtonRendererComponent, CheckboxRendererComponent])
   ],
   declarations: [
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    DeptChangeHistoryGridComponent
   ],
   providers: [
   ],
