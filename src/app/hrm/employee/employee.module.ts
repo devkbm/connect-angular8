@@ -11,6 +11,7 @@ import { CheckboxRendererComponent } from 'src/app/common/grid/renderer/checkbox
 
 import { EmployeeFormComponent } from './component/basic-info/employee-form.component';
 import { DeptChangeHistoryGridComponent } from './component/basic-info/dept-change-history-grid.component';
+import { JobChangeHistoryGridComponent } from './component/basic-info/job-change-history-grid.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { DeptChangeHistoryGridComponent } from './component/basic-info/dept-chan
   ],
   declarations: [
     EmployeeFormComponent,
-    DeptChangeHistoryGridComponent
+    DeptChangeHistoryGridComponent,
+    JobChangeHistoryGridComponent
   ],
   providers: [
   ],
