@@ -1,5 +1,6 @@
 import { DeptChangeHistory } from './dept-change-history';
 import { JobChangeHistory } from './job-change-history';
+import { StatusChangeHistory } from './status-change-history';
 
 export class Employee {    
     id: string;
@@ -13,5 +14,6 @@ export class Employee {
 	imagePath: string;	
 	deptChangeHistory: DeptChangeHistory[];
 	jobChangeHistory: JobChangeHistory[];
+	statusChangeHistory: StatusChangeHistory[];
 }
 

@@ -6,7 +6,7 @@ import { ICellRendererParams } from 'ag-grid-community';
   selector: 'app-button-renderer',
   template: `
     <button nz-button nzSize='small' (click)="onClick($event)">
-      <i nz-icon [type]="iconType"></i>
+      <i nz-icon [nzType]="iconType"></i>
       {{label}}
     </button>
   `,

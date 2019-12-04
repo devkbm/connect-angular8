@@ -59,12 +59,12 @@ export class JobChangeHistoryGridComponent extends AggridFunction implements OnI
     };
 
     this.getRowNodeId = function(data) {
-        return data.listId;
+        return data.id;
     };
   }
 
   ngOnInit() {
-    
+    this.setWidthAndHeight('100%','500px');
   }
 
   private onEditButtonClick(e) {

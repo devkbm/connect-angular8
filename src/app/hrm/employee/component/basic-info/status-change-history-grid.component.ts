@@ -3,17 +3,17 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 import { AggridFunction } from 'src/app/common/grid/aggrid-function';
 import { ResponseList } from 'src/app/common/model/response-list';
-import { DeptChangeHistory } from '../../model/dept-change-history';
+import { StatusChangeHistory } from '../../model/status-change-history';
 
 @Component({
-  selector: 'app-dept-change-history-grid',
-  templateUrl: './dept-change-history-grid.component.html',
-  styleUrls: ['./dept-change-history-grid.component.css']
+  selector: 'app-status-change-history-grid',
+  templateUrl: './status-change-history-grid.component.html',
+  styleUrls: ['./status-change-history-grid.component.css']
 })
-export class DeptChangeHistoryGridComponent extends AggridFunction implements OnInit {
+export class StatusChangeHistoryGridComponent extends AggridFunction implements OnInit {
 
   @Input()
-  gridList: DeptChangeHistory[];
+  gridList: StatusChangeHistory[];
 
   @Output()
   rowSelected = new EventEmitter();
@@ -47,8 +47,8 @@ export class DeptChangeHistoryGridComponent extends AggridFunction implements On
         cellStyle: {'text-align': 'center'}
       },
       { headerName: '식별자',     field: 'id',          width: 150 },
-      { headerName: '부서유형',   field: 'deptType',    width: 150 },
-      { headerName: '부서코드',   field: 'deptCode',    width: 150 },
+      { headerName: '발령코드',   field: 'appointmentCode',    width: 150 },
+      { headerName: '상태코드',   field: 'statusCode',    width: 150 },
       { headerName: '시작일',     field: 'fromDate',    width: 200 },
       { headerName: '종료일',     field: 'toDate',      width: 200 }
     ];

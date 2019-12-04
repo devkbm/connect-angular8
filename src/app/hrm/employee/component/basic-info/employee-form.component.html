@@ -107,9 +107,21 @@
         
 </form>
 
-<app-dept-change-history-grid [gridList]="formModel.deptChangeHistory"></app-dept-change-history-grid>
-
-<app-job-change-history-grid [gridList]="formModel.jobChangeHistory"></app-job-change-history-grid>
+<nz-tabset style="height: 500px;">
+    <nz-tab nzTitle="부서변경이력" style="height: 500px;">
+        <app-dept-change-history-grid [gridList]="formModel.deptChangeHistory"></app-dept-change-history-grid>                
+    </nz-tab>    
+    <nz-tab nzTitle="인사변경이력" style="height: 500px;">
+        <ng-template nz-tab>
+        <app-job-change-history-grid [gridList]="formModel.jobChangeHistory"></app-job-change-history-grid>
+        </ng-template>
+    </nz-tab>
+    <nz-tab nzTitle="근무상태변경이력" style="height: 500px;">
+        <ng-template nz-tab>
+        <app-status-change-history-grid [gridList]="formModel.statusChangeHistory"></app-status-change-history-grid>
+        </ng-template>
+    </nz-tab>
+</nz-tabset>
 
 <div class="footer">
     <button
