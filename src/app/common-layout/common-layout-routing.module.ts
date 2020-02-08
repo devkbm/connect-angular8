@@ -31,6 +31,7 @@ import { DeptTypeComponent } from '../hrm/appointment/component/dept-type/dept-t
 import { AppointmentCodeComponent } from '../hrm/appointment/component/appointment-code/appointment-code.component';
 import { LedgerComponent } from '../hrm/appointment/component/ledger/ledger.component';
 import { EmployeeFormComponent } from '../hrm/employee/component/basic-info/employee-form.component';
+import { EmployeeMasterComponent } from '../hrm/employee/component/basic-info/employee-master.component';
 
 
 const layoutroutes: Routes = [
@@ -61,7 +62,7 @@ const layoutroutes: Routes = [
       {path: 'depttype',      component: DeptTypeComponent},
       {path: 'appointmentcode',     component: AppointmentCodeComponent},
       {path: 'appointmentledger',   component: LedgerComponent},
-      {path: 'employee',      component: EmployeeFormComponent}
+      {path: 'employee',      component: EmployeeMasterComponent}
     ]
   }
 ];

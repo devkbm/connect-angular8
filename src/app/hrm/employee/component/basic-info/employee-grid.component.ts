@@ -83,7 +83,7 @@ export class EmployeeGridComponent extends AggridFunction implements OnInit {
     this.rowDoubleClicked.emit(event.data);
   }
   public onGridReady() {
-    const param = new SearchEmployee('20190001');    
+    const param = new SearchEmployee('20200001');
     this.getGridList(param);
   }
 

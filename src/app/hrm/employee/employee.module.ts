@@ -1,3 +1,4 @@
+import { EmployeeMasterComponent } from './component/basic-info/employee-master.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +22,7 @@ import { EmployeeGridComponent } from './component/basic-info/employee-grid.comp
     FormsModule,
     ReactiveFormsModule,
     CommonFuncModule,
-    NgZorroAntdModule,    
+    NgZorroAntdModule,
     AgGridModule.withComponents([ButtonRendererComponent, CheckboxRendererComponent])
   ],
   declarations: [
@@ -29,12 +30,14 @@ import { EmployeeGridComponent } from './component/basic-info/employee-grid.comp
     DeptChangeHistoryGridComponent,
     JobChangeHistoryGridComponent,
     StatusChangeHistoryGridComponent,
-    EmployeeGridComponent
+    EmployeeGridComponent,
+    EmployeeMasterComponent
   ],
   providers: [
   ],
   exports: [
-    EmployeeFormComponent
+    EmployeeFormComponent,
+    EmployeeMasterComponent
   ]
 })
 export class EmployeeModule { }
