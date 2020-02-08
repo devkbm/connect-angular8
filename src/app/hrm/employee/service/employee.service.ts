@@ -9,6 +9,7 @@ import { ResponseObject } from '../../../common/model/response-object';
 import { ResponseList } from '../../../common/model/response-list';
 import { Employee } from '../model/Employee';
 import { NewEmployee } from '../model/new-employee';
+import { SearchEmployee } from '../model/search-employee';
 
 
 @Injectable({
@@ -27,6 +28,20 @@ export class EmployeeService extends DataService {
         withCredentials: true,
         params: params
      };
+
+    return this.http.get<ResponseList<Employee>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
+  getEmployeeList(params: SearchEmployee): Observable<ResponseList<Employee>> {
+    const url = `${this.API_URL}/employee`;
+    const obj:any = params;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true,
+      params: obj
+    };
 
     return this.http.get<ResponseList<Employee>>(url, options).pipe(
       catchError((err) => Observable.throw(err))

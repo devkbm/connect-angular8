@@ -13,6 +13,7 @@ import { EmployeeFormComponent } from './component/basic-info/employee-form.comp
 import { DeptChangeHistoryGridComponent } from './component/basic-info/dept-change-history-grid.component';
 import { JobChangeHistoryGridComponent } from './component/basic-info/job-change-history-grid.component';
 import { StatusChangeHistoryGridComponent } from './component/basic-info/status-change-history-grid.component';
+import { EmployeeGridComponent } from './component/basic-info/employee-grid.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { StatusChangeHistoryGridComponent } from './component/basic-info/status-
     EmployeeFormComponent,
     DeptChangeHistoryGridComponent,
     JobChangeHistoryGridComponent,
-    StatusChangeHistoryGridComponent
+    StatusChangeHistoryGridComponent,
+    EmployeeGridComponent
   ],
   providers: [
   ],
