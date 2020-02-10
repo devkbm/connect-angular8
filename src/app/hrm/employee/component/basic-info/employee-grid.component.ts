@@ -66,7 +66,7 @@ export class EmployeeGridComponent extends AggridFunction implements OnInit {
   }
 
   ngOnInit() {
-    this.setWidthAndHeight('100%','500px');
+    //this.setWidthAndHeight('100%','500px');
   }
 
   private onEditButtonClick(e) {
@@ -83,7 +83,7 @@ export class EmployeeGridComponent extends AggridFunction implements OnInit {
     this.rowDoubleClicked.emit(event.data);
   }
   public onGridReady() {
-    const param = new SearchEmployee('20200001');
+    const param = new SearchEmployee('20190001');
     this.getGridList(param);
   }
 
