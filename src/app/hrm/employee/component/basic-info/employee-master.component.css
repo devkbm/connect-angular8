@@ -8,6 +8,7 @@
 .left-side {
     overflow-y: auto; 
     overflow-x: hidden;    
+    max-height: 100%;
 }
 
 .main-content {        

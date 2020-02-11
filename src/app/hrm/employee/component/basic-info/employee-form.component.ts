@@ -72,8 +72,8 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
     this.imageUrl = GlobalProperty.serverUrl + '/static/' + this.fg.get('imagePath').value;
   }
   
-  public getForm(): void {
-    const empId = this.fg.get('id').value;    
+  public getForm(empId: string): void {
+    //const empId = this.fg.get('id').value;    
     
     this.employeeService
         .getEmployee(empId)
