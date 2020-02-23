@@ -64,6 +64,7 @@
 
     <h3 class="pgm-title">발령 명단</h3>
     <app-ledger-list-grid #gridLedgerList
+        [ledgerId]="selectedLedgerId"
         (editButtonClicked)="openDrawerLedgerList($event)"
         (rowDoubleClicked)="openDrawerLedgerList($event)">
     </app-ledger-list-grid>

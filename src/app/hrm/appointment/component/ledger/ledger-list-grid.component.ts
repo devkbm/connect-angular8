@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import { LedgerService } from '../../service/ledger.service';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
@@ -15,6 +15,8 @@ import { LedgerList } from '../../model/ledger-list';
 export class LedgerListGridComponent extends AggridFunction implements OnInit {
 
   protected gridList: LedgerList[];
+
+  @Input() ledgerId;
 
   @Output()
   rowSelected = new EventEmitter();
@@ -53,7 +55,18 @@ export class LedgerListGridComponent extends AggridFunction implements OnInit {
       { headerName: '직원번호',     field: 'empId',               width: 150 },
       { headerName: '발령코드',     field: 'appointmentCode',     width: 200 },
       { headerName: '발령일',       field: 'appointmentFromDate', width: 200 },
-      { headerName: '발령종료일',   field: 'appointmentToDate',   width: 200 }
+      { headerName: '발령종료일',   field: 'appointmentToDate',   width: 200 },
+      {
+        headerName: '',
+        width: 34,
+        cellStyle: {'text-align': 'center', 'padding': '0px'},
+        cellRenderer: 'buttonRenderer',
+        cellRendererParams: {
+          onClick: this.onProcessButtonClick.bind(this),
+          label: '발령처리',
+          iconType: 'form'
+        }
+      },
     ];
 
     this.defaultColDef = {
@@ -74,6 +87,22 @@ export class LedgerListGridComponent extends AggridFunction implements OnInit {
     this.editButtonClicked.emit(e.rowData);
   }
 
+  private onProcessButtonClick(e): void {
+    console.log(this.ledgerId);
+    console.log(e.rowData);
+    this.ledgerService
+        .apponitProcess(this.ledgerId, e.rowData.listId)
+        .subscribe(
+          (model: string) => {
+            console.log(model);
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {}
+        );
+  }
+
   public getGridList(params?: any): void {
     this.ledgerService
         .getLedgerLists(params)
@@ -92,6 +121,8 @@ export class LedgerListGridComponent extends AggridFunction implements OnInit {
           () => {}
         );
   }
+
+  
 
   private selectionChanged(event) {
     const selectedRows = this.gridApi.getSelectedRows();

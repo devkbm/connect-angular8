@@ -148,4 +148,15 @@ export class LedgerService extends DataService {
     );
   }
 
+  apponitProcess(ledgerId: string, listId: string): Observable<string>  {
+    const url = `${this.API_URL}/ledger/${ledgerId}/list/${listId}/appoint`;
+    const options = {
+      headers: this.getAuthorizedHttpHeaders(),
+      withCredentials: true
+    };
+    return this.http.post<string>(url, null, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
 }
