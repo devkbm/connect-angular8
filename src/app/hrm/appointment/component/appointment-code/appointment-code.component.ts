@@ -29,6 +29,9 @@ export class AppointmentCodeComponent extends AppBase implements OnInit {
    */
   drawerVisibleCodeDetail = false;
 
+  /**
+   * 발령대장 그리드에서 선택된 발령코드
+   */
   selectedCode = '';
 
   constructor(location: Location) { 
@@ -44,10 +47,8 @@ export class AppointmentCodeComponent extends AppBase implements OnInit {
     this.drawerVisibleCode = true;    
   }
 
-  public openDrawerCodeDetail(item): void {
-    console.log(item);
-    this.formCodeDetail.getForm(item.code, item.changeType, item.changeTypeDetail);
-    this.drawerVisibleCodeDetail = true;
+  public closeDrawerCode(): void {
+    this.drawerVisibleCode = false;
   }
 
   public gridCodeRefresh(): void {
@@ -55,22 +56,34 @@ export class AppointmentCodeComponent extends AppBase implements OnInit {
     this.closeDrawerCode();
   }
 
-  public gridCodeDetailRefresh(): void {
-    this.gridDetail.getGridList(this.selectedCode,null);
-    this.closeDrawerCodeDetail();
-  }
-
   public gridCodeRowSelected(p): void {
     this.selectedCode = p.code;
     this.gridCodeDetailRefresh();
   }
 
-  public closeDrawerCode(): void {
-    this.drawerVisibleCode = false;
+  public newCodeForm(): void {
+    this.drawerVisibleCode = true;
+    this.formCode.newForm();    
+  }
+
+  public openDrawerCodeDetail(item): void {
+    console.log(item);
+    this.formCodeDetail.getForm(item.code, item.changeType, item.changeTypeDetail);
+    this.drawerVisibleCodeDetail = true;
   }
 
   public closeDrawerCodeDetail(): void {
     this.drawerVisibleCodeDetail = false;
+  }
+
+  public gridCodeDetailRefresh(): void {
+    this.gridDetail.getGridList(this.selectedCode,null);
+    this.closeDrawerCodeDetail();
+  }  
+
+  public newCodeDetailForm(): void {
+    this.formCodeDetail.newForm();
+    this.drawerVisibleCodeDetail = true;
   }
   
 }

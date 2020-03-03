@@ -37,6 +37,7 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
     this.formType = FormType.NEW;
 
     this.fg = this.fb.group({      
+      detailId          : [ null],
       code              : [ null, [ Validators.required ] ],
       changeType        : [ null, [ Validators.required ] ],
       changeTypeDetail  : [ null],
@@ -48,6 +49,7 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
     this.formType = FormType.MODIFY;
 
     this.fg = this.fb.group({      
+      detailId          : [ null],
       code              : [ null, [ Validators.required ] ],
       changeType        : [ null, [ Validators.required ] ],
       changeTypeDetail  : [ null],
@@ -114,7 +116,7 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
 
   public deleteForm(): void {
     this.appointmentCodeService
-        .deleteAppointmentCodeDetail(this.fg.get('code').value)
+        .deleteAppointmentCodeDetail(this.fg.get('code').value, this.fg.get('detailId').value)
         .subscribe(
             (model: ResponseObject<AppointmentCodeDetail>) => {
             this.appAlarmService.changeMessage(model.message);

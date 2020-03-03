@@ -118,8 +118,8 @@ export class AppointmentCodeService extends DataService {
     );
   }
 
-  deleteAppointmentCodeDetail(id: string): Observable<ResponseObject<AppointmentCodeDetail>> {
-    const url = `${this.API_URL}/appointmentcodedetail/${id}`;
+  deleteAppointmentCodeDetail(id: string, detailId: string): Observable<ResponseObject<AppointmentCodeDetail>> {
+    const url = `${this.API_URL}/appointmentcodedetail/${id}/${detailId}`;
     const options = {
       headers: this.getAuthorizedHttpHeaders(),
       withCredentials: true
