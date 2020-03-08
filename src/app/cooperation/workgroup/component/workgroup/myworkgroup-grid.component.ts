@@ -49,7 +49,8 @@ export class MyWorkGroupGridComponent extends AggridFunction implements OnInit {
           headerName: 'Id',
           field: 'id',
           width: 40,
-          suppressSizeToFit: true          
+          suppressSizeToFit: true,
+          hide: true
       },
       {
         headerName: '작업그룹명',

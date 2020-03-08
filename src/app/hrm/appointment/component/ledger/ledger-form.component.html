@@ -1,32 +1,38 @@
 {{fg.value | json}}
-<form nz-form [formGroup]="fg">    
+<form nz-form [formGroup]="fg" nzLayout="vertical">    
 
-    <!--발령번호 필드 (생성)-->
-    <nz-form-item class="form-item" *ngIf="formType == 'NEW'">
-        <nz-form-label nzFor="ledgerId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="ledgerId" formControlName="ledgerId" placeholder="발령코드를 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(fg,'ledgerId','required')">The input is Required!</nz-form-explain>
-        </nz-form-control>
-    </nz-form-item>
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="12">
+            <!--발령번호 필드 (생성)-->
+            <nz-form-item class="form-item" *ngIf="formType == 'NEW'">
+                <nz-form-label nzFor="ledgerId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="ledgerId" formControlName="ledgerId" placeholder="발령코드를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'ledgerId','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
 
-    <!--발령번호 필드 (수정)-->
-    <nz-form-item class="form-item" *ngIf="formType == 'MODIFY'">
-        <nz-form-label nzFor="ledgerId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="ledgerId" formControlName="ledgerId" placeholder="발령코드를 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(fg,'ledgerId','required')">The input is Required!</nz-form-explain>
-        </nz-form-control>
-    </nz-form-item>
-        
-    <!--발령유형 필드-->
-    <nz-form-item class="form-item">
-      <nz-form-label nzFor="appointmentType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">변경코드</nz-form-label>
-      <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <input nz-input id="appointmentType" formControlName="appointmentType" placeholder="변경코드를 입력해주세요.">
-          <nz-form-explain *ngIf="isFieldErrors(fg,'appointmentType','required')">The input is Required!</nz-form-explain>
-      </nz-form-control>
-    </nz-form-item>
+            <!--발령번호 필드 (수정)-->
+            <nz-form-item class="form-item" *ngIf="formType == 'MODIFY'">
+                <nz-form-label nzFor="ledgerId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="ledgerId" formControlName="ledgerId" placeholder="발령코드를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'ledgerId','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+
+        <div nz-col nzSpan="12">
+            <!--발령유형 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label nzFor="appointmentType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">변경코드</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="appointmentType" formControlName="appointmentType" placeholder="변경코드를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'appointmentType','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>                
 
     <!--시작일 필드-->
     <nz-form-item class="form-item">

@@ -82,6 +82,18 @@ export class AppointmentCodeService extends DataService {
     );
   }
 
+  getTypeCodeList(type: string): Observable<ResponseList<any>> {
+    const url = `${this.API_URL}/codelist/${type}`;
+    const options = {
+        headers: this.getAuthorizedHttpHeaders(),
+        withCredentials: true
+     };
+
+    return this.http.get<ResponseList<any>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
+
   getAppointmentCodeDetailList(params?: any): Observable<ResponseList<AppointmentCodeDetail>> {
     const url = `${this.API_URL}/appointmentcodedetail`;
     const options = {

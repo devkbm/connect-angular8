@@ -82,7 +82,7 @@ export class AppointmentCodeComponent extends AppBase implements OnInit {
   }  
 
   public newCodeDetailForm(): void {
-    this.formCodeDetail.newForm();
+    this.formCodeDetail.newForm(this.selectedCode);
     this.drawerVisibleCodeDetail = true;
   }
   

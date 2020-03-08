@@ -50,16 +50,16 @@ export class CommonCodeFormComponent extends FormBase implements OnInit {
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
-    this.newForm();
+    this.newForm(null);
     this.getCommonCodeHierarchy();
   }
 
-  public newForm(): void {
+  public newForm(parentId): void {
     this.formType = FormType.NEW;
 
     this.codeForm = this.fb.group({
       id                      : [ null ],
-      parentId                : [ null ],
+      parentId                : [ parentId ],
       code                    : [ null, [ Validators.required ] ],
       codeName                : [ null, [ Validators.required ] ],
       codeNameAbbreviation    : [ null ],
@@ -102,7 +102,7 @@ export class CommonCodeFormComponent extends FormBase implements OnInit {
               if ( model.total > 0 ) {
                 this.modifyForm(model.data);
               } else {
-                this.newForm();
+                this.newForm(null);
               }
               this.appAlarmService.changeMessage(model.message);
             },

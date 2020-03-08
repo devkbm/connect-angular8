@@ -14,6 +14,7 @@ export class CommonCodeComponent extends AppBase implements OnInit {
 
     queryKey = 'programCode';
     queryValue = '';
+    selectedCode;
 
     @ViewChild('commonCodeTree', {static: true})
     tree: CommonCodeTreeComponent;
@@ -31,10 +32,11 @@ export class CommonCodeComponent extends AppBase implements OnInit {
 
     public getCommonCodeTree(): void {
         this.tree.getCommonCodeHierarchy();
+        this.form.getCommonCodeHierarchy();
     }
 
-    public initForm(): void {
-        this.form.newForm();
+    public newForm(): void {
+        this.form.newForm(this.selectedCode);
     }
 
     public saveCommonCode(): void {
@@ -46,6 +48,7 @@ export class CommonCodeComponent extends AppBase implements OnInit {
     }
 
     public selectedItem(item): void {
+        this.selectedCode = item.id;
         this.form.getCommonCode(item.id);
     }
 

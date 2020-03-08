@@ -26,15 +26,15 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
 
   fg: FormGroup;
 
-  formControlXs = 4;
-  formLabelXs = 4;
-  formControlSm = 4;
-  formLabelSm = 4;
+  formControlXs = 24;
+  formLabelXs = 24;
+  formControlSm = 24;
+  formLabelSm = 24;
 
-  detailFormLabelXs = 4;
-  detailFormControlXs = 20;
-  detailFormLabelSm = 3;
-  detailFormControlSm = 21;
+  detailFormLabelXs = 24;
+  detailFormControlXs = 24;
+  detailFormLabelSm = 24;
+  detailFormControlSm = 24;
 
   appointmentCodeList;
 

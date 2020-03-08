@@ -24,21 +24,23 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
 
   changeTypeList: any[];
 
+  changeCodeList: any[];
+
   constructor(private fb:FormBuilder,
               private appointmentCodeService: AppointmentCodeService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
     this.getTypeList();
-    this.newForm();
+    this.newForm(null);
   }  
 
-  public newForm(): void {
+  public newForm(appointmentCode: string): void {
     this.formType = FormType.NEW;
 
     this.fg = this.fb.group({      
       detailId          : [ null],
-      code              : [ null, [ Validators.required ] ],
+      code              : new FormControl({value: appointmentCode, disabled: true}, {validators: Validators.required}),      
       changeType        : [ null, [ Validators.required ] ],
       changeTypeDetail  : [ null],
       sequence          : [ null]
@@ -50,7 +52,7 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
 
     this.fg = this.fb.group({      
       detailId          : [ null],
-      code              : [ null, [ Validators.required ] ],
+      code              : new FormControl({value: formData.code, disabled: true}, {validators: Validators.required}),      
       changeType        : [ null, [ Validators.required ] ],
       changeTypeDetail  : [ null],
       sequence          : [ null]
@@ -66,7 +68,26 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
           (model: ResponseList<any>) => {
             if ( model.total > 0 ) {              
               this.changeTypeList = model.data;
-            } 
+            }             
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {}
+      );
+  }
+
+  public getTypeCodeList(type: string): void {
+    this.appointmentCodeService
+        .getTypeCodeList(type)
+        .subscribe(
+          (model: ResponseList<any>) => {
+            if ( model.total > 0 ) {              
+              this.changeCodeList = model.data;
+            } else {
+              this.changeCodeList = [];              
+            }
+            this.fg.get('changeTypeDetail').setValue(null);
           },
           (err) => {
             console.log(err);
@@ -88,7 +109,7 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
               console.log(model.data);
               this.modifyForm(model.data);
             } else {
-              this.newForm();
+              this.newForm(null);
             }
             this.appAlarmService.changeMessage(model.message);
           },
@@ -131,6 +152,11 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
 
   public closeForm() {
     this.formClosed.emit(this.fg.getRawValue());
+  }
+
+  public onSelectionChanged(p) {
+    console.log(p);
+    this.getTypeCodeList(p);
   }
 
 }

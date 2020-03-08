@@ -28,8 +28,8 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
     formLabelXs = 24;
     formControlXs = 24;
 
-    formLabelSm = 3;
-    formControlSm = 21;
+    formLabelSm = 24;
+    formControlSm = 24;
 
     form: FormGroup;
     workGroupList;
@@ -56,8 +56,10 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
             start           : [ new Date(), [ Validators.required ] ],
             end             : [ new Date(), [ Validators.required ] ],
             allDay          : [ null, [ Validators.required ] ],
-            workGroupId     : [ workGroupId, [ Validators.required ] ]
+            workGroupId     : [ Number.parseInt(workGroupId,10), [ Validators.required ] ]
         });     
+
+        
     }
 
     public modifyForm(formData: WorkGroupSchedule): void {
