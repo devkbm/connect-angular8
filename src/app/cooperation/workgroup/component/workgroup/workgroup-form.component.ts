@@ -20,7 +20,7 @@ styleUrls: ['./workgroup-form.component.css']
 })
 export class WorkGroupFormComponent extends FormBase implements OnInit {
 
-    form: FormGroup;
+    fg: FormGroup;
 
     /**
      * Xs < 576px span size
@@ -50,7 +50,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
     public newForm(): void {
         this.formType = FormType.NEW;
 
-        this.form = this.fb.group({
+        this.fg = this.fb.group({
             workGroupId     : new FormControl({value: null, disabled: true}),
             workGroupName   : [ null, [ Validators.required ] ],
             color           : [ null, [ Validators.required ] ],
@@ -61,7 +61,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
     public modifyForm(formData: WorkGroup): void {
         this.formType = FormType.MODIFY;
 
-        this.form = this.fb.group({
+        this.fg = this.fb.group({
             workGroupId     : new FormControl({value: null, disabled: true}),
             workGroupName   : [ null, [ Validators.required ] ],
             color           : [ null, [ Validators.required ] ],
@@ -69,7 +69,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
         });
         this.color = formData.color;
                 
-        this.form.patchValue(formData);
+        this.fg.patchValue(formData);
     }
 
     public getWorkGroup(id: number): void {
@@ -89,10 +89,10 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
 
     public saveWorkGroup(): void {
         this.workGroupService
-        .saveWorkGroup(this.form.getRawValue())
+        .saveWorkGroup(this.fg.getRawValue())
         .subscribe(
             (model: ResponseObject<WorkGroup>) => {
-            this.formSaved.emit(this.form.getRawValue());
+            this.formSaved.emit(this.fg.getRawValue());
             },
             (err) => {
             console.log(err);
@@ -107,7 +107,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
         this.workGroupService.deleteWorkGroup(id)
         .subscribe(
             (model: ResponseObject<WorkGroup>) => {
-                this.formDeleted.emit(this.form.getRawValue());
+                this.formDeleted.emit(this.fg.getRawValue());
             },
             (err) => {},
             () => {}
@@ -115,7 +115,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
     }
 
     public closeForm() {
-        this.formClosed.emit(this.form.getRawValue());
+        this.formClosed.emit(this.fg.getRawValue());
     }
 
     public getAllMember(): void {
@@ -136,7 +136,7 @@ export class WorkGroupFormComponent extends FormBase implements OnInit {
     public selectColor(color) {
         console.log(color);
 
-        this.form.get('color').setValue(color);
+        this.fg.get('color').setValue(color);
     }
 
     //#endregion

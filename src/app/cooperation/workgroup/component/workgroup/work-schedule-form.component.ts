@@ -57,8 +57,7 @@ export class WorkScheduleFormComponent extends FormBase implements OnInit {
             end             : [ new Date(), [ Validators.required ] ],
             allDay          : [ null, [ Validators.required ] ],
             workGroupId     : [ workGroupId, [ Validators.required ] ]
-        });
-
+        });     
     }
 
     public modifyForm(formData: WorkGroupSchedule): void {

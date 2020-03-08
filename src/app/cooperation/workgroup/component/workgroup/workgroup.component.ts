@@ -83,6 +83,7 @@ export class WorkgroupComponent implements OnInit {
 
   public newSchedule2(param): void {
     console.log(param);
+    console.log(param.fkWorkGroup);
     this.workScheduleForm.newForm(param.fkWorkGroup);
     this.workScheduleForm.form.get('start').setValue(param.date);
     this.workScheduleForm.form.get('end').setValue(param.date);
