@@ -22,7 +22,7 @@
     </button>    
 </div>
 
-<form nz-form [formGroup]="form" [nzLayout]="'vertical'">
+<form nz-form [formGroup]="form" nzLayout="vertical">
     <!--
     <nz-form-item>
         <nz-form-label nzFor="workGroupId" [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 Id</nz-form-label>
@@ -32,56 +32,68 @@
     </nz-form-item>
     -->
 
-    <!--작업그룹ID 필드-->
-    <nz-form-item>
-        <nz-form-label nzFor="workGroupId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 ID</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-select
-                id="workGroupId"
-                formControlName="workGroupId"
-                nzShowSearch="true"                
-                [nzSize]="'default'"
-                nzPlaceHolder="Please select">
-                <nz-option
-                    *ngFor="let item of workGroupList"
-                    [nzLabel]="item.name"
-                    [nzValue]="item.id">
-                </nz-option>
-            </nz-select>             
-        </nz-form-control>
-    </nz-form-item>
-    
-    <!--스케쥴ID 필드-->
-    <nz-form-item>
-        <nz-form-label nzFor="id" [nzXs]="formLabelXs" [nzSm]="formLabelSm">스케쥴 Id</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="id" formControlName="id">
-        </nz-form-control>        
-    </nz-form-item>
-    
-    <!--시작일 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label nzFor="start" [nzXs]="formLabelXs" [nzSm]="formLabelSm">기간</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker formControlName="start" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
-            <nz-time-picker formControlName="start" style="width: 105px"></nz-time-picker> ~
-            <nz-date-picker formControlName="end" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker> 
-            <nz-time-picker formControlName="end" style="width: 105px"></nz-time-picker>           
-        </nz-form-control>
-    </nz-form-item>    
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="12">
+            <!--작업그룹ID 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="workGroupId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">작업그룹 ID</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-select
+                        id="workGroupId"
+                        formControlName="workGroupId"
+                        nzShowSearch="true"                
+                        [nzSize]="'default'"
+                        nzPlaceHolder="Please select">
+                        <nz-option
+                            *ngFor="let item of workGroupList"
+                            [nzLabel]="item.name"
+                            [nzValue]="item.id">
+                        </nz-option>
+                    </nz-select>             
+                </nz-form-control>
+            </nz-form-item>
+        </div>
 
-    <!--하루종일 필드-->
-    <nz-form-item>
-        <nz-form-label 
-            nzFor="allDay"    
-            [nzXs]="formLabelXs"
-            [nzSm]="formLabelSm">하루종일
-        </nz-form-label>
+        <div nz-col nzSpan="12">
+            <!--스케쥴ID 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="id" [nzXs]="formLabelXs" [nzSm]="formLabelSm">스케쥴 Id</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="id" formControlName="id">
+                </nz-form-control>        
+            </nz-form-item>
+        </div>
 
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <label id="allDay" nz-checkbox formControlName="allDay"></label>
-        </nz-form-control>
-    </nz-form-item>
+    </div>
+    
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="22">
+            <!--시작일 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label nzFor="start" [nzXs]="formLabelXs" [nzSm]="formLabelSm">기간</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-date-picker formControlName="start" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
+                    <nz-time-picker formControlName="start" style="width: 105px"></nz-time-picker> ~
+                    <nz-date-picker formControlName="end" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker> 
+                    <nz-time-picker formControlName="end" style="width: 105px"></nz-time-picker>           
+                </nz-form-control>
+            </nz-form-item>            
+        </div>
+        <div nz-col nzSpan="2">
+            <!--하루종일 필드-->
+            <nz-form-item>
+                <nz-form-label 
+                    nzFor="allDay"    
+                    [nzXs]="formLabelXs"
+                    [nzSm]="formLabelSm">하루종일
+                </nz-form-label>
+
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <label id="allDay" nz-checkbox formControlName="allDay"></label>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>                    
 
     <!--제목 필드-->
     <nz-form-item>

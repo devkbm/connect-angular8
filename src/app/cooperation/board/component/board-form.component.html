@@ -26,69 +26,84 @@
     </button>
 </div>
 
-<form nz-form [formGroup]="boardForm">
+<form nz-form [formGroup]="boardForm" nzLayout="vertical">
 
-    <!--상위 게시판 필드-->
-    <nz-form-item>
-        <nz-form-label nzFor="ppkBoard" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">상위 게시판</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-tree-select
-                id="ppkBoard"
-                [nzNodes]="parentBoardItems"
-                [nzAllowClear]="true"
-                [nzPlaceHolder]="'상위 게시판 없음'"    
-                formControlName="ppkBoard">
-            </nz-tree-select>
-        </nz-form-control>
-    </nz-form-item>
-
-    <!--게시판명 필드-->
-    <nz-form-item>
-        <nz-form-label nzFor="boardName" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">게시판 명</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <input nz-input id="boardName" formControlName="boardName" placeholder="게시판명을 입력해주세요.">
-            <nz-form-explain *ngIf="isFieldErrors(boardForm,'boardName','required')">The input is Required!</nz-form-explain>
-        </nz-form-control>
-    </nz-form-item>
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="12">
+            <!--상위 게시판 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="ppkBoard" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">상위 게시판</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-tree-select
+                        id="ppkBoard"
+                        [nzNodes]="parentBoardItems"
+                        [nzAllowClear]="true"
+                        [nzPlaceHolder]="'상위 게시판 없음'"    
+                        formControlName="ppkBoard">
+                    </nz-tree-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col nzSpan="12">
+            <!--게시판타입 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="boardType" [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+                    게시판 타입
+                </nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-select
+                        id="boardType"
+                        formControlName="boardType"
+                        [nzSize]="'default'"
+                        nzShowSearch
+                        nzAllowClear
+                        nzPlaceHolder="메뉴타입을 선택해주세요.">
+                            <nz-option
+                                *ngFor="let option of boardTypeList"
+                                [nzLabel]="option.name"
+                                [nzValue]="option.code">
+                            </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>    
  
-    <!--게시판타입 필드-->
-    <nz-form-item>
-      <nz-form-label nzFor="boardType" [nzXs]="formLabelXs" [nzSm]="formLabelSm">
-          게시판 타입
-      </nz-form-label>
-      <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <nz-select
-              id="boardType"
-              formControlName="boardType"
-              [nzSize]="'default'"
-              nzShowSearch
-              nzAllowClear
-              nzPlaceHolder="메뉴타입을 선택해주세요.">
-                  <nz-option
-                      *ngFor="let option of boardTypeList"
-                      [nzLabel]="option.name"
-                      [nzValue]="option.code">
-                  </nz-option>
-          </nz-select>
-      </nz-form-control>
-    </nz-form-item>
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="24">
+            <!--게시판명 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="boardName" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">게시판 명</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="boardName" formControlName="boardName" placeholder="게시판명을 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(boardForm,'boardName','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>            
+        </div>
+    </div>
+    
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="12">
+            <!--시작일자 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="fromDate" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일자</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-date-picker formControlName="fromDate"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>            
+        </div>
 
-    <!--시작일자 필드-->
-    <nz-form-item>
-        <nz-form-label nzFor="fromDate" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일자</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker formControlName="fromDate"></nz-date-picker>
-        </nz-form-control>
-    </nz-form-item>
-
-    <!--종료일자 필드-->
-    <nz-form-item>
-        <nz-form-label nzFor="toDate" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일자</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker formControlName="toDate"></nz-date-picker>
-        </nz-form-control>
-    </nz-form-item>
-
+        <div nz-col nzSpan="12">
+            <!--종료일자 필드-->
+            <nz-form-item>
+                <nz-form-label nzFor="toDate" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일자</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-date-picker formControlName="toDate"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    
     <!--게시판설명 필드-->
     <nz-form-item>
         <nz-form-label nzFor="boardDescription" [nzXs]="formLabelXs" [nzSm]="formLabelSm">게시판 설명</nz-form-label>
