@@ -193,7 +193,7 @@ export class ArticleFormComponent extends FormBase implements OnInit {
 
   //#region private method
 
-  private saveBoard(): void {
+  public saveArticle(): void {
 
     const attachFileIdList = [];
 

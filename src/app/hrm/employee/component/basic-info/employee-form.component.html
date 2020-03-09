@@ -3,35 +3,37 @@
 <!--{{fileList | json}}-->
 <form nz-form [formGroup]="fg" nzLayout="vertical">        
 
-    <div class="container">
-        <div class="img">
-            <nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='96' [nzSrc]="imageUrl"></nz-avatar>    
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="2">
+            <div class="img">
+                <nz-avatar class="avatar" [nzShape]="'square'" [nzSize]='96' [nzSrc]="imageUrl"></nz-avatar>    
+            </div>
         </div>
-        <div>            
-          <!--아이디 필드(생성)-->
-          <nz-form-item *ngIf="this.formType == 'NEW'">
-              <nz-form-label nzFor="id" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">
-                  아이디
-              </nz-form-label>
-              <nz-form-control nzHasFeedback [nzXs]="formControlXs" [nzSm]="formControlSm">
-                  <input nz-input id="id" formControlName="id" placeholder="아이디를 입력해주세요.">
-                  <nz-form-explain *ngIf="isFieldErrors(fg,'id','required')">The input is Required!</nz-form-explain>                  
-              </nz-form-control>        
-          </nz-form-item>
+        <div nz-col nzSpan="2">
+            <!--아이디 필드(생성)-->
+            <nz-form-item *ngIf="this.formType == 'NEW'">
+                <nz-form-label nzFor="id" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+                    아이디
+                </nz-form-label>
+                <nz-form-control nzHasFeedback [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="id" formControlName="id" placeholder="아이디를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'id','required')">The input is Required!</nz-form-explain>                  
+                </nz-form-control>        
+            </nz-form-item>
 
-          <!--아이디 필드(수정)-->
-          <nz-form-item *ngIf="this.formType == 'MODIFY'">
-              <nz-form-label nzFor="id" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">
-                  아이디
-              </nz-form-label>
-              <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                  <input nz-input id="id" formControlName="id" placeholder="아이디를 입력해주세요.">
-                  <nz-form-explain *ngIf="isFieldErrors(fg,'id','required')">The input is Required!</nz-form-explain>            
-              </nz-form-control>        
-          </nz-form-item>
+            <!--아이디 필드(수정)-->
+            <nz-form-item *ngIf="this.formType == 'MODIFY'">
+                <nz-form-label nzFor="id" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+                    아이디
+                </nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="id" formControlName="id" placeholder="아이디를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'id','required')">The input is Required!</nz-form-explain>            
+                </nz-form-control>        
+            </nz-form-item>
         </div>
 
-        <div>
+        <div nz-col nzSpan="2">
             <!--이름 필드-->
             <nz-form-item>
                 <nz-form-label 
@@ -48,7 +50,8 @@
                 </nz-form-control>
             </nz-form-item>
         </div>
-        <div class="nameEng-field">
+
+        <div nz-col nzSpan="2">
             <!--이름(영문) 필드-->
             <nz-form-item>
                 <nz-form-label 
@@ -64,8 +67,8 @@
             </nz-form-item>
         </div>
 
-        <!--이름(한문) 필드-->
-        <div class="nameChi-field">            
+        <div nz-col nzSpan="2">
+            <!--이름(한문) 필드-->                    
             <nz-form-item>
                 <nz-form-label 
                     nzFor="nameChi"             
@@ -80,8 +83,37 @@
             </nz-form-item>
         </div>
 
-        <!--주민등록번호 필드-->
-        <div class="residentRegistrationNumber-field">
+        <div nz-col nzSpan="3">
+            <!--성별 필드-->
+            <nz-form-item>
+                <nz-form-label 
+                    nzFor="gender"             
+                    [nzXs]="formLabelXs" [nzSm]="formLabelSm">
+                    성별
+                </nz-form-label>
+                <nz-radio-group id="gender" formControlName="gender">
+                    <label nz-radio nzValue="M">Male</label>
+                    <label nz-radio nzValue="F">Female</label>        
+                </nz-radio-group>
+            </nz-form-item>
+        </div>
+    </div>
+
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="2">
+            <nz-upload 
+                nzAction="http://localhost:8090/hrm/employee/changeimage"
+                nzWithCredentials="true"    
+                (nzChange)="handleChange($event)"        
+                [nzShowUploadList]="false"    
+                [nzData]="imageUploadParam">
+                <button nz-button nzType="default" nzShape="round"><i nz-icon nzType="upload"></i></button>
+            </nz-upload>
+            <button nz-button nzType="default" nzShape="round"><i nz-icon nzType="download"></i></button>
+        </div>
+        
+        <div nz-col nzSpan="4" nzOffset="2">
+            <!--주민등록번호 필드-->
             <nz-form-item>
                 <nz-form-label 
                     nzFor="residentRegistrationNumber" 
@@ -96,23 +128,15 @@
                 </nz-form-control>
             </nz-form-item>
         </div>
-        
-        <!--생년월일 필드-->
-        <div>
+
+        <div nz-col nzSpan="4">
+            <!--생년월일 필드-->            
             <nz-form-item class="form-item">
                 <nz-form-label nzFor="birthday" [nzXs]="formLabelXs" [nzSm]="formLabelSm">생년월일</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
                     <nz-date-picker id="birthday" formControlName="birthday" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>            
                 </nz-form-control>
             </nz-form-item>
-        </div>
-
-        <!--성별 필드-->
-        <div>
-            <nz-radio-group formControlName="gender">
-                <label nz-radio nzValue="M">Male</label>
-                <label nz-radio nzValue="F">Female</label>        
-            </nz-radio-group>
         </div>
     </div>
                                 

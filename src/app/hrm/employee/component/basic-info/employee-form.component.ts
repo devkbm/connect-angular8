@@ -14,6 +14,7 @@ import { Employee } from '../../model/employee';
 import { ResponseList } from 'src/app/common/model/response-list';
 import { NewEmployee } from '../../model/new-employee';
 import { GlobalProperty } from 'src/app/global-property';
+import { UploadFile } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-employee-form',
@@ -25,6 +26,7 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
   fg: FormGroup;  
   formModel: Employee;  
   imageUrl;
+  imageUploadParam;
 
   constructor(private fb:FormBuilder,
               private employeeService: EmployeeService,
@@ -81,6 +83,8 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
           (model: ResponseObject<Employee>) => {
             if ( model.total > 0 ) {                            
               this.modifyForm(model.data);
+
+              this.imageUploadParam = {employeeId: model.data.id};
             } else {
               this.newForm();
             }
@@ -144,6 +148,29 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
 
   public closeForm() {
     this.formClosed.emit(this.fg.getRawValue());
+  }
+
+  handleChange(info: { file: UploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        //this.loading = true;
+        break;
+      case 'done':        
+        console.log('image upload done');
+        this.getForm(this.fg.get('id').value);
+        // Get this url from response in real world.
+        /*
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          this.avatarUrl = img;
+        });*/
+
+        break;
+      case 'error':
+        //this.msg.error('Network error');
+        //this.loading = false;
+        break;
+    }
   }
 
 }
