@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpXsrfTokenExtractor } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpXsrfTokenExtractor } from '@angular/common/http';
+
 
 import { Observable } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
@@ -82,5 +83,20 @@ export class EmployeeService extends DataService {
     );
   }
 
+  downloadEmployeeImage(employeeId: string): Observable<Blob> {
+    const url = `${this.API_URL}/employee/downloadimage`;
+    const obj:any = {employeeId: employeeId};
+    
+    const options = {
+      headers: new HttpHeaders().set('X-Auth-Token', sessionStorage.getItem('token')),
+      responseType: 'blob' as 'json',
+      withCredentials: true,
+      params: obj      
+    };
+
+    return this.http.get<Blob>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
+  }
   
 }

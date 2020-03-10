@@ -109,7 +109,7 @@
                 [nzData]="imageUploadParam">
                 <button nz-button nzType="default" nzShape="round"><i nz-icon nzType="upload"></i></button>
             </nz-upload>
-            <button nz-button nzType="default" nzShape="round"><i nz-icon nzType="download"></i></button>
+            <button nz-button nzType="default" nzShape="round" (click)="downloadImage($event)"><i nz-icon nzType="download"></i></button>
         </div>
         
         <div nz-col nzSpan="4" nzOffset="2">

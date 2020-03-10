@@ -15,6 +15,8 @@ import { ResponseList } from 'src/app/common/model/response-list';
 import { NewEmployee } from '../../model/new-employee';
 import { GlobalProperty } from 'src/app/global-property';
 import { UploadFile } from 'ng-zorro-antd';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-employee-form',
@@ -173,4 +175,22 @@ export class EmployeeFormComponent extends FormBase implements OnInit {
     }
   }
 
+  public downloadImage(): void {
+
+    this.employeeService
+        .downloadEmployeeImage(this.fg.get('id').value)        
+        .subscribe(
+          (model: Blob) => {
+            //this.appAlarmService.changeMessage(model.message);                                          
+            const blob = new Blob([model], { type: 'application/octet-stream' });            
+            saveAs(blob, this.fg.get('id').value+".jpg");            
+
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {}
+        );    
+  }
+  
 }
