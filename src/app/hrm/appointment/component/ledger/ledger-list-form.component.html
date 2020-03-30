@@ -5,31 +5,22 @@
         <div nz-col nzSpan="12">
             <!--발령번호 필드-->
             <nz-form-item class="form-item">
-                <nz-form-label nzFor="ledgerId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령번호</nz-form-label>
+                <nz-form-label nzFor="list_ledgerId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령번호</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="ledgerId" formControlName="ledgerId" placeholder="발령번호를 입력해주세요.">
+                    <input nz-input id="list_ledgerId" formControlName="ledgerId" placeholder="발령번호를 입력해주세요.">
                     <nz-form-explain *ngIf="isFieldErrors(fg,'ledgerId','required')">The input is Required!</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
         <div nz-col nzSpan="12">
             <!--발령명단식별자 필드 (생성)-->
-            <nz-form-item class="form-item" *ngIf="formType == 'NEW'">
-                <nz-form-label nzFor="listId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령명단식별자</nz-form-label>
+            <nz-form-item class="form-item">
+                <nz-form-label nzFor="list_listId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령명단식별자</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="listId" formControlName="listId" placeholder="발령명단식별자를 입력해주세요.">
+                    <input nz-input id="list_listId" formControlName="listId" placeholder="발령명단식별자를 입력해주세요.">
                     <nz-form-explain *ngIf="isFieldErrors(fg,'listId','required')">The input is Required!</nz-form-explain>
                 </nz-form-control>
-            </nz-form-item>
-
-            <!--발령명단식별자 필드 (수정)-->
-            <nz-form-item class="form-item" *ngIf="formType == 'MODIFY'">
-                <nz-form-label nzFor="listId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령명단식별자</nz-form-label>
-                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="listId" formControlName="listId" placeholder="발령명단식별자를 입력해주세요.">
-                    <nz-form-explain *ngIf="isFieldErrors(fg,'listId','required')">The input is Required!</nz-form-explain>
-                </nz-form-control>
-            </nz-form-item>
+            </nz-form-item>            
         </div>
     </div>
     
@@ -37,21 +28,41 @@
         <div nz-col nzSpan="12">
             <!--순번 필드-->
             <nz-form-item class="form-item">
-                <nz-form-label nzFor="sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">순번</nz-form-label>
+                <nz-form-label nzFor="list_sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">순번</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <nz-input-number nzId="sequence" formControlName="sequence" placeholder="순번을 입력해주세요."></nz-input-number>
+                    <nz-input-number nzId="list_sequence" formControlName="sequence" placeholder="순번을 입력해주세요."></nz-input-number>
                 </nz-form-control>
             </nz-form-item>
         </div>
         <div nz-col nzSpan="12">
             <!--사번 필드-->
+            <!--
             <nz-form-item class="form-item">
-                <nz-form-label nzFor="empId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">사번</nz-form-label>
+                <nz-form-label nzFor="list_empId" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">사번</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="empId" formControlName="empId" placeholder="사번을 입력해주세요.">
+                    <input nz-input id="list_empId" formControlName="empId" placeholder="사번을 입력해주세요.">
                     <nz-form-explain *ngIf="isFieldErrors(fg,'empId','required')">The input is Required!</nz-form-explain>
                 </nz-form-control>
-            </nz-form-item>            
+            </nz-form-item>       
+            -->
+
+            <!--사번 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">사번</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">          
+                    <nz-select                
+                        formControlName="empId"
+                        nzShowSearch
+                        [nzSize]="'default'"
+                        nzPlaceHolder="Please select">
+                        <nz-option
+                            *ngFor="let option of employeeList"
+                            [nzLabel]="option.name"
+                            [nzValue]="option.id">
+                        </nz-option>
+                    </nz-select>    
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
         
@@ -110,18 +121,18 @@
                 <div nz-col nzSpan="8">
                     <!--유형 필드-->                
                     <nz-form-item class="form-item">
-                        <nz-form-label nzFor="changeType" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">유형</nz-form-label>
+                        <nz-form-label [nzFor]="'changeType'+i" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">인사 유형</nz-form-label>
                         <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="detailFormControlSm">
-                            <input nz-input id="changeType" formControlName="changeType" placeholder="유형을 입력해주세요.">
+                            <input nz-input [attr.id]="'changeType'+i" formControlName="changeType" placeholder="인사 유형을 입력해주세요.">
                         </nz-form-control>
                     </nz-form-item>
                 </div>
                 <div nz-col nzSpan="8">
                     <!--유형상세 필드-->
                     <nz-form-item class="form-item">
-                        <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">유형 상세</nz-form-label>
+                        <nz-form-label [nzFor]="'changeTypeDetail'+i" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">인사 유형 코드</nz-form-label>
                         <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="detailFormControlSm">
-                            <input nz-input formControlName="changeTypeDetail" placeholder="유형 상세를 입력해주세요."/>
+                            <input nz-input [attr.id]="'changeTypeDetail'+i" formControlName="changeTypeDetail" placeholder="인사유형 코드를 입력해주세요."/>
                         </nz-form-control>
                     </nz-form-item>
                 </div>

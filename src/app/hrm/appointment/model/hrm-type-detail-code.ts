@@ -1,5 +1,6 @@
-export class JobType {    
+export class HrmTypeDetailCode {    
     id: string;
+    typeId: string;
     code: string;
     codeName: string;    
     useYn: boolean;

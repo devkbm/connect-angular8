@@ -1,30 +1,48 @@
 {{fg.value | json}}
 <form nz-form [formGroup]="fg" nzLayout="vertical">    
 
+    <!-- 식별자 필드-->
+    <!--
+    <nz-form-item class="form-item">
+        <nz-form-label nzFor="id" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">식별자</nz-form-label>
+        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+            <input nz-input id="id" formControlName="id">            
+        </nz-form-control>
+      </nz-form-item>
+    -->
+
     <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-            <!--발령코드 필드-->
+            <!--인사유형 필드-->
             <nz-form-item class="form-item">
-                <nz-form-label nzFor="code" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
+                <nz-form-label nzFor="hrmType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">인사유형</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="code" formControlName="code" placeholder="발령코드를 입력해주세요.">
-                    <nz-form-explain *ngIf="isFieldErrors(fg,'code','required')">The input is Required!</nz-form-explain>
-                </nz-form-control>
-            </nz-form-item>            
-        </div>
-
-        <div nz-col nzSpan="12">
-            <!--발령명(한글) 필드-->
-            <nz-form-item class="form-item">
-                <nz-form-label nzFor="codeName" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령명</nz-form-label>
-                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="codeName" formControlName="codeName" placeholder="발령명(한글)을 입력해주세요.">
-                    <nz-form-explain *ngIf="isFieldErrors(fg,'codeName','required')">The input is Required!</nz-form-explain>
+                    <input nz-input id="hrmType" formControlName="hrmType" placeholder="인사유형을 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'hrmType','required')">The input is Required!</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>
         </div>
-    </div>
 
+        <div nz-col nzSpan="12">                        
+            <nz-form-item class="form-item">
+                <nz-form-label nzFor="code" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">인사유형코드</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="code" formControlName="code" placeholder="인사유형코드를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'code','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>                             
+        </div>
+    </div>
+    
+    <!--인사유형코드명(한글) 필드-->
+    <nz-form-item class="form-item">
+        <nz-form-label nzFor="codeName" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">인사유형코드명</nz-form-label>
+        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+            <input nz-input id="codeName" formControlName="codeName" placeholder="인사유형코드명을 입력해주세요.">
+            <nz-form-explain *ngIf="isFieldErrors(fg,'codeName','required')">The input is Required!</nz-form-explain>
+        </nz-form-control>
+    </nz-form-item>
+        
     <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
             <!--사용여부 필드-->
@@ -32,8 +50,7 @@
                 <nz-form-label 
                     nzFor="useYn"    
                     [nzXs]="formLabelXs"
-                    [nzSm]="formLabelSm">
-                    사용여부
+                    [nzSm]="formLabelSm">사용여부
                 </nz-form-label>
 
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
@@ -41,6 +58,7 @@
                 </nz-form-control>
             </nz-form-item>
         </div>
+
         <div nz-col nzSpan="12">
             <!--출력순번 필드-->
             <nz-form-item class="form-item">
@@ -49,11 +67,10 @@
                     <nz-input-number id="sequence" formControlName="sequence" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>            
                     <nz-form-explain *ngIf="isFieldErrors(fg,'sequence','required')">The input is Required!</nz-form-explain>
                 </nz-form-control>
-            </nz-form-item>    
+            </nz-form-item>
         </div>
-
-    </div>            
-
+    </div>
+    
     <!--설명 필드-->
     <nz-form-item>
         <nz-form-label nzFor="comment" [nzXs]="formLabelXs" [nzSm]="formLabelSm">설명</nz-form-label>
@@ -67,7 +84,7 @@
 <div class="footer">
         <button
         nz-button
-        (click)="getForm(fg.get('code').value)">
+        (click)="getHrmType(fg.get('id').value)">
         <i nz-icon nzType="search" nzTheme="outline"></i>        
         조회
     </button>    
@@ -95,7 +112,7 @@
         nzType="danger"
         nz-popconfirm
         nzTitle="삭제하시겠습니까?"
-        (nzOnConfirm)="deleteForm()"
+        (nzOnConfirm)="deleteHrmType()"
         (nzOnCancel)="false">
         <i nz-icon nzType="delete" theme="outline"></i>
         삭제

@@ -10,63 +10,62 @@ import { FormBase, FormType } from 'src/app/common/form/form-base';
 import { ResponseObject } from 'src/app/common/model/response-object';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 
-import { DeptTypeService } from '../../service/dept-type.service';
-import { DeptType } from '../../model/dept-type';
+import { HrmCodeService } from '../../service/hrm-code.service';
+import { HrmType } from '../../model/hrm-type';
+
 
 @Component({
-  selector: 'app-dept-type-form',
-  templateUrl: './dept-type-form.component.html',
-  styleUrls: ['./dept-type-form.component.css']
+  selector: 'app-hrm-type-form',
+  templateUrl: './hrm-type-form.component.html',
+  styleUrls: ['./hrm-type-form.component.css']
 })
-export class DeptTypeFormComponent extends FormBase implements OnInit {
+export class HrmTypeFormComponent extends FormBase implements OnInit {
 
   fg: FormGroup;
-
+  
   constructor(private fb:FormBuilder,
-              private deptTypeService: DeptTypeService,
+              private hrmCodeService: HrmCodeService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
+    
+    this.fg = this.fb.group({
+      id        : [ null, [ Validators.required ] ], //new FormControl(fkBoard, {validators: Validators.required}),
+      hrmType   : [ null, [ Validators.required ] ],
+      code      : [ null, [ Validators.required ] ],
+      codeName  : [ null, [ Validators.required ] ],
+      useYn     : [ null],
+      sequence  : [ null],
+      comment   : [ null]
+    });
+
     this.newForm();
   }  
 
   public newForm(): void {
     this.formType = FormType.NEW;
-
-    this.fg = this.fb.group({
-      id        : [ null, [ Validators.required ] ], //new FormControl(fkBoard, {validators: Validators.required}),
-      code      : [ null, [ Validators.required ] ],
-      codeName  : [ null, [ Validators.required ] ],
-      useYn     : [ null],
-      sequence  : [ null],
-      comment   : [ null]
-    });
+    
+    this.fg.reset();
+    this.fg.controls.code.enable();    
   }
 
-  public modifyForm(formData: DeptType): void {
-    this.formType = FormType.MODIFY;
+  public modifyForm(formData: HrmType): void {
+    this.formType = FormType.MODIFY;    
 
-    this.fg = this.fb.group({
-      id        : [ null, [ Validators.required ] ], //new FormControl(fkBoard, {validators: Validators.required}),
-      code      : [ null, [ Validators.required ] ],
-      codeName  : [ null, [ Validators.required ] ],
-      useYn     : [ null],
-      sequence  : [ null],
-      comment   : [ null]
-    });
-
-    this.fg.patchValue(formData);
+    this.fg.patchValue(formData);    
+        
+    this.fg.controls.code.disable();    
   }
 
   public select(param) {    
-    this.getDeptType(param.value['code']);
+    this.getHrmType(param.value['id']);
   }
 
-  public getDeptType(id: string): void {
-    this.deptTypeService
-        .getDeptType(id)
+  public getHrmType(id: string): void {
+    this.hrmCodeService
+        .getHrmType(id)
         .subscribe(
-          (model: ResponseObject<DeptType>) => {
+          (model: ResponseObject<HrmType>) => {
             if ( model.total > 0 ) {
               console.log(model.data);
               this.modifyForm(model.data);
@@ -83,10 +82,10 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
   }
 
   public submitForm(): void {
-    this.deptTypeService
-        .saveDeptType(this.fg.getRawValue())
+    this.hrmCodeService
+        .saveHrmType(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<DeptType>) => {
+          (model: ResponseObject<HrmType>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           },
@@ -97,11 +96,11 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
         );
   }
 
-  public deleteDeptType(): void {
-    this.deptTypeService
-        .deleteDeptType(this.fg.get('code').value)
+  public deleteHrmType(): void {
+    this.hrmCodeService
+        .deleteHrmType(this.fg.get('id').value)
         .subscribe(
-            (model: ResponseObject<DeptType>) => {
+            (model: ResponseObject<HrmType>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
             },
@@ -115,4 +114,6 @@ export class DeptTypeFormComponent extends FormBase implements OnInit {
   public closeForm() {
     this.formClosed.emit(this.fg.getRawValue());
   }
+  
 }
+

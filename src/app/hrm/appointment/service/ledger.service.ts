@@ -16,12 +16,25 @@ import { Ledger } from '../model/ledger';
 import { LedgerChangeInfo } from '../model/ledger-change-info';
 import { LedgerList } from '../model/ledger-list';
 import { LedgerGridComponent } from '../component/ledger/ledger-grid.component';
+import { LedgerEmployee } from '../model/ledger-employee';
 
 @Injectable()
 export class LedgerService extends DataService {
 
   constructor(http: HttpClient, tokenExtractor: HttpXsrfTokenExtractor) {
     super('/hrm', http, tokenExtractor);
+  }
+
+  getEmployeeList(): Observable<ResponseList<LedgerEmployee>> {
+    const url = `${this.API_URL}/employee`;
+    const options = {
+        headers: this.getAuthorizedHttpHeaders(),
+        withCredentials: true
+     };
+
+    return this.http.get<ResponseList<LedgerEmployee>>(url, options).pipe(
+      catchError((err) => Observable.throw(err))
+    );
   }
 
   getAppointmentCodeList(params?: any): Observable<ResponseList<Ledger>> {

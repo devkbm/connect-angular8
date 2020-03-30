@@ -26,12 +26,6 @@ export class AppointmentCodeFormComponent extends FormBase implements OnInit {
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
-    this.newForm();
-  }  
-
-  public newForm(): void {
-    this.formType = FormType.NEW;
-
     this.fg = this.fb.group({      
       code      : [ null, [ Validators.required ] ],
       codeName  : [ null, [ Validators.required ] ],
@@ -40,21 +34,25 @@ export class AppointmentCodeFormComponent extends FormBase implements OnInit {
       endDateYn : [ null],
       comment   : [ null]
     });
+
+    this.newForm();
+  }  
+
+  public newForm(): void {
+    this.formType = FormType.NEW;
+    
+    this.fg.reset();
+    this.fg.get('code').enable();
+    
+    this.fg.get('useYn').setValue(true);
   }
 
   public modifyForm(formData: AppointmentCode): void {
     this.formType = FormType.MODIFY;
-
-    this.fg = this.fb.group({      
-      code      : [ null, [ Validators.required ] ],
-      codeName  : [ null, [ Validators.required ] ],
-      sequence  : [ null],
-      useYn     : [ null],
-      endDateYn : [ null],
-      comment   : [ null]    
-    });
-
+    
     this.fg.patchValue(formData);
+
+    this.fg.get('code').disable();
   }
 
   public getForm(id: string): void {
@@ -62,8 +60,7 @@ export class AppointmentCodeFormComponent extends FormBase implements OnInit {
         .getAppointmentCode(id)
         .subscribe(
           (model: ResponseObject<AppointmentCode>) => {
-            if ( model.total > 0 ) {
-              console.log(model.data);
+            if ( model.total > 0 ) {              
               this.modifyForm(model.data);
             } else {
               this.newForm();
@@ -101,7 +98,7 @@ export class AppointmentCodeFormComponent extends FormBase implements OnInit {
             this.formDeleted.emit(this.fg.getRawValue());
             },
             (err) => {
-            console.log(err);
+              console.log(err);
             },
             () => {}
         );

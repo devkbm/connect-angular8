@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DeptTypeFormComponent } from './dept-type-form.component';
+import { HrmTypeComponent } from './hrm-type.component';
 
-describe('DeptTypeFormComponent', () => {
-  let component: DeptTypeFormComponent;
-  let fixture: ComponentFixture<DeptTypeFormComponent>;
+describe('HrmTypeComponent', () => {
+  let component: HrmTypeComponent;
+  let fixture: ComponentFixture<HrmTypeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeptTypeFormComponent ]
+      declarations: [ HrmTypeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeptTypeFormComponent);
+    fixture = TestBed.createComponent(HrmTypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

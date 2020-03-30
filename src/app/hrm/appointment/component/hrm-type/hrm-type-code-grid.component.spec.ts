@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DeptTypeComponent } from './dept-type.component';
+import { HrmTypeCodeGridComponent } from './hrm-type-code-grid.component';
 
-describe('DeptTypeComponent', () => {
-  let component: DeptTypeComponent;
-  let fixture: ComponentFixture<DeptTypeComponent>;
+describe('HrmTypeCodeGridComponent', () => {
+  let component: HrmTypeCodeGridComponent;
+  let fixture: ComponentFixture<HrmTypeCodeGridComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeptTypeComponent ]
+      declarations: [ HrmTypeCodeGridComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeptTypeComponent);
+    fixture = TestBed.createComponent(HrmTypeCodeGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -16,6 +16,7 @@ import { LedgerChangeInfo } from '../../model/ledger-change-info';
 import { LedgerList } from '../../model/ledger-list';
 import { AppointmentCodeService } from '../../service/appointment-code.service';
 import { AppointmentCode } from '../../model/appointment-code';
+import { LedgerEmployee } from '../../model/ledger-employee';
 
 @Component({
   selector: 'app-ledger-list-form',
@@ -37,6 +38,9 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   detailFormControlSm = 24;
 
   appointmentCodeList;
+  employeeList: LedgerEmployee[];
+
+  isOpened: boolean = false;
 
   constructor(private fb: FormBuilder,
               private ledgerService: LedgerService,
@@ -45,22 +49,20 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     this.getAppointmentCodeList();
+    this.getEmployeeList();
     
-    this.newForm(null);
-  }
-
-  private createForm(ledgerId: string): FormGroup {
-    return this.fb.group({            
-              listId              : [ null, [ Validators.required ] ],
-              sequence            : [ null, [ Validators.required ] ],
-              empId               : [ null ],
-              appointmentCode     : [ null ],
-              appointmentFromDate : [ null ],
-              appointmentToDate   : [ null ],
-              ledgerId            : [ ledgerId, [ Validators.required ] ],
-              changeInfoList      :  this.fb.array([])
-           });
-  }
+    this.fg = this.fb.group({            
+      listId              : [ null, [ Validators.required ] ],
+      sequence            : [ null, [ Validators.required ] ],
+      empId               : [ null ],
+      appointmentCode     : [ null ],
+      appointmentFromDate : [ null ],
+      appointmentToDate   : [ null ],
+      ledgerId            : [ null, [ Validators.required ] ],
+      changeInfoList      :  this.fb.array([])
+   });    
+   
+  }  
 
   get changeInfoList() {
     return this.fg.get('changeInfoList') as FormArray
@@ -68,14 +70,20 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
 
   public newForm(ledgerId: string): void {
     this.formType = FormType.NEW;
+    this.isOpened = false;
 
-    this.fg = this.createForm(ledgerId);
+    this.fg.reset();
+    this.fg.get('ledgerId').setValue(ledgerId);
+    this.fg.get('listId').disable();
+
+    this.isOpened = true;
   }
 
   public modifyForm(formData: LedgerList): void {
     this.formType = FormType.MODIFY;
-
-    this.fg = this.createForm(formData.ledgerId);
+    
+    this.fg.get('ledgerId').disable();
+    this.fg.get('listId').disable();
     this.fg.patchValue(formData);
 
     for (const details of formData.changeInfoList) {
@@ -100,6 +108,8 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
   }
 
   public getForm(ledgerId: string, listId: string): void {    
+    this.isOpened = false;
+    this.clearChangeInfo();
 
     this.ledgerService
         .getLedgerList(ledgerId, listId)
@@ -110,8 +120,9 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
               this.modifyForm(model.data);                          
             } else {
               this.newForm(null);
-            }
+            }            
             this.appAlarmService.changeMessage(model.message);
+            this.isOpened = true;
           },
           (err) => {
             console.log(err);
@@ -140,8 +151,8 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
         .deleteLedgerList(this.fg.get('ledgerId').value, this.fg.get('listId').value)
         .subscribe(
             (model: ResponseObject<LedgerList>) => {
-            this.appAlarmService.changeMessage(model.message);
-            this.formDeleted.emit(this.fg.getRawValue());
+              this.appAlarmService.changeMessage(model.message);
+              this.formDeleted.emit(this.fg.getRawValue());
             },
             (err) => {
             console.log(err);
@@ -189,12 +200,33 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
         );
   }
 
+  public getEmployeeList(): void {
+    this.ledgerService
+        .getEmployeeList()
+        .subscribe(
+          (model: ResponseList<LedgerEmployee>) => {
+              if (model.total > 0) {
+                console.log(model.data);
+                this.employeeList = model.data;
+              } 
+              this.appAlarmService.changeMessage(model.message);
+          },
+          (err) => {
+              console.log(err);
+          },
+          () => {}
+        );
+  }
+
   public appointmentCodeChanged(appointmentCode): void {    
-    this.getChangeInfo(appointmentCode);
+    if (this.isOpened) {
+      this.getChangeInfo(appointmentCode);
+    }
   }
 
   public closeForm() {
-    this.formClosed.emit(this.fg.getRawValue());
+    this.isOpened = false;
+    this.formClosed.emit(this.fg.getRawValue());    
   }
 
 }

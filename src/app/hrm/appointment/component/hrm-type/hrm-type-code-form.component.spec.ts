@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { JobTypeFormComponent } from './job-type-form.component';
+import { HrmTypeCodeFormComponent } from './hrm-type-code-form.component';
 
-describe('JobTypeFormComponent', () => {
-  let component: JobTypeFormComponent;
-  let fixture: ComponentFixture<JobTypeFormComponent>;
+describe('HrmTypeCodeFromComponent', () => {
+  let component: HrmTypeCodeFormComponent;
+  let fixture: ComponentFixture<HrmTypeCodeFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JobTypeFormComponent ]
+      declarations: [ HrmTypeCodeFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JobTypeFormComponent);
+    fixture = TestBed.createComponent(HrmTypeCodeFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

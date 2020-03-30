@@ -9,11 +9,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ButtonRendererComponent } from 'src/app/common/grid/renderer/button-renderer.component';
 import { CheckboxRendererComponent } from 'src/app/common/grid/renderer/checkbox-renderer.component';
 
-import { DeptTypeComponent } from './component/dept-type/dept-type.component';
-import { DeptTypeFormComponent } from './component/dept-type/dept-type-form.component';
-import { DeptTypeService } from './service/dept-type.service';
-import { JobTypeFormComponent } from './component/dept-type/job-type-form.component';
-import { JobTypeService } from './service/job-type.service';
 import { AppointmentCodeComponent } from './component/appointment-code/appointment-code.component';
 import { AppointmentCodeFormComponent } from './component/appointment-code/appointment-code-form.component';
 import { AppointmentCodeService } from './service/appointment-code.service';
@@ -27,6 +22,12 @@ import { LedgerListFormComponent } from './component/ledger/ledger-list-form.com
 import { LedgerListDetailGridComponent } from './component/ledger/ledger-list-detail-grid.component';
 import { LedgerGridComponent } from './component/ledger/ledger-grid.component';
 import { LedgerListGridComponent } from './component/ledger/ledger-list-grid.component';
+import { HrmCodeService } from './service/hrm-code.service';
+import { HrmTypeFormComponent } from './component/hrm-type/hrm-type-form.component';
+import { HrmTypeComponent } from './component/hrm-type/hrm-type.component';
+import { HrmTypeGridComponent } from './component/hrm-type/hrm-type-grid.component';
+import { HrmTypeCodeFormComponent } from './component/hrm-type/hrm-type-code-form.component';
+import { HrmTypeCodeGridComponent } from './component/hrm-type/hrm-type-code-grid.component';
 
 
 
@@ -40,9 +41,11 @@ import { LedgerListGridComponent } from './component/ledger/ledger-list-grid.com
     AgGridModule.withComponents([ButtonRendererComponent, CheckboxRendererComponent]),
   ],
   declarations: [
-    DeptTypeComponent,
-    DeptTypeFormComponent,
-    JobTypeFormComponent,
+    HrmTypeComponent,
+    HrmTypeFormComponent,
+    HrmTypeGridComponent,    
+    HrmTypeCodeFormComponent,
+    HrmTypeCodeGridComponent,
     
     AppointmentCodeComponent,
     AppointmentCodeFormComponent,
@@ -57,14 +60,13 @@ import { LedgerListGridComponent } from './component/ledger/ledger-list-grid.com
     LedgerListGridComponent,
     LedgerComponent
   ],
-  providers: [
-    DeptTypeService,
-    JobTypeService,
+  providers: [    
+    HrmCodeService,
     AppointmentCodeService,
     LedgerService
   ],
   exports: [
-    DeptTypeComponent,
+    HrmTypeComponent,
     AppointmentCodeComponent,
     LedgerComponent
   ]

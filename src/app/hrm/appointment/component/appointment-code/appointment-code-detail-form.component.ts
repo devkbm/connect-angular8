@@ -32,31 +32,28 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
 
   ngOnInit() {
     this.getTypeList();
+
+    this.fg = this.fb.group({      
+      detailId          : [ null],
+      code              : [ null, [ Validators.required ] ],
+      changeType        : [ null, [ Validators.required ] ],
+      changeTypeDetail  : [ null],
+      sequence          : [ null]
+    });
+
     this.newForm(null);
   }  
 
   public newForm(appointmentCode: string): void {
     this.formType = FormType.NEW;
 
-    this.fg = this.fb.group({      
-      detailId          : [ null],
-      code              : new FormControl({value: appointmentCode, disabled: true}, {validators: Validators.required}),      
-      changeType        : [ null, [ Validators.required ] ],
-      changeTypeDetail  : [ null],
-      sequence          : [ null]
-    });
+    this.fg.reset();
+    this.fg.get('code').setValue(appointmentCode);
+    this.fg.get('code').disable();    
   }
 
   public modifyForm(formData: AppointmentCodeDetail): void {
     this.formType = FormType.MODIFY;
-
-    this.fg = this.fb.group({      
-      detailId          : [ null],
-      code              : new FormControl({value: formData.code, disabled: true}, {validators: Validators.required}),      
-      changeType        : [ null, [ Validators.required ] ],
-      changeTypeDetail  : [ null],
-      sequence          : [ null]
-    });
 
     this.fg.patchValue(formData);
   }
@@ -87,7 +84,7 @@ export class AppointmentCodeDetailFormComponent  extends FormBase implements OnI
             } else {
               this.changeCodeList = [];              
             }
-            this.fg.get('changeTypeDetail').setValue(null);
+            //this.fg.get('changeTypeDetail').setValue(null);
           },
           (err) => {
             console.log(err);

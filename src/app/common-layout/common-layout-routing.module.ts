@@ -27,11 +27,11 @@ import { TeamFormComponent } from '../cooperation/communication/component/team-f
 import { TeamComponent } from '../cooperation/communication/component/team.component';
 import { DeptComponent } from '../common/component/dept/dept.component';
 import { WorkgroupComponent } from '../cooperation/workgroup/component/workgroup/workgroup.component';
-import { DeptTypeComponent } from '../hrm/appointment/component/dept-type/dept-type.component';
 import { AppointmentCodeComponent } from '../hrm/appointment/component/appointment-code/appointment-code.component';
 import { LedgerComponent } from '../hrm/appointment/component/ledger/ledger.component';
 import { EmployeeFormComponent } from '../hrm/employee/component/basic-info/employee-form.component';
 import { EmployeeMasterComponent } from '../hrm/employee/component/basic-info/employee-master.component';
+import { HrmTypeComponent } from '../hrm/appointment/component/hrm-type/hrm-type.component';
 
 
 const layoutroutes: Routes = [
@@ -59,7 +59,7 @@ const layoutroutes: Routes = [
       {path: 'team',          component: TeamComponent},
       {path: 'dept',          component: DeptComponent},
       {path: 'workgroup',     component: WorkgroupComponent},
-      {path: 'depttype',      component: DeptTypeComponent},
+      {path: 'hrmtype',      component: HrmTypeComponent},
       {path: 'appointmentcode',     component: AppointmentCodeComponent},
       {path: 'appointmentledger',   component: LedgerComponent},
       {path: 'employee',      component: EmployeeMasterComponent}

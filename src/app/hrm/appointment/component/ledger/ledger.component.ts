@@ -69,7 +69,7 @@ export class LedgerComponent extends AppBase implements OnInit {
   }
 
   public closeDrawerLedgerList(): void {
-    this.drawerVisibleLedgerList = false;
+    this.drawerVisibleLedgerList = false;    
   }
 
   public refreshGridLedgerList(): void {

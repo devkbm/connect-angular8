@@ -27,31 +27,28 @@ export class LedgerFormComponent extends FormBase implements OnInit {
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {  
+    this.fg = this.fb.group({      
+      ledgerId          : [ null, [ Validators.required ] ],
+      appointmentType   : [ null, [ Validators.required ] ],
+      registrationDate  : [ null ],
+      comment           : [ null ]
+    });
+
     this.newForm();
   }  
 
   public newForm(): void {
     this.formType = FormType.NEW;
 
-    this.fg = this.fb.group({      
-      ledgerId          : [ null, [ Validators.required ] ],
-      appointmentType   : [ null, [ Validators.required ] ],
-      registrationDate  : [ null ],
-      comment           : [ null ]
-    });
+    this.fg.reset();
+    this.fg.get('ledgerId').enable();
   }
 
   public modifyForm(formData: Ledger): void {
-    this.formType = FormType.MODIFY;
-
-    this.fg = this.fb.group({      
-      ledgerId          : [ null, [ Validators.required ] ],
-      appointmentType   : [ null, [ Validators.required ] ],
-      registrationDate  : [ null ],
-      comment           : [ null ]
-    });
+    this.formType = FormType.MODIFY;    
 
     this.fg.patchValue(formData);
+    this.fg.get('ledgerId').disable();
   }
 
   public getForm(ledgerId: string): void {        

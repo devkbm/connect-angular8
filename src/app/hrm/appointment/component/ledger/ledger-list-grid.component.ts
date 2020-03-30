@@ -83,11 +83,11 @@ export class LedgerListGridComponent extends AggridFunction implements OnInit {
     this.getGridList();
   }
 
-  private onEditButtonClick(e) {
+  protected onEditButtonClick(e) {
     this.editButtonClicked.emit(e.rowData);
   }
 
-  private onProcessButtonClick(e): void {
+  protected onProcessButtonClick(e): void {
     console.log(this.ledgerId);
     console.log(e.rowData);
     this.ledgerService

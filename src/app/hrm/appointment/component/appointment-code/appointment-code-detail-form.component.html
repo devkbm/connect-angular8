@@ -4,32 +4,24 @@
 
     <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-            <!--발령코드 필드 (생성)-->
-            <nz-form-item class="form-item" *ngIf="formType == 'NEW'">
-                <nz-form-label nzFor="code" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
-                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="code" formControlName="code" placeholder="발령코드를 입력해주세요.">
-                    <nz-form-explain *ngIf="isFieldErrors(fg,'code','required')">The input is Required!</nz-form-explain>
-                </nz-form-control>
-            </nz-form-item>
-
-            <!--발령코드 필드 (수정)-->
-            <nz-form-item class="form-item" *ngIf="formType == 'MODIFY'">
-                <nz-form-label nzFor="code" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
-                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <input nz-input id="code" formControlName="code" placeholder="발령코드를 입력해주세요.">
-                    <nz-form-explain *ngIf="isFieldErrors(fg,'code','required')">The input is Required!</nz-form-explain>
-                </nz-form-control>
-            </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
-            <!--변경유형코드 필드-->
+            <!--발령코드 필드 -->
             <nz-form-item class="form-item">
-                <nz-form-label nzFor="changeType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">변경유형코드</nz-form-label>        
+                <nz-form-label nzFor="detail_code" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">발령코드</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <input nz-input id="detail_code" formControlName="code" placeholder="발령코드를 입력해주세요.">
+                    <nz-form-explain *ngIf="isFieldErrors(fg,'code','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>            
+        </div>
+
+        <div nz-col nzSpan="12">
+            <!--인사유형 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label nzFor="detail_changeType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">인사유형코드</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
                     <nz-select formControlName="changeType" [nzSize]="'default'"
                         (ngModelChange)="onSelectionChanged($event)"
-                        nzShowSearch nzPlaceHolder="변경유형을 선택해주세요.">
+                        nzShowSearch nzPlaceHolder="인사유형을 선택해주세요.">
                             <nz-option
                                 *ngFor="let option of changeTypeList"
                                 [nzLabel]="option.name"
@@ -43,16 +35,16 @@
 
     <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-            <!--변경코드 필드-->
+            <!--인사유형코드 필드-->
             <nz-form-item class="form-item">
-                <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">변경코드</nz-form-label>
+                <nz-form-label nzFor="changeTypeDetail" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">인사유형코드상세</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
                     <!--<input nz-input id="changeTypeDetail" formControlName="changeTypeDetail" placeholder="변경코드를 입력해주세요.">-->
                     <nz-select formControlName="changeTypeDetail" [nzSize]="'default'"                        
-                        nzShowSearch nzPlaceHolder="변경코드를 선택해주세요.">
+                        nzShowSearch nzPlaceHolder="인사유형코드상세를 선택해주세요.">
                             <nz-option
                                 *ngFor="let option of changeCodeList"
-                                [nzLabel]="option.name"
+                                [nzLabel]="option.codeName"
                                 [nzValue]="option.code">
                             </nz-option>
                     </nz-select>
@@ -63,9 +55,9 @@
         <div nz-col nzSpan="12">
             <!--출력순번 필드-->
             <nz-form-item class="form-item">
-                <nz-form-label nzFor="sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">출력 순번</nz-form-label>
+                <nz-form-label nzFor="detail_sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">출력 순번</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <nz-input-number id="sequence" formControlName="sequence" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>            
+                    <nz-input-number id="detail_sequence" formControlName="sequence" [nzMin]="0" [nzMax]="9999" [nzStep]="1"></nz-input-number>            
                     <nz-form-explain *ngIf="isFieldErrors(fg,'sequence','required')">The input is Required!</nz-form-explain>
                 </nz-form-control>
             </nz-form-item>      

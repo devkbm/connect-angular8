@@ -1,20 +1,19 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-
-import { AppointmentCodeService } from '../../service/appointment-code.service';
-import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
-
 import { AggridFunction } from 'src/app/common/grid/aggrid-function';
+
+import { HrmTypeDetailCode } from '../../model/hrm-type-detail-code';
+import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
+import { HrmCodeService } from '../../service/hrm-code.service';
 import { ResponseList } from 'src/app/common/model/response-list';
-import { AppointmentCodeDetail } from '../../model/appointment-code-detail';
 
 @Component({
-  selector: 'app-appointment-code-detail-grid',
-  templateUrl: './appointment-code-detail-grid.component.html',
-  styleUrls: ['./appointment-code-detail-grid.component.css']
+  selector: 'app-hrm-type-code-grid',
+  templateUrl: './hrm-type-code-grid.component.html',
+  styleUrls: ['./hrm-type-code-grid.component.css']
 })
-export class AppointmentCodeDetailGridComponent extends AggridFunction implements OnInit {
+export class HrmTypeCodeGridComponent extends AggridFunction implements OnInit {
 
-  protected gridList: AppointmentCodeDetail[];
+  protected gridList: HrmTypeDetailCode[];
 
   @Input()
   appointmentCode;
@@ -28,8 +27,8 @@ export class AppointmentCodeDetailGridComponent extends AggridFunction implement
   @Output()
   editButtonClicked = new EventEmitter();
 
-  constructor(private appAlarmService: AppAlarmService,              
-              private appointmentCodeService: AppointmentCodeService) {
+  constructor(private appAlarmService: AppAlarmService,    
+              private hrmCodeService: HrmCodeService) {
 
     super();
 
@@ -50,10 +49,10 @@ export class AppointmentCodeDetailGridComponent extends AggridFunction implement
         valueGetter: 'node.rowIndex + 1',
         width: 70,
         cellStyle: {'text-align': 'center'}
-      },
+      },      
       { headerName: '코드',         field: 'code',        width: 150 },
-      { headerName: '인사유형',     field: 'changeType',    width: 200 },
-      { headerName: '인사유형코드', field: 'changeTypeDetail',    width: 200 },
+      { headerName: '코드명',       field: 'codeName',    width: 200 },
+      { headerName: '설명',         field: 'comment',     width: 200 },
       { headerName: '순번',         field: 'sequence',    width: 80 }
     ];
 
@@ -63,27 +62,26 @@ export class AppointmentCodeDetailGridComponent extends AggridFunction implement
     };
 
     this.getRowNodeId = function(data) {
-        return data.code + data.changeType + data.changeTypeDetail;
+        return data.id;
     };
   }
 
-  ngOnInit() {
-    
+  ngOnInit() {    
   }
 
   private onEditButtonClick(e) {
     this.editButtonClicked.emit(e.rowData);
   }
 
-  public getGridList(appointmentCode: string, filter: object): void {
+  public getGridList(typeId: string): void {
     const params = {
-      appointmentCode : appointmentCode
+      typeId : typeId
     };
 
-    this.appointmentCodeService
-        .getAppointmentCodeDetailList(params)
+    this.hrmCodeService
+        .getHrmTypeDetailCodeList(params)
         .subscribe(
-          (model: ResponseList<AppointmentCodeDetail>) => {
+          (model: ResponseList<HrmTypeDetailCode>) => {
               if (model.total > 0) {
                   this.gridList = model.data;
               } else {
@@ -98,13 +96,13 @@ export class AppointmentCodeDetailGridComponent extends AggridFunction implement
         );
   }
 
-  private selectionChanged(event) {
+  protected selectionChanged(event) {
     const selectedRows = this.gridApi.getSelectedRows();
 
     this.rowSelected.emit(selectedRows[0]);
   }
 
-  private rowDbClicked(event) {
+  protected rowDbClicked(event) {
     this.rowDoubleClicked.emit(event.data);
   }
 

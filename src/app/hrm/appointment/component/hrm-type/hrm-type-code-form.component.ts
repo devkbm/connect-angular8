@@ -10,69 +10,75 @@ import { FormBase, FormType } from 'src/app/common/form/form-base';
 import { ResponseObject } from 'src/app/common/model/response-object';
 import { AppAlarmService } from 'src/app/common/service/app-alarm.service';
 
-import { DeptType } from '../../model/dept-type';
-import { JobTypeService } from '../../service/job-type.service';
-import { JobType } from '../../model/job-type';
+import { HrmCodeService } from '../../service/hrm-code.service';
+import { HrmTypeDetailCode } from '../../model/hrm-type-detail-code';
+
 
 @Component({
-  selector: 'app-job-type-form',
-  templateUrl: './job-type-form.component.html',
-  styleUrls: ['./job-type-form.component.css']
+  selector: 'app-hrm-type-code-form',
+  templateUrl: './hrm-type-code-form.component.html',
+  styleUrls: ['./hrm-type-code-form.component.css']
 })
-export class JobTypeFormComponent extends FormBase implements OnInit {
+export class HrmTypeCodeFormComponent extends FormBase implements OnInit {
 
   fg: FormGroup;
 
   constructor(private fb:FormBuilder,
-              private jobTypeService: JobTypeService,
+              private hrmCodeService: HrmCodeService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
-    this.newForm();
+    this.fg = this.fb.group({
+      id        : [ null, [ Validators.required ] ], //new FormControl(fkBoard, {validators: Validators.required}),
+      typeId    : [ null, [ Validators.required ] ],
+      code      : [ null, [ Validators.required ] ],
+      codeName  : [ null, [ Validators.required ] ],
+      useYn     : [ null],
+      sequence  : [ null],
+      comment   : [ null]
+    });
+
+    this.newForm(null);
   }  
 
-  public newForm(): void {
+  public newForm(typeId: string): void {
     this.formType = FormType.NEW;
 
-    this.fg = this.fb.group({
-      id        : [ null, [ Validators.required ] ], //new FormControl(fkBoard, {validators: Validators.required}),
-      code      : [ null, [ Validators.required ] ],
-      codeName  : [ null, [ Validators.required ] ],
-      useYn     : [ null],
-      sequence  : [ null],
-      comment   : [ null]
-    });
+    /**
+     * 컨트롤 초기값 설정
+     */
+    this.fg.reset();
+    this.fg.controls.typeId.setValue(typeId);    
+    this.fg.controls.useYn.setValue(true);
+
+    /**
+     * 컨트롤 설정
+     */
+    this.fg.controls.typeId.disable();
+    this.fg.controls.code.enable();
   }
 
-  public modifyForm(formData: DeptType): void {
-    this.formType = FormType.MODIFY;
-
-    this.fg = this.fb.group({
-      id        : [ null, [ Validators.required ] ], //new FormControl(fkBoard, {validators: Validators.required}),
-      code      : [ null, [ Validators.required ] ],
-      codeName  : [ null, [ Validators.required ] ],
-      useYn     : [ null],
-      sequence  : [ null],
-      comment   : [ null]
-    });
+  public modifyForm(formData: HrmTypeDetailCode): void {
+    this.formType = FormType.MODIFY;    
 
     this.fg.patchValue(formData);
+
+    this.fg.controls.code.disable();
   }
 
   public select(param) {    
-    this.getJobType(param.value['code']);
+    this.getHrmTypeDetailCode(param.value['id']);
   }
 
-  public getJobType(id: string): void {
-    this.jobTypeService
-        .getJobType(id)
+  public getHrmTypeDetailCode(id: string): void {
+    this.hrmCodeService
+        .getHrmTypeDetailCode(id)
         .subscribe(
-          (model: ResponseObject<JobType>) => {
-            if ( model.total > 0 ) {
-              console.log(model.data);
+          (model: ResponseObject<HrmTypeDetailCode>) => {
+            if ( model.total > 0 ) {              
               this.modifyForm(model.data);
             } else {
-              this.newForm();
+              this.newForm(null);
             }
             this.appAlarmService.changeMessage(model.message);
           },
@@ -84,10 +90,10 @@ export class JobTypeFormComponent extends FormBase implements OnInit {
   }
 
   public submitForm(): void {
-    this.jobTypeService
-        .saveJobType(this.fg.getRawValue())
+    this.hrmCodeService
+        .saveHrmTypeDetailCode(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<JobType>) => {
+          (model: ResponseObject<HrmTypeDetailCode>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           },
@@ -98,11 +104,11 @@ export class JobTypeFormComponent extends FormBase implements OnInit {
         );
   }
 
-  public deleteJobType(): void {
-    this.jobTypeService
-        .deleteJobType(this.fg.get('code').value)
+  public deleteHrmTypeDetailCode(): void {
+    this.hrmCodeService
+        .deleteHrmTypeDetailCode(this.fg.get('id').value)
         .subscribe(
-            (model: ResponseObject<JobType>) => {
+            (model: ResponseObject<HrmTypeDetailCode>) => {
             this.appAlarmService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
             },
