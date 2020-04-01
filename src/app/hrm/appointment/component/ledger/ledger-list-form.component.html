@@ -1,4 +1,6 @@
-{{fg.value | json}}
+<!--{{fg.value | json}}-->
+<!--{{comboList | json}}-->
+
 <form nz-form [formGroup]="fg" nzLayout="vertical">
 
     <div nz-row nzGutter="8">
@@ -26,15 +28,6 @@
     
     <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-            <!--순번 필드-->
-            <nz-form-item class="form-item">
-                <nz-form-label nzFor="list_sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">순번</nz-form-label>
-                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-                    <nz-input-number nzId="list_sequence" formControlName="sequence" placeholder="순번을 입력해주세요."></nz-input-number>
-                </nz-form-control>
-            </nz-form-item>
-        </div>
-        <div nz-col nzSpan="12">
             <!--사번 필드-->
             <!--
             <nz-form-item class="form-item">
@@ -48,25 +41,23 @@
 
             <!--사번 필드-->
             <nz-form-item class="form-item">
-                <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">사번</nz-form-label>
+                <nz-form-label nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">사번</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">          
                     <nz-select                
                         formControlName="empId"
                         nzShowSearch
                         [nzSize]="'default'"
+                        [nzDisabled]="this.formType == 'MODIFY'"
                         nzPlaceHolder="Please select">
                         <nz-option
                             *ngFor="let option of employeeList"
-                            [nzLabel]="option.name"
+                            [nzLabel]="option.name + '[' + option.id + ']'"
                             [nzValue]="option.id">
                         </nz-option>
                     </nz-select>    
                 </nz-form-control>
-            </nz-form-item>
+            </nz-form-item>            
         </div>
-    </div>
-        
-    <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
             <!--발령코드 필드-->
             <nz-form-item class="form-item">
@@ -90,23 +81,39 @@
         </div>
     </div>
 
+    <div nz-row nzGutter="8">
+        <div nz-col nzSpan="8">
+            <!--시작일 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-date-picker formControlName="appointmentFromDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
 
+        <div nz-col nzSpan="8">
+            <!--종료일 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-date-picker formControlName="appointmentToDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
 
-    <!--시작일 필드-->
-    <nz-form-item class="form-item">
-        <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">시작일</nz-form-label>
-        <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-            <nz-date-picker formControlName="appointmentFromDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
-        </nz-form-control>
-    </nz-form-item>
+        <div nz-col nzSpan="8">
+            <!--순번 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label nzFor="list_sequence" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">순번</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-input-number nzId="list_sequence" formControlName="sequence" placeholder="순번을 입력해주세요."></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>        
+    
 
-    <!--종료일 필드-->
-    <nz-form-item class="form-item">
-      <nz-form-label [nzXs]="formLabelXs" [nzSm]="formLabelSm">종료일</nz-form-label>
-      <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
-          <nz-date-picker formControlName="appointmentToDate" nzFormat="YYYY-MM-DD" style="width: 130px"></nz-date-picker>
-      </nz-form-control>
-    </nz-form-item>
 
     <button (click)="getChangeInfo(fg.get('appointmentCode').value)">
         상세조회
@@ -141,7 +148,33 @@
                     <nz-form-item class="form-item">
                         <nz-form-label [nzFor]="'changeCode'+i" nzRequired [nzXs]="detailFormLabelXs" [nzSm]="detailFormLabelSm">코드</nz-form-label>
                         <nz-form-control [nzXs]="detailFormControlXs" [nzSm]="detailFormControlSm">
-                            <input nz-input [attr.id]="'changeCode'+i" formControlName="changeCode" placeholder="코드를 입력해주세요."/>                                                        
+                            <!--
+                            <input nz-input [attr.id]="'changeCode'+i" formControlName="changeCode" placeholder="코드를 입력해주세요."/>  
+                            -->
+                            <nz-select *ngIf="list.get('changeType').value == 'JOB'"              
+                                formControlName="changeCode"
+                                nzShowSearch
+                                [nzSize]="'default'"
+                                nzPlaceHolder="Please select">
+                                <nz-option
+                                    *ngFor="let option of comboList[i]"
+                                    [nzLabel]="option.codeName"
+                                    [nzValue]="option.code"
+                                    [nzDisabled]="!option.useYn">
+                                </nz-option>
+                            </nz-select>    
+                            
+                            <nz-select *ngIf="list.get('changeType').value == 'DEPT'"              
+                                formControlName="changeCode"
+                                nzShowSearch
+                                [nzSize]="'default'"
+                                nzPlaceHolder="Please select">
+                                <nz-option
+                                    *ngFor="let option of comboList[i]"
+                                    [nzLabel]="option.deptNameKorean"
+                                    [nzValue]="option.deptCode">
+                                </nz-option>
+                            </nz-select>
                         </nz-form-control>
                     </nz-form-item>
                 </div>

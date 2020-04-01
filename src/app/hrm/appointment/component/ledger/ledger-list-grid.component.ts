@@ -51,11 +51,12 @@ export class LedgerListGridComponent extends AggridFunction implements OnInit {
         cellStyle: {'text-align': 'center'}
       },
       { headerName: '식별자',       field: 'listId',              width: 150 },
-      { headerName: '순번',         field: 'sequence',            width: 150 },
-      { headerName: '직원번호',     field: 'empId',               width: 150 },
-      { headerName: '발령코드',     field: 'appointmentCode',     width: 200 },
-      { headerName: '발령일',       field: 'appointmentFromDate', width: 200 },
-      { headerName: '발령종료일',   field: 'appointmentToDate',   width: 200 },
+      { headerName: '순번',         field: 'sequence',            width: 100 },
+      { headerName: '직원번호',     field: 'empId',               width: 100 },
+      { headerName: '발령코드',     field: 'appointmentCode',     width: 100 },
+      { headerName: '발령일',       field: 'appointmentFromDate', width: 100 },
+      { headerName: '발령종료일',   field: 'appointmentToDate',   width: 100 },
+      { headerName: '처리여부',     field: 'finishYn',            width: 50 },
       {
         headerName: '',
         width: 34,
@@ -124,13 +125,13 @@ export class LedgerListGridComponent extends AggridFunction implements OnInit {
 
   
 
-  private selectionChanged(event) {
+  protected selectionChanged(event) {
     const selectedRows = this.gridApi.getSelectedRows();
 
     this.rowSelected.emit(selectedRows[0]);
   }
 
-  private rowDbClicked(event) {
+  protected rowDbClicked(event) {
     this.rowDoubleClicked.emit(event.data);
   }
 

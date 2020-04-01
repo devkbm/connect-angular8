@@ -92,13 +92,13 @@ export class LedgerGridComponent extends AggridFunction implements OnInit {
         );
   }
 
-  private selectionChanged(event) {
+  protected selectionChanged(event) {
     const selectedRows = this.gridApi.getSelectedRows();
 
     this.rowSelected.emit(selectedRows[0]);
   }
 
-  private rowDbClicked(event) {
+  protected rowDbClicked(event) {
     this.rowDoubleClicked.emit(event.data);
   }
 

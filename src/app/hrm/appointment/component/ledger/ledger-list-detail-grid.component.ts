@@ -102,13 +102,13 @@ export class LedgerListDetailGridComponent extends AggridFunction implements OnI
         */
   }
 
-  private selectionChanged(event) {
+  protected selectionChanged(event): void {
     const selectedRows = this.gridApi.getSelectedRows();
 
     this.rowSelected.emit(selectedRows[0]);
   }
 
-  private rowDbClicked(event) {
+  protected rowDbClicked(event): void {
     this.rowDoubleClicked.emit(event.data);
   }
 

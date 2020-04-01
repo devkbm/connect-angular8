@@ -17,6 +17,10 @@ import { LedgerList } from '../../model/ledger-list';
 import { AppointmentCodeService } from '../../service/appointment-code.service';
 import { AppointmentCode } from '../../model/appointment-code';
 import { LedgerEmployee } from '../../model/ledger-employee';
+import { HrmCodeService } from '../../service/hrm-code.service';
+import { HrmTypeDetailCode } from '../../model/hrm-type-detail-code';
+import { DeptService } from 'src/app/common/service/dept.service';
+import { Dept } from 'src/app/common/model/dept';
 
 @Component({
   selector: 'app-ledger-list-form',
@@ -39,12 +43,14 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
 
   appointmentCodeList;
   employeeList: LedgerEmployee[];
-
+  comboList: any[] = new Array();  
   isOpened: boolean = false;
 
   constructor(private fb: FormBuilder,
               private ledgerService: LedgerService,
               private appointmentCodeService: AppointmentCodeService,
+              private hrmCodeService: HrmCodeService,
+              private deptService: DeptService,
               private appAlarmService: AppAlarmService) { super(); }
 
   ngOnInit() {
@@ -72,7 +78,8 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
     this.formType = FormType.NEW;
     this.isOpened = false;
 
-    this.fg.reset();
+    this.clearChangeInfo();
+    this.fg.reset();    
     this.fg.get('ledgerId').setValue(ledgerId);
     this.fg.get('listId').disable();
 
@@ -91,8 +98,13 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
     }
   }
   
-  public addChangeInfo(changeInfo: LedgerChangeInfo): void {    
-    
+  public addChangeInfo(changeInfo: LedgerChangeInfo): void {       
+    if (changeInfo.changeType == 'JOB') {
+      this.getHrmTypeDetail(changeInfo.changeType+changeInfo.changeTypeDetail);
+    } else if (changeInfo.changeType == 'DEPT') {
+      this.getDeptList();
+    }
+
     this.changeInfoList.push(this.fb.group({
       id: new FormControl({value: changeInfo.id, disabled: false}),
       changeType: new FormControl({value: changeInfo.changeType, disabled: true}),
@@ -100,6 +112,35 @@ export class LedgerListFormComponent extends FormBase implements OnInit {
       changeCode: new FormControl({value: changeInfo.changeCode, disabled: false}),
       sequence: new FormControl({value: changeInfo.sequence, disabled: false})
     }));
+  }
+  
+  public getHrmTypeDetail(typeId: string): void {
+    this.hrmCodeService
+        .getHrmTypeDetailCodeList({typeId: typeId})
+        .subscribe(
+          (model: ResponseList<HrmTypeDetailCode>) => {            
+            this.comboList.push(model.data);           
+             
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {}
+      );
+  }
+
+  public getDeptList(): void {
+    this.deptService
+        .getDeptList()
+        .subscribe(
+          (model: ResponseList<Dept>) => {            
+            this.comboList.push(model.data);                        
+          },
+          (err) => {
+            console.log(err);
+          },
+          () => {}
+      );
   }
 
   public clearChangeInfo(): void {

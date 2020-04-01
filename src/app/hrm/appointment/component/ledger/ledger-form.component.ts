@@ -13,6 +13,7 @@ import { AppointmentCodeDetail } from '../../model/appointment-code-detail';
 import { ResponseList } from 'src/app/common/model/response-list';
 import { LedgerService } from '../../service/ledger.service';
 import { Ledger } from '../../model/ledger';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-ledger-form',
@@ -42,6 +43,8 @@ export class LedgerFormComponent extends FormBase implements OnInit {
 
     this.fg.reset();
     this.fg.get('ledgerId').enable();
+    this.fg.get('registrationDate').setValue(new Date());
+    this.fg.get('registrationDate').disable();
   }
 
   public modifyForm(formData: Ledger): void {
@@ -49,6 +52,7 @@ export class LedgerFormComponent extends FormBase implements OnInit {
 
     this.fg.patchValue(formData);
     this.fg.get('ledgerId').disable();
+    this.fg.get('registrationDate').disable();
   }
 
   public getForm(ledgerId: string): void {        
