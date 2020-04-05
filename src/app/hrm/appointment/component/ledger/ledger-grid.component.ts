@@ -49,9 +49,9 @@ export class LedgerGridComponent extends AggridFunction implements OnInit {
         width: 70,
         cellStyle: {'text-align': 'center'}
       },
-      { headerName: '발령번호',     field: 'ledgerId',          width: 150 },
-      { headerName: '발령유형',     field: 'appointmentType',   width: 200 },
-      { headerName: '발령등록일',   field: 'registrationDate',  width: 200 },      
+      { headerName: '발령번호',     field: 'ledgerId',          width: 150, cellStyle: {'text-align': 'center'} },
+      { headerName: '발령유형',     field: 'appointmentType',   width: 100 },
+      { headerName: '발령등록일',   field: 'registrationDate',  width: 100 },      
       { headerName: '설명',         field: 'comment',           width: 300 }
     ];
 

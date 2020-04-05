@@ -14,11 +14,28 @@
     <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
             <!--인사유형 필드-->
+            <!--
             <nz-form-item class="form-item">
                 <nz-form-label nzFor="hrmType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">인사유형</nz-form-label>
                 <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
                     <input nz-input id="hrmType" formControlName="hrmType" placeholder="인사유형을 입력해주세요.">
                     <nz-form-explain *ngIf="isFieldErrors(fg,'hrmType','required')">The input is Required!</nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+            -->
+            
+            <!--인사유형 필드-->
+            <nz-form-item class="form-item">
+                <nz-form-label nzFor="hrmType" nzRequired [nzXs]="formLabelXs" [nzSm]="formLabelSm">인사유형코드</nz-form-label>
+                <nz-form-control [nzXs]="formControlXs" [nzSm]="formControlSm">
+                    <nz-select formControlName="hrmType" [nzSize]="'default'"                        
+                        nzShowSearch nzPlaceHolder="인사유형을 선택해주세요.">
+                            <nz-option
+                                *ngFor="let option of hrmTypeList"
+                                [nzLabel]="option.name"
+                                [nzValue]="option.code">
+                            </nz-option>
+                    </nz-select>
                 </nz-form-control>
             </nz-form-item>
         </div>
